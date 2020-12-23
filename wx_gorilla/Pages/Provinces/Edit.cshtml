@@ -1,0 +1,70 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Provinces.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>@Html.DisplayFor(model => model.Province.Province_name)</h1>
+
+<h4>Province - 修改</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Province.Id" />
+            @*<div class="form-group">
+            <label asp-for="Province.Province_area" class="control-label"></label>
+            <input asp-for="Province.Province_area" class="form-control" />
+            <span asp-validation-for="Province.Province_area" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Province.Province_type" class="control-label"></label>
+            <input asp-for="Province.Province_type" class="form-control" />
+            <span asp-validation-for="Province.Province_type" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="Province.Province_type"></label>
+                <select class="form-control" asp-for="Province.Province_type">
+                    <option>省</option>
+                    <option>直辖市</option>
+                    <option>建设兵团</option>
+                    <option>自治区</option>
+                    <option>特别行政区</option>
+                </select>
+                <span asp-validation-for="Province.Province_type" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province.Province_area"></label>
+                <select class="form-control" asp-for="Province.Province_area">
+                    <option>华北地区</option>
+                    <option>东北地区</option>
+                    <option>西北地区</option>
+                    <option>华东地区</option>
+                    <option>华中地区</option>
+                    <option>华南地区</option>
+                    <option>西南地区</option>
+                    <option>港澳台</option>
+                </select>
+                <span asp-validation-for="Province.Province_area" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Province.Province_name" class="control-label"></label>
+                <input asp-for="Province.Province_name" class="form-control" />
+                <span asp-validation-for="Province.Province_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,76 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Provinces.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>@Html.DisplayFor(model => model.Province.Province_name)</h1>
+
+<div>
+    <table>
+        <tr>
+            <td>
+                <h4>Province</h4>
+            </td>
+            <td style="padding-left:13px;">
+                <a asp-page="./Edit" asp-route-id="@Model.Province.Id">Edit</a> | <a asp-page="./Index">Back to List</a>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+    <hr />
+    <table>
+        <tr>
+            <td class="text-dark"><span class="label label-primary"> @Html.DisplayNameFor(model => model.Province.Province_type)</span></td>
+            <td>@Html.DisplayFor(model => model.Province.Province_type)</td>
+            <td class="col-sm-2"><span class="label label-success"> @Html.DisplayNameFor(model => model.Province.Province_name)</span></td>
+            <td> @Html.DisplayFor(model => model.Province.Province_name)</td>
+            <td class="col-sm-2"><span class="label label-info"> @Html.DisplayNameFor(model => model.Province.Province_area)</span></td>
+            <td> @Html.DisplayFor(model => model.Province.Province_area)</td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</div>
+<p><br />
+    <a asp-page="/Citys/Create" asp-route-id="@Model.Province.Id">Create New</a>
+</p>
+<table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Citys[0].Show_index)
+            </th>
+            <th style="display:none;">
+                @Html.DisplayNameFor(model => model.Citys[0].Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Citys[0].City_name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Citys) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Show_index)
+            </td>
+            <td style="display:none;">
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City_name)
+            </td>
+            <td>
+                <a asp-page="/Citys/Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="/Citys/Details" asp-route-id="@item.Id">Detail</a> |
+                <a asp-page="/Citys/Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+<br />
+<br />

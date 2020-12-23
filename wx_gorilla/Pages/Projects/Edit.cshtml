@@ -1,0 +1,60 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Projects.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Project.ID" />
+            <div class="form-group">
+                <label asp-for="Project.Project_name" class="control-label"></label>
+                <input asp-for="Project.Project_name" class="form-control" />
+                <span asp-validation-for="Project.Project_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.Sign_date" class="control-label"></label>
+                <input asp-for="Project.Sign_date" class="form-control" />
+                <span asp-validation-for="Project.Sign_date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.Short_name" class="control-label"></label>
+                <input asp-for="Project.Short_name" class="form-control" />
+                <span asp-validation-for="Project.Short_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.fk_province_id" class="control-label"></label>
+                <input asp-for="Project.fk_province_id" class="form-control" />
+                <span asp-validation-for="Project.fk_province_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.fk_city_id" class="control-label"></label>
+                <input asp-for="Project.fk_city_id" class="form-control" />
+                <span asp-validation-for="Project.fk_city_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Project.Address" class="control-label"></label>
+                <input asp-for="Project.Address" class="form-control" />
+                <span asp-validation-for="Project.Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

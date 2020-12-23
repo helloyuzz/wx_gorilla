@@ -1,0 +1,82 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Provinces.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>全国省市字典管理</h3>
+<form id="searchForm" method="get">
+    <table width="100%">
+        <tr>
+            <td style="width:300px;">
+                @*<div><a asp-page="Create">Create New</a></div>*@
+                <h4>Province and City</h4>
+            </td>
+            <td style="width:130px;">
+                <div class="form-group" style="width:126px">
+                    <select class="form-control" asp-for="SearchType" onchange="document.getElementById('searchForm').submit();">
+                        <option>全部类型</option>
+                        <option>省</option>
+                        <option>直辖市</option>
+                        <option>建设兵团</option>
+                        <option>自治区</option>
+                        <option>特别行政区</option>
+                    </select>
+                </div>
+            </td>
+            <td style="width:113px;">
+                <div class="form-group" style="width:113px;">
+                    <select class="form-control" asp-for="SearchArea" onchange="document.getElementById('searchForm').submit();">
+                        <option>地理位置</option>
+                        <option>华北地区</option>
+                        <option>东北地区</option>
+                        <option>西北地区</option>
+                        <option>华东地区</option>
+                        <option>华中地区</option>
+                        <option>华南地区</option>
+                        <option>西南地区</option>
+                        <option>港澳台</option>
+                    </select>
+                </div>
+            </td>
+            <td>&nbsp;</td>
+        </tr>
+    </table>
+</form>
+<table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Province[0].Province_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Province[0].Province_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Province[0].Province_area)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Province) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Province_area)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">下级机构</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,87 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Projects.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h3>项目列表</h3>
+<form id="searchForm" method="get">
+    <table width="100%">
+        <tr>
+            <td style="width:300px;">
+                <div><a asp-page="Create">Create New</a></div>
+            </td>
+            <td>&nbsp;</td>
+            <td style="width:400px;" align="right">
+                <div class="input-group" style="width:300px">
+                    <input type="text" id="searchKey" class="form-control" placeholder="输入项目名称或简称" autocomplete="off" asp-for="SearchString">
+                    <span class="input-group-btn">
+                        <button class="btn btn-primary" type="submit">查询</button>
+                        <button class="btn btn-default" type="button" onclick="document.getElementById('searchKey').value = ''; document.getElementById('searchForm').submit();">重置</button>
+                    </span>
+                </div>
+            </td>
+        </tr>
+    </table>
+</form>
+<table class="table table-hover table-condensed">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Project_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Sign_date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Short_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].fk_province_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].fk_city_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Phone)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Project) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sign_date)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Short_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fk_province_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fk_city_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

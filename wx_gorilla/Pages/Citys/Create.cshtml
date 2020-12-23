@@ -1,0 +1,62 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Citys.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+    string argu_province_id = Request.Query["id"];
+}
+
+<h1>添加城市</h1>
+<table>
+    <tr>
+        <td><h4>City - 新增</h4></td>
+        <td style="padding-left:13px;"><a asp-page="/Provinces/Details" asp-route-id="@Html.Raw(argu_province_id)">Back to List</a></td>
+        <td></td>
+    </tr>
+</table>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+            <label asp-for="City.fk_province_id" class="control-label"></label>
+            <input asp-for="City.fk_province_id" class="form-control" />
+            <span asp-validation-for="City.fk_province_id" class="text-danger"></span>
+        </div>*@
+            <div class="form-group">
+                <label asp-for="City.fk_province_id"></label>
+                <select id="itemProvince" class="form-control" asp-for="City.fk_province_id">
+                    @foreach (var item in Model.Province) {
+                        <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.Province_name)</option>
+                    }
+                </select>
+                <span asp-validation-for="City.fk_province_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City.City_name" class="control-label"></label>
+                <input asp-for="City.City_name" class="form-control" autocomplete="off" />
+                <span asp-validation-for="City.City_name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="City.Show_index" class="control-label"></label>
+                <input asp-for="City.Show_index" class="form-control" autocomplete="off" />
+                <span asp-validation-for="City.Show_index" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    
+</div>
+<script>
+    $("#itemProvince").val("@Html.Raw(argu_province_id)");
+</script>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
