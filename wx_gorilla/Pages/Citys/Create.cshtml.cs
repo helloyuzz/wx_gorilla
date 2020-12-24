@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace com.wechat.gorilla.Pages.Citys {
     public class CreateModel : PageModel {
@@ -32,8 +33,21 @@ namespace com.wechat.gorilla.Pages.Citys {
             if (!ModelState.IsValid) {
                 return Page();
             }
-
-            _context.City.Add(City);
+            string[] citys = City.City_name.Split(' ');
+            if (citys.Length > 1) {
+                List<City> dbSet = new List<City>();
+                int showIndex = City.Show_index.Value;
+                foreach (string temp in citys) {
+                    City newCity = new City();
+                    newCity.fk_province_id = City.fk_province_id;
+                    newCity.City_name = temp;
+                    newCity.Show_index = showIndex++;
+                    dbSet.Add(newCity);
+                }
+                _context.City.AddRange(dbSet);
+            } else {
+                _context.City.Add(City);
+            }
             await _context.SaveChangesAsync();
 
             //return RedirectToPage("./Index");

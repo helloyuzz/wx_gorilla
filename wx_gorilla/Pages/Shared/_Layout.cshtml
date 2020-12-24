@@ -4,8 +4,11 @@
     ViewData["Title"] = "蓝鹰追溯";
 
     string displayFlag = "block";
+    string account_name = "";
     if (com.wechat.gorilla.Globals.Cua == null) {
         displayFlag = "none";
+    } else {
+        account_name = com.wechat.gorilla.Globals.Cua.User_Name;
     }
 }
 <head>
@@ -35,21 +38,24 @@
                         <li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Projects/Index"><span class="glyphicon glyphicon glyphicon-flag"></span>项目列表</a>
                         </li>
-                        <li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
+                        @*<li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Movies/Index"><span class="glyphicon glyphicon glyphicon-transfer"></span>组织结构</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Movies/Index"><span class="glyphicon glyphicon glyphicon-flash" style="color: forestgreen;"></span><span style="color: forestgreen;">推送订阅</span></a>
                         </li>
-                        <li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
+                        @*<li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Accounts/Index"><span class="glyphicon glyphicon-user"></span>人员列表</a>
-                        </li>
+                        </li>*@
                         <li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Movies/Index"><span class="glyphicon glyphicon glyphicon-info-sign" style="color: forestgreen;"></span><span style="color: forestgreen;">推送日志</span></a>
                         </li>
                         <li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Provinces/Index"><span class="glyphicon glyphicon glyphicon-transfer"></span>全国省市字典</a>
+                        </li>
+                        <li class="nav-item" style="margin-right: 8px; display: @Html.Raw(displayFlag)">
                             <div class="dropdown" style="padding-top:9px;">
-                                <a id="dropdownMenu1" data-toggle="dropdown" class="nav-link text-dark" style="margin-top:1px;">系统设置<span class="caret"></span></a>
+                                <a id="dropdownMenu1" data-toggle="dropdown" class="nav-link text-dark" style="margin-top:1px;cursor:pointer;">系统设置<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                     <li role="presentation" style="padding:1px 8px 1px 8px;">
                                         <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Provinces/Index">全国省市字典管理</a>
@@ -66,7 +72,7 @@
                                     </li>
                                     <li role="presentation" style="padding:1px 8px 1px 8px;">
                                         <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                                    </li>                                    
+                                    </li>
                                 </ul>
                             </div>
                         </li>

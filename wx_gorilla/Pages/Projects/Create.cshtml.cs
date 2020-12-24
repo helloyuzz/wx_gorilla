@@ -19,12 +19,6 @@ namespace com.wechat.gorilla.Pages.Projects {
 
         public IActionResult OnGet() {
             Provinces = _context.Province.ToList();
-            if (Fk_Province_Id > 0) {
-                Citys = _context.City.Where(A => A.fk_province_id == Fk_Province_Id).ToList();
-            }
-            if (Citys == null) {
-                Citys = new List<City>();
-            }
             return Page();
         }
 
@@ -32,11 +26,6 @@ namespace com.wechat.gorilla.Pages.Projects {
         public Project Project { get; set; }
         [BindProperty]
         public IList<Province> Provinces { get; set; }
-        [BindProperty]
-        public IList<City> Citys { get; set; }
-        [BindProperty(SupportsGet =true)]
-        public int Fk_Province_Id { get; set; }
-
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
         public async Task<IActionResult> OnPostAsync() {

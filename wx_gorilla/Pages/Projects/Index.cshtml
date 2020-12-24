@@ -32,22 +32,28 @@
                 @Html.DisplayNameFor(model => model.Project[0].Project_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Project[0].Sign_date)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Project[0].Short_name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Project[0].fk_province_id)
+                @Html.DisplayNameFor(model => model.Project[0].Provinceid)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Project[0].fk_city_id)
+                @Html.DisplayNameFor(model => model.Project[0].Cityid)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Project[0].Current_progress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Project_imple)
+            </th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Project[0].Address)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Project[0].Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Project[0].Sign_date)
             </th>
             <th></th>
         </tr>
@@ -59,27 +65,47 @@
                 @Html.DisplayFor(modelItem => item.Project_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Sign_date)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Short_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fk_province_id)
+                @Html.DisplayFor(modelItem => item.Province.Province_name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.fk_city_id)
+                @Html.DisplayFor(modelItem => item.City.City_name)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Current_progress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project_imple)
+            </td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Address)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                @Html.DisplayFor(modelItem => item.Sign_date)
+            </td>
+            <td>
+                <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                        操作
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation">
+                            <a asp-page="./Details" asp-route-id="@item.ID">Detail</a>
+                        </li>
+                        <li role="presentation">
+                            <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                        </li> 
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation">
+                            <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                        </li>
+                    </ul>
+                </div>                
             </td>
         </tr>
 }

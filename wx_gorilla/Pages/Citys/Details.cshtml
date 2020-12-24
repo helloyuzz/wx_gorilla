@@ -12,33 +12,33 @@
         <tr>
             <td><h4>City</h4></td>
             <td style="padding-left:13px;">
-                <a asp-page="./Edit" asp-route-id="@Model.City.Id">Edit</a> | <a asp-page="/Provinces/Details" asp-route-id="@Model.City.fk_province_id">Back to List</a>
+                
             </td>
             <td></td>
         </tr>
     </table>
-        <hr />
-        <dl class="row">
-            <dt class="col-sm-2" style="display:none;">
-                @Html.DisplayNameFor(model => model.City.fk_province_id)
-            </dt>
-            <dd class="col-sm-10" style="display:none;">
-                @Html.DisplayFor(model => model.City.fk_province_id)
-            </dd>
-            <dt class="col-sm-2">
-                <span class="label label-primary">  @Html.DisplayNameFor(model => model.City.City_name)</span>
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.City.City_name)
-            </dd>
-            <dt class="col-sm-2">
-                <span class="label label-success">  @Html.DisplayNameFor(model => model.City.Show_index)</span>
-            </dt>
-            <dd class="col-sm-10">
-                @Html.DisplayFor(model => model.City.Show_index)
-            </dd>
-        </dl>
+    <hr style="margin-top:0px;" />
+    <dl class="row">
+        <dt class="col-sm-2" style="display:none;">
+            @Html.DisplayNameFor(model => model.City.fk_province_id)
+        </dt>
+        <dd class="col-sm-10" style="display:none;">
+            @Html.DisplayFor(model => model.City.fk_province_id)
+        </dd>
+        <dt class="col-sm-2">
+            <span class="label label-primary">  @Html.DisplayNameFor(model => model.City.City_name)</span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City.City_name)
+        </dd>
+        <dt class="col-sm-2">
+            <span class="label label-success">  @Html.DisplayNameFor(model => model.City.Show_index)</span>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.City.Show_index)
+        </dd>
+    </dl>
 </div>
 <div>
-    
+    <a asp-page="./Edit" asp-route-id="@Model.City.Id"><span class="glyphicon glyphicon-pencil"></span>Edit</a> | <a asp-page="/Provinces/Details" asp-route-id="@Model.City.fk_province_id"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a> | <a asp-page="/Provinces/Index" asp-route-id="@Model.City.fk_province_id"><span class="glyphicon glyphicon-hand-up"></span>Back To Top</a>
 </div>

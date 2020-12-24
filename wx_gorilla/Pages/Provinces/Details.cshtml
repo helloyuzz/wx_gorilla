@@ -5,21 +5,21 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>@Html.DisplayFor(model => model.Province.Province_name)</h1>
+<h1><a asp-page="./Index">全国</a> / @Html.DisplayFor(model => model.Province.Province_name)</h1>
 
 <div>
-    <table>
+    <table style="height:30px;">
         <tr>
             <td>
                 <h4>Province</h4>
             </td>
             <td style="padding-left:13px;">
-                <a asp-page="./Edit" asp-route-id="@Model.Province.Id">Edit</a> | <a asp-page="./Index">Back to List</a>
+                <a asp-page="./Edit" asp-route-id="@Model.Province.Id"><span class="glyphicon glyphicon-pencil"></span>Edit</a> | <a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a>
             </td>
             <td>&nbsp;</td>
         </tr>
     </table>
-    <hr />
+    <hr style="margin-top:0px;" />
     <table>
         <tr>
             <td class="text-dark"><span class="label label-primary"> @Html.DisplayNameFor(model => model.Province.Province_type)</span></td>
@@ -63,9 +63,23 @@
                 @Html.DisplayFor(modelItem => item.City_name)
             </td>
             <td>
-                <a asp-page="/Citys/Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-page="/Citys/Details" asp-route-id="@item.Id">Detail</a> |
-                <a asp-page="/Citys/Delete" asp-route-id="@item.Id">Delete</a>
+                <div class="dropdown">
+                    <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                        操作
+                    </button>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                        <li role="presentation">
+                            <a asp-page="/Citys/Details" asp-route-id="@item.Id">Detail</a>
+                        </li>
+                        <li role="presentation">
+                            <a asp-page="/Citys/Edit" asp-route-id="@item.Id">Edit</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li role="presentation">
+                            <a asp-page="/Citys/Delete" asp-route-id="@item.Id">Delete</a>
+                        </li>
+                    </ul>
+                </div>
             </td>
         </tr>
         }

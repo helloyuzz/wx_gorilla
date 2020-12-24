@@ -20,9 +20,9 @@ namespace com.wechat.gorilla.Pages.Projects {
 
         public async Task OnGetAsync() {
             if (string.IsNullOrEmpty(SearchString)) {
-                Project = await _context.Project.ToListAsync();
+                Project = await _context.Project.Include(A=>A.Province).Include(B=>B.City).ToListAsync();
             } else {
-                Project = await _context.Project.Where(s => s.Project_name.Contains(SearchString)).ToListAsync();
+                Project = await _context.Project.Where(s => s.Project_name.Contains(SearchString)).Include(A => A.Province).Include(B => B.City).ToListAsync();
             }
         }
         [BindProperty(SupportsGet = true)]

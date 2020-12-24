@@ -5,51 +5,205 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<h1>@Model.Project.Project_name</h1>
+<style>
+    .span1 {
+        padding-left: 3px;
+    }
+    .span_title {
+        font-weight:bold;
+    }
+</style>
 <div>
-    <h4>Project</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Project_name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Project_name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Sign_date)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Sign_date)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Short_name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Short_name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.fk_province_id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.fk_province_id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.fk_city_id)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.fk_city_id)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Address)
-        </dd>
-    </dl>
+    <table>
+        <tr>
+            <td><h4>Project - 详细信息</h4></td>
+            <td style="padding-left:13px;">
+                <a asp-page="./Edit" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-pencil"></span>Edit</a> |
+            <td style="padding-left:8px;"><a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back To List</a></td>
+            <td></td>
+        </tr>
+    </table>
+    <hr style="margin-top: 0px; margin-bottom: 13px;" />
+    <div class="row">
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Project_name)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Project_name)
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Sign_date)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Sign_date)
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Short_name)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Short_name)
+            </span>
+        </div>
+    </div>
+    <div class="row" style="margin-top:3px;">
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Provinceid)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Province.Province_name)
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Cityid)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.City.City_name)
+        </div>
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Address)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Address)
+            </span>
+        </div>
+    </div>
+    <div class="row" style="margin-top:3px;">
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Current_progress)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Current_progress)
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Project_imple)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Project_imple)
+            </span>
+        </div>
+        <div class="col-md-4">
+            <span class="span_title">
+                @Html.DisplayNameFor(model => model.Project.Phone)
+            </span>
+            <span class="span1">
+                @Html.DisplayFor(model => model.Project.Phone)
+            </span>
+        </div>
+    </div>
 </div>
+<p>
+</p>
+<ul id="myTab" class="nav nav-tabs">
+    <li class="active">
+        <a href="#department" data-toggle="tab">科室</a>
+    </li>
+    <li><a href="#user" data-toggle="tab">人员</a></li>
+    <li class="dropdown">
+        <a href="#menuItem" id="myTabDrop1" class="dropdown-toggle"
+           data-toggle="dropdown">
+            本院管理
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+            <li>
+                <a asp-page="/Departments/Create">添加科室</a>
+            </li>
+            <li>
+                <a href="#subscribe" tabindex="-1" data-toggle="tab">添加人员</a>
+            </li><li role="presentation" class="divider"></li>
+            <li>
+                <a href="#subscribe" tabindex="-1" data-toggle="tab">订阅管理</a>
+            </li>
+            <li>
+                <a href="#qrcode" tabindex="-1" data-toggle="tab">二维码</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<div id="myTabContent" class="tab-content">
+    <div class="tab-pane fade in active" id="department">
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departments[0].Dept_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departments[0].Short_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departments[0].Project)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Departments) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Dept_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Short_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Project.Project_name)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                    操作
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">
+                                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                    </li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation">
+                                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-pane fade" id="user">
+        <p>
+            iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
+            TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。
+        </p>
+    </div>
+    <div class="tab-pane fade" id="jmeter">
+        <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
+    </div>
+    <div class="tab-pane fade" id="ejb">
+        <p>
+            Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
+        </p>
+    </div>
+</div>
+<script>
+    $(function () {
+        //$('#myTab li:eq(1) a').tab('show');
+    });
+</script>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Project.ID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+
 </div>
