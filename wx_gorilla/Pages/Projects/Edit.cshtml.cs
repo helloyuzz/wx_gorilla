@@ -54,7 +54,7 @@ namespace com.wechat.gorilla.Pages.Projects {
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("./Details",new { id=Project.ID});
         }
 
         private bool ProjectExists(int id) {

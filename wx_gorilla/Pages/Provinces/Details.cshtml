@@ -5,7 +5,7 @@
     ViewData["Title"] = "Details";
 }
 
-<h1><a asp-page="./Index">全国</a> / @Html.DisplayFor(model => model.Province.Province_name)</h1>
+<h1><a asp-page="./Index">全国</a> / <a href="#self">@Html.DisplayFor(model => model.Province.Province_name)</a></h1>
 
 <div>
     <table style="height:30px;">
@@ -14,7 +14,7 @@
                 <h4>Province</h4>
             </td>
             <td style="padding-left:13px;">
-                <a asp-page="./Edit" asp-route-id="@Model.Province.Id"><span class="glyphicon glyphicon-pencil"></span>Edit</a> | <a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a>
+                <a asp-page="./Edit" asp-route-id="@Model.Province.Id"><span class="glyphicon glyphicon-pencil"></span>Edit</a> @*| <a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a>*@
             </td>
             <td>&nbsp;</td>
         </tr>
@@ -35,7 +35,7 @@
 <p><br />
     <a asp-page="/Citys/Create" asp-route-id="@Model.Province.Id">Create New</a>
 </p>
-<table class="table table-hover table-condensed">
+<table class="table table-hover table-condensed" style="width:400px;">
     <thead>
         <tr>
             <th>

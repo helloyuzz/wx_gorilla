@@ -18,7 +18,7 @@ namespace com.wechat.gorilla.Pages.Citys {
         }
 
         public IActionResult OnGet() {
-            Province = _context.Province.ToList();
+            Province = _context.Provinces.ToList();
             return Page();
         }
 
@@ -39,7 +39,7 @@ namespace com.wechat.gorilla.Pages.Citys {
                 int showIndex = City.Show_index.Value;
                 foreach (string temp in citys) {
                     City newCity = new City();
-                    newCity.fk_province_id = City.fk_province_id;
+                    newCity.Provinceid = City.Provinceid;
                     newCity.City_name = temp;
                     newCity.Show_index = showIndex++;
                     dbSet.Add(newCity);
@@ -52,7 +52,7 @@ namespace com.wechat.gorilla.Pages.Citys {
 
             //return RedirectToPage("./Index");
 
-            return RedirectToPage("/Provinces/Details", new { id = City.fk_province_id });
+            return RedirectToPage("/Provinces/Details", new { id = City.Provinceid });
         }
     }
 }

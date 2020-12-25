@@ -20,8 +20,8 @@ namespace com.wechat.gorilla.Pages.Departments {
         public Project Project { get; set; }
 
         public async Task OnGetAsync() {
-            Department = await _context.Department
-                .Include(d => d.Project).ToListAsync();
+            Department = await _context.Department.ToListAsync();
+            //.Include(d => d.Project)
         }
     }
 }

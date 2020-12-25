@@ -20,15 +20,15 @@ namespace com.wechat.gorilla.Pages.Citys {
         [BindProperty]
         public City City { get; set; }
         [BindProperty]
-        public IList<Province> Province { get; set; }
+        public IList<Province> Provinces { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id) {
             if (id == null) {
                 return NotFound();
             }
 
-            City = await _context.City.FirstOrDefaultAsync(m => m.Id == id);
-            Province = await _context.Province.ToListAsync();
+            City = await _context.City.Include(A=>A.Province).FirstOrDefaultAsync(m => m.Id == id);
+            Provinces = await _context.Provinces.ToListAsync();
 
             if (City == null) {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace com.wechat.gorilla.Pages.Citys {
             }
 
             //return RedirectToPage("./Index");
-            return RedirectToPage("/Provinces/Details", new { id = City.fk_province_id });
+            return RedirectToPage("/Provinces/Details", new { id = City.Provinceid });
         }
 
         private bool CityExists(int id) {

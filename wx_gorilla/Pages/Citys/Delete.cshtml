@@ -13,10 +13,10 @@
     <hr />
     <dl class="row">
         <dt class="col-sm-2" style="display:none;">
-            @Html.DisplayNameFor(model => model.City.fk_province_id)
+            @Html.DisplayNameFor(model => model.City.Provinceid)
         </dt>
         <dd class="col-sm-10" style="display:none;">
-            @Html.DisplayFor(model => model.City.fk_province_id)
+            @Html.DisplayFor(model => model.City.Provinceid)
         </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.City.City_name)
@@ -31,6 +31,6 @@
     <form method="post">
         <input type="hidden" asp-for="City.Id" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-page="/Provinces/Details" asp-route-id="@Model.City.fk_province_id">Back to List</a>
+        <a asp-page="/Provinces/Details" asp-route-id="@Model.City.Provinceid">Back to List</a>
     </form>
 </div>

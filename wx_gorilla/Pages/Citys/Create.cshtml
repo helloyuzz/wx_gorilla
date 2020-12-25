@@ -25,13 +25,13 @@
             <span asp-validation-for="City.fk_province_id" class="text-danger"></span>
         </div>*@
             <div class="form-group">
-                <label asp-for="City.fk_province_id"></label>
-                <select id="itemProvince" class="form-control" asp-for="City.fk_province_id">
+                <label asp-for="City.Provinceid"></label>
+                <select id="itemProvince" class="form-control" asp-for="City.Provinceid">
                     @foreach (var item in Model.Province) {
                         <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.Province_name)</option>
                     }
                 </select>
-                <span asp-validation-for="City.fk_province_id" class="text-danger"></span>
+                <span asp-validation-for="City.Provinceid" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="City.City_name" class="control-label"></label>

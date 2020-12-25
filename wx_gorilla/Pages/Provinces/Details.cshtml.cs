@@ -25,7 +25,7 @@ namespace com.wechat.gorilla.Pages.Provinces {
             }
 
             Province = await _context.Province.FirstOrDefaultAsync(m => m.Id == id);
-            Citys = await _context.City.Where(A => A.fk_province_id == id).OrderBy(B=>B.Show_index).ToListAsync();
+            Citys = await _context.City.Where(A => A.Provinceid == id).OrderBy(B=>B.Show_index).ToListAsync();
 
             if (Province == null) {
                 return NotFound();

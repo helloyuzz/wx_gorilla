@@ -35,7 +35,8 @@ namespace com.wechat.gorilla.Pages.Projects {
                 return NotFound();
             }
 
-            Departments = await _ctxDepartment.Department.Where(A => A.Projectid == Project.ID).Include(d=>d.Project).ToListAsync();
+            Departments = await _ctxDepartment.Department.Where(A => A.Projectid == Project.ID).ToListAsync();
+            // .Include(d=>d.Project)
             return Page();
         }
     }

@@ -18,22 +18,39 @@ namespace com.wechat.gorilla.Pages.Provinces {
 
         public IList<Province> Province { get; set; }
 
+
         public async Task OnGetAsync() {
             if ("全部类型".Equals(SearchType) && "地理位置".Equals(SearchArea)) {
-                Province = await _context.Province.ToListAsync();
+            RecordCount = _context.Province.Count();
+                Province = await _context.Province.Skip((PageIndex-1)*PageSize).Take(PageSize).ToListAsync();
             } else {
                 if (SearchType.Equals("全部类型") == false && SearchArea.Equals("地理位置") == false) {
-                    Province = await _context.Province.Where(A => A.Province_type.Equals(SearchType)).Where(B => B.Province_area.Equals(SearchArea)).ToListAsync();
+                    RecordCount = _context.Province.Where(A => A.Province_type.Equals(SearchType)).Where(B => B.Province_area.Equals(SearchArea)).Count();
+                    Province = await _context.Province.Where(A => A.Province_type.Equals(SearchType)).Where(B => B.Province_area.Equals(SearchArea)).Skip((PageIndex-1)*PageSize).Take(PageSize).ToListAsync();
                 } else if (SearchArea.Equals("地理位置")) {
-                    Province = await _context.Province.Where(A => A.Province_type.Equals(SearchType)).ToListAsync();
+                    RecordCount = _context.Province.Where(A => A.Province_type.Equals(SearchType)).Count();
+                    Province = await _context.Province.Where(A => A.Province_type.Equals(SearchType)).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
                 } else {
-                    Province = await _context.Province.Where(A => A.Province_area.Equals(SearchArea)).ToListAsync();
+                    RecordCount = _context.Province.Where(A => A.Province_area.Equals(SearchArea)).Count();
+                    Province = await _context.Province.Where(A => A.Province_area.Equals(SearchArea)).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
                 }
+            }
+            PageCount = RecordCount / PageSize;
+            if (RecordCount % PageSize > 0) {
+                PageCount++;
             }
         }
         [BindProperty(SupportsGet = true)]
         public string SearchType { get; set; } = "全部类型";
         [BindProperty(SupportsGet = true)]
         public string SearchArea { get; set; } = "地理位置";
+        [BindProperty(SupportsGet = true)]
+        public int PageSize { get; set; } = 8;
+        [BindProperty(SupportsGet = true)]
+        public int PageIndex { get; set; } = 1;
+        [BindProperty(SupportsGet = true)]
+        public int PageCount { get; set; }
+        [BindProperty(SupportsGet =true)]
+        public int RecordCount { get; set; }
     }
 }

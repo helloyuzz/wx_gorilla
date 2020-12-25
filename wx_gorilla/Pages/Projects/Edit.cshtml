@@ -9,9 +9,15 @@
 
 <h1>@Html.Raw(Model.Project.Project_name)</h1>
 
-<h4>Project - 编辑</h4>
-<hr />
-<form method="post">
+<table>
+    <tr>
+        <td><h4>Project - 编辑</h4></td>
+        <td style="padding-left:13px;"><a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a> | <a asp-page="./Details" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a></td>
+        <td></td>
+    </tr>
+</table>
+<hr style="margin-top:3px;"/>
+<form method="post" autocomplete="off">
     <input type="hidden" asp-for="Project.ID" />
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
@@ -90,14 +96,14 @@
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="Project.Address" class="control-label"></label>
-                <input asp-for="Project.Address" class="form-control" />
+                <input asp-for="Project.Address" class="form-control" autocomplete="off"/>
                 <span asp-validation-for="Project.Address" class="text-danger"></span>
             </div>
         </div>
         <div class="col-md-4">
             <div class="form-group">
                 <label asp-for="Project.Phone" class="control-label"></label>
-                <input asp-for="Project.Phone" class="form-control" />
+                <input asp-for="Project.Phone" class="form-control" autocomplete="off" />
                 <span asp-validation-for="Project.Phone" class="text-danger"></span>
             </div>
         </div>
@@ -112,7 +118,7 @@
 </form>
 
 <div>
-    <a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a>
+    
 </div>
 <script>
     function AppLoad() {

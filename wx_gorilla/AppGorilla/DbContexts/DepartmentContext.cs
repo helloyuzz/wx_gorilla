@@ -15,5 +15,6 @@ namespace com.wechat.gorilla.DbContexts {
         protected override void OnModelCreating(ModelBuilder modelBuilder) {
         }
         public DbSet<com.wechat.gorilla.Models.Department> Department { get; set; }
+        public Project Project { get; set; }
     }
 }

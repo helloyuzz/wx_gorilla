@@ -19,7 +19,7 @@ namespace com.wechat.gorilla.Controllers {
         public IList<City> Get(int province_id) {
             IList<City> result = null;
             if (province_id > 0) {
-                result = _cityContext.City.Where(A => A.fk_province_id == province_id).ToList();
+                result = _cityContext.City.Where(A => A.Provinceid == province_id).ToList();
             } else {
                 result = new List<City>();
             }

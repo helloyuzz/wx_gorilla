@@ -45,7 +45,7 @@ namespace com.wechat.gorilla.Pages.Citys {
             }
 
             //return RedirectToPage("./Index");
-            return RedirectToPage("/Provinces/Details", new { id = City.fk_province_id });
+            return RedirectToPage("/Provinces/Details", new { id = City.Provinceid });
         }
     }
 }

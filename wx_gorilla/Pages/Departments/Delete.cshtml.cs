@@ -8,53 +8,50 @@ using Microsoft.EntityFrameworkCore;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
-namespace com.wechat.gorilla.Pages.Departments
-{
-    public class DeleteModel : PageModel
-    {
-        private readonly com.wechat.gorilla.DbContexts.DepartmentContext _context;
+namespace com.wechat.gorilla.Pages.Departments {
+    public class DeleteModel : PageModel {
+        private readonly DepartmentContext _ctxDepartment;
+        private readonly ProjectContext _ctxProject;
 
-        public DeleteModel(com.wechat.gorilla.DbContexts.DepartmentContext context)
-        {
-            _context = context;
+        public DeleteModel(DepartmentContext context, ProjectContext ctxProject) {
+            _ctxDepartment = context;
+            _ctxProject = ctxProject;
         }
 
         [BindProperty]
         public Department Department { get; set; }
+        [BindProperty]
+        public string Project_name { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> OnGetAsync(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
-            Department = await _context.Department
-                .Include(d => d.Project).FirstOrDefaultAsync(m => m.Id == id);
+            Department = await _ctxDepartment.Department.FirstOrDefaultAsync(m => m.Id == id);
+            //    .Include(d => d.Project)
 
-            if (Department == null)
-            {
+            if (Department == null) {
                 return NotFound();
             }
+            Project_name = _ctxProject.Project.FirstOrDefault(A => A.ID == Department.Projectid).Project_name;
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> OnPostAsync(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
-            Department = await _context.Department.FindAsync(id);
+            Department = await _ctxDepartment.Department.FindAsync(id);
 
-            if (Department != null)
-            {
-                _context.Department.Remove(Department);
-                await _context.SaveChangesAsync();
+            if (Department != null) {
+                _ctxDepartment.Department.Remove(Department);
+                await _ctxDepartment.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            //return RedirectToPage("./Index");
+            return RedirectToPage("/Projects/Details", new { id = Department.Projectid });
         }
     }
 }

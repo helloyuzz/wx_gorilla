@@ -117,16 +117,21 @@
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
             <li>
-                <a asp-page="/Departments/Create">添加科室</a>
+                <a asp-page="/Departments/Create" asp-route-id="@Model.Project.ID">添加科室</a>
             </li>
             <li>
                 <a href="#subscribe" tabindex="-1" data-toggle="tab">添加人员</a>
-            </li><li role="presentation" class="divider"></li>
+            </li>
+            <li role="presentation" class="divider"></li>
             <li>
                 <a href="#subscribe" tabindex="-1" data-toggle="tab">订阅管理</a>
             </li>
             <li>
                 <a href="#qrcode" tabindex="-1" data-toggle="tab">二维码</a>
+            </li>
+            <li role="presentation" class="divider"></li>
+            <li>
+                <a asp-page="/Projects/Delete" asp-route-id="@Model.Project.ID">删除</a>
             </li>
         </ul>
     </li>
@@ -143,7 +148,7 @@
                         @Html.DisplayNameFor(model => model.Departments[0].Short_name)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Departments[0].Project)
+                        @Html.DisplayNameFor(model => model.Departments[0].Projectid)
                     </th>
                     <th></th>
                 </tr>
@@ -158,23 +163,23 @@
                             @Html.DisplayFor(modelItem => item.Short_name)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Project.Project_name)
+                            @Html.DisplayFor(modelItem => item.Projectid)
                         </td>
                         <td>
                             <div class="dropdown">
-                                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                <a class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
                                     操作
-                                </button>
+                                </a>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation">
+                                    @*<li role="presentation">
                                         <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                                    </li>
+                                    </li>*@
                                     <li role="presentation">
-                                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a asp-page="/Departments/Edit" asp-route-id="@item.Id">Edit</a>
                                     </li>
                                     <li role="presentation" class="divider"></li>
                                     <li role="presentation">
-                                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                        <a asp-page="/Departments/Delete" asp-route-id="@item.Id">Delete</a>
                                     </li>
                                 </ul>
                             </div>
