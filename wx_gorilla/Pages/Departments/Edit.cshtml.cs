@@ -29,7 +29,7 @@ namespace com.wechat.gorilla.Pages.Departments {
                 return NotFound();
             }
 
-            Department = await _ctxDepartment.Department.FirstOrDefaultAsync(m => m.Id == id);
+            Department = await _ctxDepartment.Departments.FirstOrDefaultAsync(m => m.Id == id);
             // .Include(d => d.Project)
 
             if (Department == null) {
@@ -65,7 +65,7 @@ namespace com.wechat.gorilla.Pages.Departments {
         }
 
         private bool DepartmentExists(int id) {
-            return _ctxDepartment.Department.Any(e => e.Id == id);
+            return _ctxDepartment.Departments.Any(e => e.Id == id);
         }
     }
 }

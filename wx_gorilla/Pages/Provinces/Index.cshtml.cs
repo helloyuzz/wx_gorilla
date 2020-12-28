@@ -45,7 +45,7 @@ namespace com.wechat.gorilla.Pages.Provinces {
         [BindProperty(SupportsGet = true)]
         public string SearchArea { get; set; } = "地理位置";
         [BindProperty(SupportsGet = true)]
-        public int PageSize { get; set; } = 8;
+        public int PageSize { get; set; } = 12;
         [BindProperty(SupportsGet = true)]
         public int PageIndex { get; set; } = 1;
         [BindProperty(SupportsGet = true)]

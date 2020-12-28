@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
 using com.wechat.gorilla;
 using com.wechat.gorilla.DbContexts;
+using System;
 
 namespace wx_razor_project {
     public class Startup {
@@ -19,6 +20,7 @@ namespace wx_razor_project {
         public void ConfigureServices(IServiceCollection services) {
             services.AddRazorPages();
             services.AddControllers();
+            services.AddSession(a => a.IdleTimeout = TimeSpan.FromMinutes(30));
 
             //services.AddDbContext<MovieContext>(options =>
             //        options.UseSqlServer(Configuration.GetConnectionString("MsSql")));
@@ -27,6 +29,7 @@ namespace wx_razor_project {
             services.AddDbContext<ProvinceContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
             services.AddDbContext<CityContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
             services.AddDbContext<DepartmentContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
+            services.AddDbContext<UserContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,9 +41,8 @@ namespace wx_razor_project {
             }
 
             app.UseStaticFiles();
-
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {

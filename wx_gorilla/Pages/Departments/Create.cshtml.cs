@@ -60,11 +60,11 @@ namespace com.wechat.gorilla.Pages.Departments {
                 return Page();
             }
 
-            int count = _ctxDepartment.Department.Count(A => A.Dept_name.Equals(Department.Dept_name));
+            int count = _ctxDepartment.Departments.Count(A => A.Dept_name.Equals(Department.Dept_name));
             if (count > 0) {
                 return RedirectToPage("/Departments/Create", new { id = Department.Projectid,error_code= ErrorCode.Error_DepartmentAlreadyExist.Code });
             } else {
-                _ctxDepartment.Department.Add(Department);
+                _ctxDepartment.Departments.Add(Department);
                 await _ctxDepartment.SaveChangesAsync();
 
                 //return RedirectToPage("./Index");

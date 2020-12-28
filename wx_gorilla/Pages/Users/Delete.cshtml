@@ -1,0 +1,70 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Users.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.User_account)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.User_account)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.User_type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.User_type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Projectid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Projectid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Departmentid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Departmentid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.wx_unique_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.wx_unique_id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Roleid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Roleid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.User_password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.User_password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Login_time)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Login_time)
+        </dd>
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" asp-for="User.Id" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

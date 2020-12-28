@@ -1,0 +1,67 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Users.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.User_account)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.User_account)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.User_type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.User_type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Projectid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Projectid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Departmentid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Departmentid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.wx_unique_id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.wx_unique_id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Roleid)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Roleid)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.User_password)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.User_password)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.User.Login_time)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.User.Login_time)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.User.Id">Edit</a> |
+    <a asp-page="./Index">Back to List</a>
+</div>

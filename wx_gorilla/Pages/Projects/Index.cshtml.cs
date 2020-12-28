@@ -18,7 +18,12 @@ namespace com.wechat.gorilla.Pages.Projects {
 
         public IList<Project> Project { get; set; }
 
-        public async Task OnGetAsync() {
+        public async Task<IActionResult> OnGet() {
+            User user = HttpContext.Session.Get<User>(Globals.KEY_CUA);
+            if (user == null) {
+                return RedirectToPage("Login");
+            }
+
             HtmlTip = "";
             IQueryable<Project> temp = _context.Project.Include(A => A.Province).Include(B => B.City);
             if (string.IsNullOrEmpty(SearchProvince) == false) {
@@ -52,6 +57,7 @@ namespace com.wechat.gorilla.Pages.Projects {
             if (RecordCount % PageSize > 0) {
                 PageCount++;
             }
+            return Page();
         }
         [BindProperty(SupportsGet = true)]
         public string SearchProjectName { get; set; }
@@ -60,7 +66,7 @@ namespace com.wechat.gorilla.Pages.Projects {
         [BindProperty(SupportsGet = true)]
         public string SearchProgress { get; set; }
         [BindProperty(SupportsGet = true)]
-        public int PageSize { get; set; } = 8;
+        public int PageSize { get; set; } = 12;
         [BindProperty(SupportsGet = true)]
         public int PageIndex { get; set; } = 1;
         [BindProperty(SupportsGet = true)]

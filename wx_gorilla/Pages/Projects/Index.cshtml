@@ -89,15 +89,15 @@
                     </td>
                     <td>
                         <div class="dropdown">
-                            <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
-                                操作
+                            <button type="button" class="btn btn-success dropdown-toggle btn-xs"
+                                    data-toggle="dropdown">操作
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                 <li role="presentation">
                                     <a asp-page="./Details" asp-route-id="@item.ID">Detail</a>
                                 </li>
                                 <li role="presentation">
-                                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a>
+                                    <a asp-page="./Edit" asp-route-id="@item.ID" asp-route-source="index">Edit</a>
                                 </li>
                                 <li role="presentation" class="divider"></li>
                                 <li role="presentation">

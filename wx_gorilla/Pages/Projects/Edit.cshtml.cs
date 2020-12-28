@@ -21,11 +21,15 @@ namespace com.wechat.gorilla.Pages.Projects {
         public Project Project { get; set; }
         [BindProperty]
         public IList<Province> Provinces { get; set; }
+        [BindProperty]
+        public string FromSource { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id) {
             if (id == null) {
                 return NotFound();
             }
+
+            FromSource = Request.Query["source"];
             Provinces = _context.Province.ToList();
             Project = await _context.Project.FirstOrDefaultAsync(m => m.ID == id);
 
@@ -53,8 +57,12 @@ namespace com.wechat.gorilla.Pages.Projects {
                     throw;
                 }
             }
+            if (FromSource.Equals("index")) {
+                return RedirectToPage("./Index");
+            } else {
+                return RedirectToPage("./Details", new { id = Project.ID });
+            }
 
-            return RedirectToPage("./Details",new { id=Project.ID});
         }
 
         private bool ProjectExists(int id) {

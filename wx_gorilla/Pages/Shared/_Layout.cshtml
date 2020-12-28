@@ -4,12 +4,11 @@
     ViewData["Title"] = "蓝鹰追溯";
 
     string displayFlag = "block";
-    string account_name = "";
-    if (com.wechat.gorilla.Globals.Cua == null) {
+    string account_name = com.wechat.gorilla.Globals.Current_username;
+    //com.wechat.gorilla.Models.User user = Microsoft.AspNetCore.Http.HttpContext.Session.Get<com.wechat.gorilla.Models.User>("CUA");
+    if (string.IsNullOrEmpty(account_name)) {
         displayFlag = "none";
-    } else {
-        account_name = com.wechat.gorilla.Globals.Cua.User_Name;
-    }
+    } 
 }
 <head>
     <meta charset="utf-8" />
@@ -68,7 +67,7 @@
                                     </li>
                                     <li role="presentation" class="divider"></li>
                                     <li role="presentation" style="padding:1px 8px 1px 8px;">
-                                        <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Logout">注销</a>
+                                        <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Logout">注销 @account_name</a>
                                     </li>
                                     <li role="presentation" style="padding:1px 8px 1px 8px;">
                                         <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>

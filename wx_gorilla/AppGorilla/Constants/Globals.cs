@@ -29,7 +29,9 @@ namespace com.wechat.gorilla {
             }
         }
 
-        public static Account Cua { get; internal set; }
+        public static string KEY_CUA = "CUA";
+
+        public static string Current_username = "";
 
         public const string AuthCookieFlag = "AuthCookieFlag-Temp";
         public const string CopyRight = "蓝鹰追溯";

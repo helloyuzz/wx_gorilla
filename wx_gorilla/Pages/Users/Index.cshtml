@@ -1,0 +1,78 @@
+﻿@page
+@model com.wechat.gorilla.Pages.Users.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].User_account)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].User_type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Projectid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Departmentid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].wx_unique_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Roleid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].User_password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User[0].Login_time)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.User) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_account)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Projectid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Departmentid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.wx_unique_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Roleid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User_password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Login_time)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

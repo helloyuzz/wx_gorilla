@@ -23,7 +23,7 @@ namespace com.wechat.gorilla.Pages.Departments {
                 return NotFound();
             }
 
-            Department = await _context.Department.FirstOrDefaultAsync(m => m.Id == id);
+            Department = await _context.Departments.FirstOrDefaultAsync(m => m.Id == id);
             //.Include(d => d.Project)
 
             if (Department == null) {

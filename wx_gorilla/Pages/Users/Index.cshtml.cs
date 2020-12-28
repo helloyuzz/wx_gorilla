@@ -8,20 +8,18 @@ using Microsoft.EntityFrameworkCore;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
-namespace com.wechat.gorilla.Pages.Departments {
+namespace com.wechat.gorilla.Pages.Users {
     public class IndexModel : PageModel {
-        private readonly com.wechat.gorilla.DbContexts.DepartmentContext _context;
+        private readonly com.wechat.gorilla.DbContexts.UserContext _context;
 
-        public IndexModel(com.wechat.gorilla.DbContexts.DepartmentContext context) {
+        public IndexModel(com.wechat.gorilla.DbContexts.UserContext context) {
             _context = context;
         }
 
-        public IList<Department> Department { get; set; }
-        public Project Project { get; set; }
+        public IList<User> User { get; set; }
 
         public async Task OnGetAsync() {
-            Department = await _context.Departments.ToListAsync();
-            //.Include(d => d.Project)
+            User = await _context.Users.ToListAsync();
         }
     }
 }

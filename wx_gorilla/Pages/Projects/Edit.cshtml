@@ -5,6 +5,7 @@
     ViewData["Title"] = "Edit";
     int province_id = Model.Project.Provinceid.Value;
     int city_id = Model.Project.Cityid.Value;
+    string fromSource = Request.Query["source"];
 }
 
 <h1>@Html.Raw(Model.Project.Project_name)</h1>
@@ -19,6 +20,7 @@
 <hr style="margin-top:3px;"/>
 <form method="post" autocomplete="off">
     <input type="hidden" asp-for="Project.ID" />
+    <input type="text" asp-for="FromSource"/>
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <div class="row">
         <div class="col-md-4">

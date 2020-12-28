@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using com.wechat.gorilla.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
@@ -15,10 +16,13 @@ namespace com.wechat.gorilla.Pages {
         }
 
         public async Task<IActionResult> OnGet() {
-            if (Globals.Cua == null) {
+            User user = HttpContext.Session.Get<User>(Globals.KEY_CUA);
+            if (user == null) {
                 return RedirectToPage("Login");
             }
+
             return Page();
+            //if (Globals.Cua == null) {
         }
     }
 }

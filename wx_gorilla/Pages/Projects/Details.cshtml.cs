@@ -12,10 +12,12 @@ namespace com.wechat.gorilla.Pages.Projects {
     public class DetailsModel : PageModel {
         private readonly com.wechat.gorilla.DbContexts.ProjectContext _ctxProject;
         private readonly com.wechat.gorilla.DbContexts.DepartmentContext _ctxDepartment;
+        private readonly com.wechat.gorilla.DbContexts.UserContext _ctxUser;
 
-        public DetailsModel(ProjectContext context, DepartmentContext contextDepartment) {
+        public DetailsModel(ProjectContext context, DepartmentContext contextDepartment, UserContext ctxUser) {
             _ctxProject = context;
             _ctxDepartment = contextDepartment;
+            _ctxUser = ctxUser;
         }
 
         public Project Project { get; set; }
@@ -23,6 +25,7 @@ namespace com.wechat.gorilla.Pages.Projects {
         public Province Province { get; set; }
         public City City { get; set; }
         public IList<Department> Departments { get; set; }
+        public IList<User> Users { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id) {
             if (id == null) {
@@ -35,7 +38,8 @@ namespace com.wechat.gorilla.Pages.Projects {
                 return NotFound();
             }
 
-            Departments = await _ctxDepartment.Department.Where(A => A.Projectid == Project.ID).ToListAsync();
+            Departments = await _ctxDepartment.Departments.Where(A => A.Projectid == Project.ID).ToListAsync();
+            Users = await _ctxUser.Users.Where(A => A.Projectid == Project.ID).Include(A=>A.Project).Include(A=>A.Department).ToListAsync();
             // .Include(d=>d.Project)
             return Page();
         }

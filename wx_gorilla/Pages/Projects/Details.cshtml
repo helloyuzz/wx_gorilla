@@ -3,6 +3,10 @@
 
 @{
     ViewData["Title"] = "Details";
+    string remoteType = Request.Query["type"];
+    if (string.IsNullOrEmpty(remoteType)) {
+        remoteType = "0";
+    }
 }
 
 <h1>@Model.Project.Project_name</h1>
@@ -10,8 +14,9 @@
     .span1 {
         padding-left: 3px;
     }
+
     .span_title {
-        font-weight:bold;
+        font-weight: bold;
     }
 </style>
 <div>
@@ -120,7 +125,7 @@
                 <a asp-page="/Departments/Create" asp-route-id="@Model.Project.ID">添加科室</a>
             </li>
             <li>
-                <a href="#subscribe" tabindex="-1" data-toggle="tab">添加人员</a>
+                <a asp-page="/Users/Create" asp-route-id="@Model.Project.ID">添加人员</a>
             </li>
             <li role="presentation" class="divider"></li>
             <li>
@@ -147,9 +152,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Departments[0].Short_name)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Departments[0].Projectid)
-                    </th>
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Departments[0].Projectid)
+                        </th>*@
                     <th></th>
                 </tr>
             </thead>
@@ -162,18 +167,19 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Short_name)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Projectid)
-                        </td>
+                        @*<td>
+                                @Html.DisplayFor(modelItem => item.Projectid)
+                            </td>*@
                         <td>
                             <div class="dropdown">
-                                <a class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                                <button type="button" class="btn btn-success dropdown-toggle btn-xs"
+                                        data-toggle="dropdown">
                                     操作
-                                </a>
+                                </button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                                     @*<li role="presentation">
-                                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                                    </li>*@
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+            </li>*@
                                     <li role="presentation">
                                         <a asp-page="/Departments/Edit" asp-route-id="@item.Id">Edit</a>
                                     </li>
@@ -190,10 +196,87 @@
         </table>
     </div>
     <div class="tab-pane fade" id="user">
-        <p>
-            iOS 是一个由苹果公司开发和发布的手机操作系统。最初是于 2007 年首次发布 iPhone、iPod Touch 和 Apple
-            TV。iOS 派生自 OS X，它们共享 Darwin 基础。OS X 操作系统是用在苹果电脑上，iOS 是苹果的移动版本。
-        </p>
+        <table class="table table-bordered table-hover table-condensed">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].User_account)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].User_type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].Projectid)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].Departmentid)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].wx_unique_id)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].Roleid)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].User_password)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Users[0].Login_time)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Users) {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User_account)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User_type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Project.Project_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Department.Dept_name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.wx_unique_id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Roleid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User_password)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Login_time)
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle btn-xs"
+                                        data-toggle="dropdown">操作
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a asp-page="./Edit" asp-route-id="@item.Id">复制到</a>
+                                    </li>
+                                    <li>
+                                        <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a asp-page="./Delete" asp-route-id="@item.Id">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
     </div>
     <div class="tab-pane fade" id="jmeter">
         <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
@@ -206,7 +289,7 @@
 </div>
 <script>
     $(function () {
-        //$('#myTab li:eq(1) a').tab('show');
+        $('#myTab li:eq(@remoteType) a').tab('show');
     });
 </script>
 <div>
