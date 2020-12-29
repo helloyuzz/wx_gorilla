@@ -9,31 +9,25 @@ using Microsoft.EntityFrameworkCore;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
-namespace com.wechat.gorilla.Pages.Users
-{
-    public class EditModel : PageModel
-    {
+namespace com.wechat.gorilla.Pages.Users {
+    public class EditModel : PageModel {
         private readonly com.wechat.gorilla.DbContexts.UserContext _context;
 
-        public EditModel(com.wechat.gorilla.DbContexts.UserContext context)
-        {
+        public EditModel(com.wechat.gorilla.DbContexts.UserContext context) {
             _context = context;
         }
 
         [BindProperty]
         public User User { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> OnGetAsync(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
             User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (User == null)
-            {
+            if (User == null) {
                 return NotFound();
             }
             return Page();
@@ -41,27 +35,19 @@ namespace com.wechat.gorilla.Pages.Users
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> OnPostAsync() {
+            if (!ModelState.IsValid) {
                 return Page();
             }
 
             _context.Attach(User).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!UserExists(User.Id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!UserExists(User.Id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -69,8 +55,7 @@ namespace com.wechat.gorilla.Pages.Users
             return RedirectToPage("./Index");
         }
 
-        private bool UserExists(int id)
-        {
+        private bool UserExists(int id) {
             return _context.Users.Any(e => e.Id == id);
         }
     }

@@ -29,9 +29,11 @@ namespace com.wechat.gorilla {
             }
         }
 
-        public static string KEY_CUA = "CUA";
+        public static string SessionKey_SwitchPanel = "KEY-SwitchPanel";
 
-        public static string Current_username = "";
+        public static string SessionKey_CUA = "KEY-CUA";
+
+        public static User Current_user;
 
         public const string AuthCookieFlag = "AuthCookieFlag-Temp";
         public const string CopyRight = "蓝鹰追溯";

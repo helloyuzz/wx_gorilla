@@ -35,13 +35,13 @@ namespace com.wechat.gorilla.Pages {
 
             User = _userContext.Users.FirstOrDefault(A => A.User_account.Equals(account) && A.User_password.Equals(pwd_encrypt));
             if (User != null) {
-                HttpContext.Session.Set(Globals.KEY_CUA, User);
+                HttpContext.Session.Set(Globals.SessionKey_CUA, User);
 
                 User.Login_time = DateTime.Now;
                 _userContext.Users.Attach(User).Property(x => x.Login_time).IsModified = true;
                 _userContext.SaveChanges();
 
-                Globals.Current_username = User.User_account;
+                Globals.Current_user = User;
                 return RedirectToPage("Index");
             } else {
                 return RedirectToPage("Login",new { id=DateTime.Now.ToString("yyyymmddHHmmssfff") });

@@ -1,0 +1,76 @@
+﻿@page
+@model com.wechat.gorilla.Pages.ChangePwdModel
+@{
+}
+<h1>修改登录密码</h1>
+
+<h4>Change password</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<input type="hidden" asp-for="User.Id" />
+                <div class="form-group">
+                    <label asp-for="User.User_account" class="control-label"></label>
+                    <input asp-for="User.User_account" class="form-control" />
+                    <span asp-validation-for="User.User_account" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.User_type" class="control-label"></label>
+                    <input asp-for="User.User_type" class="form-control" />
+                    <span asp-validation-for="User.User_type" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Projectid" class="control-label"></label>
+                    <input asp-for="User.Projectid" class="form-control" />
+                    <span asp-validation-for="User.Projectid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Departmentid" class="control-label"></label>
+                    <input asp-for="User.Departmentid" class="form-control" />
+                    <span asp-validation-for="User.Departmentid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.wx_unique_id" class="control-label"></label>
+                    <input asp-for="User.wx_unique_id" class="form-control" />
+                    <span asp-validation-for="User.wx_unique_id" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Roleid" class="control-label"></label>
+                    <input asp-for="User.Roleid" class="form-control" />
+                    <span asp-validation-for="User.Roleid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.User_password" class="control-label"></label>
+                    <input asp-for="User.User_password" class="form-control" />
+                    <span asp-validation-for="User.User_password" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.Login_time" class="control-label"></label>
+                    <input asp-for="User.Login_time" class="form-control" />
+                    <span asp-validation-for="User.Login_time" class="text-danger"></span>
+                </div>*@
+
+            <div class="form-group">
+                <label class="control-label">当前密码：</label>
+                <input class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">新密码：</label>
+                <input class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

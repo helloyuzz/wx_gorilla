@@ -49,7 +49,7 @@
             <tr>
                 <th style="width:40%;">
                     @Html.DisplayNameFor(model => model.Province[0].Province_name)
-                </th>
+</th>
                 <th>
                     @Html.DisplayNameFor(model => model.Province[0].Province_type)
                 </th>
@@ -63,8 +63,8 @@
             @foreach (var item in Model.Province) {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Province_name)
-                    </td>
+                        <a asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Province_name)</a>
+</td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Province_type)
                     </td>
