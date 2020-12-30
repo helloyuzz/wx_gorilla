@@ -5,69 +5,72 @@
 }
 <h1>@ViewData["Title"]</h1>
 <br />
+<p>登录类型：@Model.User.User_account / @Model.User.User_type</p>
+<br />
 <p>上次登录：@Model.User.Login_time</p>
 <form method="post">
     <div class="form-group">
+        <br />
         <input type="submit" value="退出系统" class="btn btn-primary" />
     </div>
 </form>
 @*<div class="panel-group" id="accordion">
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion"
-                   href="#collapseOne">全国省市字典管理</a>
-            </h4>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseOne">全国省市字典管理</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <a asp-page="/Provinces/Index">编辑</a>
+                </div>
+            </div>
         </div>
-        <div id="collapseOne" class="panel-collapse collapse in">
-            <div class="panel-body">
-                <a asp-page="/Provinces/Index">编辑</a>
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseTwo">日志审计</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse">
+                <div class="panel-body"><a href="">查看</a></div>
+            </div>
+        </div>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseThree">帐号安全</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="">修改密码</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-warning">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion"
+                       href="#collapseFour">功能菜单</a>
+                </h4>
+            </div>
+            <div id="collapseFour" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <a href="">查询</a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="panel panel-success">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion"
-                   href="#collapseTwo">日志审计</a>
-            </h4>
-        </div>
-        <div id="collapseTwo" class="panel-collapse collapse">
-            <div class="panel-body"><a href="">查看</a></div>
-        </div>
-    </div>
-    <div class="panel panel-info">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion"
-                   href="#collapseThree">帐号安全</a>
-            </h4>
-        </div>
-        <div id="collapseThree" class="panel-collapse collapse">
-            <div class="panel-body">
-                <a href="">修改密码</a>
-            </div>
-        </div>
-    </div>
-    <div class="panel panel-warning">
-        <div class="panel-heading">
-            <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion"
-                   href="#collapseFour">功能菜单</a>
-            </h4>
-        </div>
-        <div id="collapseFour" class="panel-collapse collapse">
-            <div class="panel-body">
-                <a href="">查询</a>
-            </div>
-        </div>
-    </div>
-</div>
-<script type="text/javascript">
-    $(function () { $('#collapseOne').collapse('show')});
-    $(function () { $('#collapseTwo').collapse('hide')});
-    $(function () { $('#collapseThree').collapse('show')});
-	$(function () { $('#collapseFour').collapse({
-		toggle: false
-	})});
-</script>*@  
+    <script type="text/javascript">
+        $(function () { $('#collapseOne').collapse('show')});
+        $(function () { $('#collapseTwo').collapse('hide')});
+        $(function () { $('#collapseThree').collapse('show')});
+        $(function () { $('#collapseFour').collapse({
+            toggle: false
+        })});
+    </script>*@  

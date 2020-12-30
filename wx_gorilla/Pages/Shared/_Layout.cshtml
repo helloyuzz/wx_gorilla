@@ -3,27 +3,41 @@
 @{
     ViewData["Title"] = "蓝鹰追溯";
 
-    string isLogoned = "false";                                         // 当前是否登录
-    com.wechat.gorilla.Models.User cua = com.wechat.gorilla.Globals.Current_user;  // 当前用户名
-    string showScroll = "hidden";                                       // 登录界面不显示滚动条，进入主界面才显示    
-    string showPanel = "";                                              // 是否显示左边菜单栏
-    var showPanel_Bytes = new Byte[30];
-    bool tryShowValue = Context.Session.TryGetValue(com.wechat.gorilla.Globals.SessionKey_SwitchPanel,out showPanel_Bytes);
-    if (tryShowValue) {                                                 // 从Session中获取是否显示菜单的设置
-        showPanel = System.Text.Encoding.UTF8.GetString(showPanel_Bytes);
-        showPanel = showPanel.Replace("\"", "");
-        if (showPanel.Equals("none")) {
-            showPanel = "display:none;";
+    // 当前是否登录
+    bool isLogoned = Context.Session.Keys.Contains(com.wechat.gorilla.Globals.SessionKey_CUA);
+
+    // 登录界面不显示滚动条，进入主界面才显示    
+    string showScroll = "hidden";
+
+    // 是否显示左边菜单栏
+    string showPanel = "";
+
+    // 当前用户名
+    com.wechat.gorilla.Models.User cua = null;
+
+    if (isLogoned == true) {
+        //var cua_Bytes = new Byte[768];
+        //Context.Session.TryGetValue(com.wechat.gorilla.Globals.SessionKey_CUA, out cua_Bytes);
+
+        cua = com.wechat.gorilla.Globals.Current_user;
+
+        // 从Session中获取是否显示菜单的设置
+        var showPanel_Bytes = new Byte[30];
+        bool isTryPanel = Context.Session.TryGetValue(com.wechat.gorilla.Globals.SessionKey_SwitchPanel, out showPanel_Bytes);
+        if (isTryPanel) {
+            showPanel = System.Text.Encoding.UTF8.GetString(showPanel_Bytes);
+            showPanel = showPanel.Replace("\"", "");
+            if (showPanel.Equals("none")) {
+                showPanel = "display:none;";
+            }
+        }
+        if (cua == null) {
+            showScroll = "hidden";
+        } else {
+            showScroll = "scroll";
         }
     }
-    if (cua == null) {
-        isLogoned = "false";
-        showScroll = "hidden";
-    } else {
-        isLogoned = "true";
-        showScroll = "scroll";
-    }
-}
+            }
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -36,118 +50,197 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <style>
         .menuIcon {
-            margin-right: 3px;
+            margin-right: 5px;
+            margin-left: 18px;
+            color: #fff;
         }
-        .menuIcon_Active {
-            margin-right: 3px;
-            color: forestgreen;
+
+        .transprantBackground {
+            background: #eee;
+            opacity: 0.8;
         }
-        .menu_li {
-            margin-left:18px;
+
+        h1 {
+            color: #fff;
+        }
+
+        .menuItem, .menuItem_Active, .menuItem_Hover {
+            font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+            color: #202124;
+            user-select: none;
+            white-space: nowrap;
+            line-height: 20px;
+            background: rgba(0,0,0,0.702);
+            border-radius: 0 16px 16px 0;
+            box-sizing: border-box;
+            width: 100%;
+            transition: border-radius .15s cubic-bezier(0.4,0.0,0.2,1),margin .15s cubic-bezier(0.4,0.0,0.2,1),width .15s cubic-bezier(0.4,0.0,0.2,1);
+            box-shadow: inset 0 0 0 1px transparent;
+            font-family: 微软雅黑,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+            letter-spacing: .2px;
+            text-shadow: 0 1px 2px rgba(0,0,0,.65);
+            color: #fff;
+            font-size: 11pt;
+            height: 34px;
+            padding: 6px;
+            width: 100%;
+        }
+
+        .menuItem {
+            background-color: transparent;
+        }
+
+        .menuItem_Active {
+            background-color: rgba(255,255,255,0.30);
+        }
+
+        .menuItem_Hover {
+            background-color: rgb(255, 0, 0);
+        }
+
+        .navMenuItem_Title {
+            user-select: none;
+            line-height: 20px;
+            white-space: nowrap;
+            -webkit-user-drag: none;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: bold;
+            -webkit-font-smoothing: antialiased;
+            font-family: 微软雅黑,Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
+            letter-spacing: .2px;
+            text-shadow: 0 1px 2px rgba(0,0,0,.65);
+            color: #fff;
+            font-size: 11pt;
+        }
+
+        .text-shadow {
+            text-shadow: 0 1px 2px rgba(0,0,0,.65);
         }
     </style>
 </head>
-<body style="height:100%;">
-    <table style="height:100%;width:100%;border:1px solid;">
-        <tr>
-            @if (isLogoned == "true") {
-                <td id="panelMenu" style="vertical-align:top;width:273px;background:#eee;@showPanel" rowspan="2">
-                    <ul class="nav navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                                    <a class="navbar-brand" asp-area="" asp-page="/Index">蓝鹰追溯CSSD在线管理系统</a>             
-                        </li>
-                        <li class="nav-item menu menu_li">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index"><span class="glyphicon glyphicon glyphicon-th menuIcon"></span> 主页</a>
-                        </li>
-                        <li class="nav-item menu_li">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Projects/Index"><span class="glyphicon glyphicon glyphicon-flag menuIcon"></span>项目列表</a>
-                        </li>
-                        <li class="nav-item menu_li">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Movies/Index"><span class="glyphicon glyphicon glyphicon-flash menuIcon_Active"></span><span style="color: forestgreen;">推送订阅</span></a>
-                        </li>
-                        <li class="nav-item menu_li">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Movies/Index"><span class="glyphicon glyphicon glyphicon-sort menuIcon_Active"></span><span style="color: forestgreen;">推送日志</span></a>
-                        </li>
-                        <li class="nav-item menu_li">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Provinces/Index"><span class="glyphicon glyphicon glyphicon-transfer menuIcon"></span>全国省市字典管理</a>
-                        </li>
-                        <li class="nav-item menu_li">
-                            <div class="dropdown" style="padding-top:9px;">
-                                <a id="dropdownMenu1" data-toggle="dropdown" class="nav-link text-dark menuIcon" style="margin-top:1px;cursor:pointer;"><span class="glyphicon glyphicon glyphicon-wrench menuIcon"></span>系统设置<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                    <li role="presentation" style="padding:1px 8px 1px 8px;">
-                                        <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Provinces/Index">全国省市字典管理</a>
-                                    </li>
-                                    <li role="presentation" style="padding:1px 8px 1px 8px;">
-                                        <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Logout">查看日志</a>
-                                    </li>
-                                    <li role="presentation" class="divider"></li>
-                                    <li role="presentation" style="padding:1px 8px 1px 8px;">
-                                        <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                                    </li>
-                                    <li role="presentation" style="padding:1px 8px 1px 8px;">
-                                        <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/ChangePwd" asp-route-id="@cua.Id" asp-route-type="changepwd">修改密码</a>
-                                    </li>
-                                </ul>
+<body style="height:100%;background-image:url('/images/1.jpg'); background-position:center;background-repeat:no-repeat;background-size:100% 100%;">
+        <table style="height:100%;width:100%;border:1px solid;">
+            <tr>
+                @if (isLogoned) {
+                <td id="panelMenu" style="vertical-align:top;width:273px;@showPanel" rowspan="2">
+                    <a class="navbar-brand text-white navMenuItem_Title" style="font-size:13.5pt;" asp-area="" asp-page="/Index">蓝鹰追溯CSSD在线管理系统</a>
+                    <table style="width:100%;" cellspacing="2" cellpadding="2">
+                        <tr>
+                            <td id="navMenu_Index" class="menuItem_Active" onmouseover="changeStyle(this.id,'menuItem_Hover');" onmouseout="changeStyle(this.id,'menuItem_Active');">
+                                <a asp-area="" asp-page="/Index" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon glyphicon-th menuIcon"></span>主页</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="navMenu_Project" class="menuItem" onmouseover="changeStyle(this.id,'menuItem_Active');" onmouseout="changeStyle(this.id,'menuItem');">
+                                <a asp-area="" asp-page="/Projects/Index" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon glyphicon-flag menuIcon"></span>项目列表</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="navMenu_1" class="menuItem" onmouseover="changeStyle(this.id,'menuItem_Active');" onmouseout="changeStyle(this.id,'menuItem');">
+                                <a asp-area="" asp-page="/Movies/Index" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon glyphicon-flash menuIcon"></span>推送订阅</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="navMenu_2" class="menuItem" onmouseover="changeStyle(this.id,'menuItem_Active');" onmouseout="changeStyle(this.id,'menuItem');">
+                                <a asp-area="" asp-page="/Provinces/Index" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon glyphicon-wrench menuIcon"></span>系统管理</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="navMenu_3" class="menuItem" onmouseover="changeStyle(this.id,'menuItem_Active');" onmouseout="changeStyle(this.id,'menuItem');">
+                                <a asp-area="" asp-page="/Logout" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon-save menuIcon"></span>修改密码</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="navMenu_4" class="menuItem" onmouseover="changeStyle(this.id,'menuItem_Active');" onmouseout="changeStyle(this.id,'menuItem');">
+                                <a asp-area="" asp-page="/Logout" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon-save menuIcon"></span>日志审计</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="navMenu_5" class="menuItem" onmouseover="changeStyle(this.id,'menuItem_Active');" onmouseout="changeStyle(this.id,'menuItem');">
+                                <a asp-area="" asp-page="/Logout" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon-save menuIcon"></span>Privacy</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td id="navMenu_6" class="menuItem" onmouseover="changeStyle(this.id,'menuItem_Active');" onmouseout="changeStyle(this.id,'menuItem');">
+                                <a asp-area="" asp-page="/Logout" style="color:#fff;text-decoration:none;"><span class="glyphicon glyphicon-save menuIcon"></span>注销 @cua.User_account</a>
+                            </td>
+                        </tr>
+                    </table>                
+                    @*<li role="presentation">
+            <a id="dropdownMenu1" data-toggle="dropdown" class="nav-link text-white navMenuItem_Text" style="padding: 8px;cursor: pointer; "><span class="glyphicon glyphicon glyphicon-wrench menuIcon"></span>系统设置<span class="caret"></span></a>
+            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation" style="padding:1px 8px 1px 8px;">
+                    <a role="menuitem" tabindex="-1" class="nav-link text-black navMenuItem_Text" asp-area="" asp-page="/Provinces/Index">全国省市字典管理</a>
+                </li>
+                <li role="presentation" style="padding:1px 8px 1px 8px;">
+                    <a role="menuitem" tabindex="-1" class="nav-link text-white navMenuItem_Text" asp-area="" asp-page="/Logout">查看日志</a>
+                </li>
+                <li role="presentation" class="divider"></li>
+                <li role="presentation" style="padding:1px 8px 1px 8px;">
+                    <a role="menuitem" tabindex="-1" class="nav-link text-white navMenuItem_Text" asp-area="" asp-page="/Privacy">Privacy</a>
+                </li>
+                <li role="presentation" style="padding:1px 8px 1px 8px;">
+                    <a role="menuitem" tabindex="-1" class="nav-link text-white navMenuItem_Text" asp-area="" asp-page="/ChangePwd" asp-route-id="@cua.Id" asp-route-type="changepwd">修改密码</a>
+                </li>
+            </ul>
+        </li>*@
+                </td>
+                    <td style="width:30px;vertical-align:top;padding-top:16px;text-align:right;" align="center" rowspan="2">
+                        <span class="glyphicon glyphicon-align-justify" onclick="SwitchPanel();"></span>
+                        <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
+                    </td>
+                }
+                <td style="vertical-align:top;padding-left:13px;">
+                    <div style="height:100%;width:100%;overflow-x:hidden;overflow-y:@showScroll;">
+                        @RenderBody()
+                        @*<main role="main" class="pb-3">
+                            </main>*@
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td height="30px" style="padding-left: 13px;color:#fff;" class="text-shadow">
+                    &copy; 2020 - <a asp-area="" asp-page="/Index" class="text-white text-shadow">蓝鹰追溯</a> - <a asp-area="" asp-page="/Privacy" class="text-white text-shadow">Privacy</a>
+                    @*<footer class="border-top footer text-muted">
+                            <div class="container">
                             </div>
-                        </li>
-                        <li class="nav-item menu_li">
-                            <a role="menuitem" tabindex="-1" class="nav-link text-dark" asp-area="" asp-page="/Logout"><span class="glyphicon glyphicon-save menuIcon"></span>注销 @cua.User_account</a>
-                        </li>
-                    </ul>
+                        </footer>*@
                 </td>
-                <td style="width:40px;vertical-align:top;background:#eee;padding-top:16px;" align="center" rowspan="2">
-                    <span class="glyphicon glyphicon-align-justify" onclick="SwitchPanel();"></span>
-                    <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
-                </td>
+            </tr>
+        </table>
+        <iframe id="ChangeShowPanelIframe" name="ChangeShowPanelIframe" src="/HidePanelPage" hidden="hidden">
+        </iframe>
+        <script>
+            function changeStyle(objid,type) {
+                $('#' + objid).attr('class', type);
             }
-            <td style="vertical-align:top;padding-left:13px;">
-                <div style="height:100%;width:100%;overflow-x:hidden;overflow-y:@showScroll;">
-                    @RenderBody()
-                    @*<main role="main" class="pb-3">
-                        </main>*@
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td height="30px" style="padding-left: 13px;">
-                &copy; 2020 - <a asp-area="" asp-page="/Index">蓝鹰追溯</a> - <a asp-area="" asp-page="/Privacy">Privacy</a>
-                @*<footer class="border-top footer text-muted">
-                        <div class="container">
-                        </div>
-                    </footer>*@
-            </td>
-        </tr>
-    </table>
-    <iframe id="ChangeShowPanelIframe" name="ChangeShowPanelIframe" src="/HidePanelPage" hidden="hidden">
-    </iframe>
-    <script>
-        function SwitchPanel() {
-            var showPanel = $('#hidden_ShowPanel').val();
-            if (showPanel.indexOf("none") != -1) {  // "display:none;"
-                $('#panelMenu').show();
-                $('#hidden_ShowPanel').val('block');
-                $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=block');
-                $('#ChangeShowPanelIframe').reload();
-            } else {
-                $('#panelMenu').hide();
-                $('#hidden_ShowPanel').val('none');
-                $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=none');
+            function SwitchPanel() {
+                var showPanel = $('#hidden_ShowPanel').val();
+                if (showPanel.indexOf("none") != -1) {  // "display:none;"
+                    $('#panelMenu').show();
+                    $('#hidden_ShowPanel').val('block');
+                    $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=block');
+                    $('#ChangeShowPanelIframe').reload();
+                } else {
+                    $('#panelMenu').hide();
+                    $('#hidden_ShowPanel').val('none');
+                    $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=none');
+                    $('#ChangeShowPanelIframe').reload();
+                }
+            }
+            function Init() {
+                $('#ChangeShowPanelIframe').attr('src', '');
                 $('#ChangeShowPanelIframe').reload();
             }
-        }
-        function Init() {
-            $('#ChangeShowPanelIframe').attr('src', '');
-            $('#ChangeShowPanelIframe').reload();
-        }
-        onload = Init;
-    </script>
+            onload = Init;
+        </script>
 
-    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+        <script src="~/js/site.js" asp-append-version="true"></script>
 
-    @RenderSection("Scripts", required: false)
+        @RenderSection("Scripts", required: false)
 </body>
 </html>
 
