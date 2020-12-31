@@ -6,67 +6,67 @@
 }
 
 <h1>@Model.Project.Project_name</h1>
-<h3>是否删除?</h3>
 <div>
     <table>
         <tr>
-            <td><h4>Project</h4></td>
+            <td><h4 class="text-ccc">Project - 是否删除?</h4></td>
             <td style="padding-left:13px;">
-                <a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a> | 
-                <a asp-page="./Details" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a>
+                <a asp-page="./Index" class="text-ccc"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a> |
+                <a asp-page="./Details" asp-route-id="@Model.Project.ID" class="text-ccc"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a>
             </td>
             <td></td>
         </tr>
     </table>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Project_name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Project_name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Sign_date)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Sign_date)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Short_name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Short_name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Provinceid)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Province.Province_name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Cityid)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.City.City_name)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Project.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Project.Address)
-        </dd>
-    </dl>
-    <p>
-        <span class="glyphicon glyphicon-warning-sign"></span>注意：删除操作不可恢复！
-    </p>
-    <form method="post">
-        <br />
-        <input type="hidden" asp-for="Project.ID" />
-        <input type="submit" value="Delete" class="btn btn-danger" />
-        <br />
-        <div>
+    <div class="transprantBackground">
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Project.Project_name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Project.Project_name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Project.Sign_date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Project.Sign_date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Project.Short_name)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Project.Short_name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Project.Provinceid)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Project.Province.Province_name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Project.Cityid)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Project.City.City_name)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(model => model.Project.Address)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.Project.Address)
+            </dd>
+        </dl>
+        <p class="text-danger">
+            <span class="glyphicon glyphicon-warning-sign"></span>注意：删除操作不可恢复！
+        </p>
+        <form method="post">
+            <br />
+            <input type="hidden" asp-for="Project.ID" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <br />
+            <div>
 
-        </div>
-    </form>
-</div>
+            </div>
+        </form>
+    </div>
+    </div>

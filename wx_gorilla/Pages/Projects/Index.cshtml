@@ -5,147 +5,146 @@
     ViewData["Title"] = "Index";
 }
 
-    <h1><label id="htmlTip1" style="font-weight:normal;"></label>项目列表</h1>
-<div class="transprantBackground" style="padding:8px;">
-<form id="searchForm" method="get">
-    <table width="100%">
-        <tr>
-            <td style="width:300px;">
-                <div><a asp-page="Create">Create New</a></div>
-            </td>
-            <td>&nbsp;</td>
-            <td style="width:400px;" align="right">
-                <div class="input-group" style="width:300px">
-                    <input type="text" id="searchKey" class="form-control" placeholder="输入项目名称或简称" autocomplete="off" asp-for="SearchProjectName">
-                    <span class="input-group-btn">
-                        <button class="btn btn-primary" type="submit">查询</button>
-                        <button class="btn btn-default" type="button" onclick="SearchAll();">所有项目</button>
-                    </span>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <table class="table table-hover table-condensed">
-        <thead>
-            <tr>
-                <th style="width:30%;">
-                    @Html.DisplayNameFor(model => model.Project[0].Project_name)
-                </th>
-                <th style="width:130px;">
-                    @Html.DisplayNameFor(model => model.Project[0].Short_name)
-                </th>
-                <th style="width:80px;">
-                    @Html.DisplayNameFor(model => model.Project[0].Provinceid)
-                </th>
-                <th style="width:80px;">
-                    @Html.DisplayNameFor(model => model.Project[0].Cityid)
-                </th>
-                <th style="width:80px;">
-                    @Html.DisplayNameFor(model => model.Project[0].Current_progress)
-                </th>
-                <th style="width:80px;">
-                    @Html.DisplayNameFor(model => model.Project[0].Project_imple)
-                </th>
-                @*<th>
-                        @Html.DisplayNameFor(model => model.Project[0].Address)
-                    </th>*@
-                <th>
-                    @Html.DisplayNameFor(model => model.Project[0].Phone)
-                </th>
-                <th style="width:80px;">
-                    @Html.DisplayNameFor(model => model.Project[0].Sign_date)
-                </th>
-                <th style="width:80px;"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Project) {
-                <tr>
-                    <td>
-                        <a asp-page="./Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Project_name)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Short_name)
-                    </td>
-                    <td>
-                        <a href="#SearchProvince" onclick="SearchProvince('@item.Province.Province_name');">@Html.DisplayFor(modelItem => item.Province.Province_name)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.City.City_name)
-                    </td>
-                    <td>
-                        <a href="#SearchProgress" onclick="SearchProgress('@item.Current_progress');">@Html.DisplayFor(modelItem => item.Current_progress)</a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Project_imple)
-                    </td>
-                    @*<td>
-                            @Html.DisplayFor(modelItem => item.Address)
-                        </td>*@
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Phone)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sign_date)
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-success dropdown-toggle btn-xs"
-                                    data-toggle="dropdown">操作
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation">
-                                    <a asp-page="./Details" asp-route-id="@item.ID">Detail</a>
-                                </li>
-                                <li role="presentation">
-                                    <a asp-page="./Edit" asp-route-id="@item.ID" asp-route-source="index">Edit</a>
-                                </li>
-                                <li role="presentation" class="divider"></li>
-                                <li role="presentation">
-                                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-                                </li>
-                            </ul>
+<h1><label id="htmlTip1" style="font-weight:normal;"></label>项目列表</h1>
+    <h4 style="color:#ccc;"><a asp-page="Create" class="text-eee">Create New</a></h4>
+    <div class="transprantBackground">
+        <form id="searchForm" method="get">
+            <table width="100%">
+                <tr>           
+                    <td style="width:500px;">
+                        <div class="input-group" style="width:400px">
+                            <input type="text" id="searchKey" class="form-control" placeholder="输入项目名称或简称" autocomplete="off" asp-for="SearchProjectName">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="submit">查询</button>
+                                <button class="btn btn-default" type="button" onclick="SearchAll();">所有项目</button>
+                            </span>
                         </div>
                     </td>
+                    <td>&nbsp;</td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <table>
-        <tr>
-            <td>
-                <div class="input-group" style="padding-bottom:7px;">
-                    <span class="input-group-addon input-group-sm">共 @Model.RecordCount 条记录，每页显示</span>
-                    <input type="text" class="form-control" asp-for="PageSize" style="width:100px;">
-                    <span class="input-group-addon">条记录</span>
-                </div>
-            </td>
-            <td style="padding-left:13px;">
-                <ul class="pagination" style="margin:0px;">
-                    <li><a href="#FirstPage" onclick="NaviToPage(1);">第一页</a></li>
-                    @*<li class="active"><a href="#">1</a></li>
-                        <li class="disabled"><a href="#">2</a></li>*@
-
-                    @for (int naviPageIndex = 1; naviPageIndex <= Model.PageCount; naviPageIndex++) {
-                        string className = "";
-                        if (naviPageIndex == Model.PageIndex) {
-                            className = "class=\"active\"";
-                        }
-                        <li @Html.Raw(className)><a href="#Page @naviPageIndex" onclick="NaviToPage(@naviPageIndex);">@naviPageIndex</a></li>
+            </table>
+            <table class="table table-hover table-condensed">
+                <thead>
+                    <tr>
+                        <th style="width:30%;">
+                            @Html.DisplayNameFor(model => model.Project[0].Project_name)
+                        </th>
+                        <th style="width:130px;">
+                            @Html.DisplayNameFor(model => model.Project[0].Short_name)
+                        </th>
+                        <th style="width:80px;">
+                            @Html.DisplayNameFor(model => model.Project[0].Provinceid)
+                        </th>
+                        <th style="width:80px;">
+                            @Html.DisplayNameFor(model => model.Project[0].Cityid)
+                        </th>
+                        <th style="width:80px;">
+                            @Html.DisplayNameFor(model => model.Project[0].Current_progress)
+                        </th>
+                        <th style="width:80px;">
+                            @Html.DisplayNameFor(model => model.Project[0].Project_imple)
+                        </th>
+                        @*<th>
+                            @Html.DisplayNameFor(model => model.Project[0].Address)
+                        </th>*@
+                        <th>
+                            @Html.DisplayNameFor(model => model.Project[0].Phone)
+                        </th>
+                        <th style="width:80px;">
+                            @Html.DisplayNameFor(model => model.Project[0].Sign_date)
+                        </th>
+                        <th style="width:80px;"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Project) {
+                        <tr>
+                            <td>
+                                <a asp-page="./Details" asp-route-id="@item.ID">@Html.DisplayFor(modelItem => item.Project_name)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Short_name)
+                            </td>
+                            <td>
+                                <a href="#SearchProvince" onclick="SearchProvince('@item.Province.Province_name');">@Html.DisplayFor(modelItem => item.Province.Province_name)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.City.City_name)
+                            </td>
+                            <td>
+                                <a href="#SearchProgress" onclick="SearchProgress('@item.Current_progress');">@Html.DisplayFor(modelItem => item.Current_progress)</a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Project_imple)
+                            </td>
+                            @*<td>
+                                @Html.DisplayFor(modelItem => item.Address)
+                            </td>*@
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Phone)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sign_date)
+                            </td>
+                            <td>
+                                <div class="dropdown">
+                                    <button type="button" class="btn btn-success dropdown-toggle btn-xs"
+                                            data-toggle="dropdown">
+                                        操作
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                        <li role="presentation">
+                                            <a asp-page="./Details" asp-route-id="@item.ID">Detail</a>
+                                        </li>
+                                        <li role="presentation">
+                                            <a asp-page="./Edit" asp-route-id="@item.ID" asp-route-source="index">Edit</a>
+                                        </li>
+                                        <li role="presentation" class="divider"></li>
+                                        <li role="presentation">
+                                            <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                        </tr>
                     }
-                    <li><a href="#LastPage" onclick="NaviToPage(@Model.PageCount);">最后一页</a></li>
-                </ul>
-            </td>
-            <td>
-            </td>
-        </tr>
-    </table>
-    <input id="htmlPageIndex" type="hidden" asp-for="PageIndex" />
-    <input id="htmlSearchProvince" type="hidden" asp-for="SearchProvince" />
-    <input id="htmlSearchProgress" type="hidden" asp-for="SearchProgress" />
-</form>
-    <input id="htmlTip" type="hidden" asp-for="HtmlTip" />
-    <br />
+                </tbody>
+            </table>
+            <table>
+                <tr>
+                    <td>
+                        <div class="input-group" style="padding-bottom:7px;">
+                            <span class="input-group-addon input-group-sm">共 @Model.RecordCount 条记录，每页显示</span>
+                            <input type="text" class="form-control" asp-for="PageSize" style="width:100px;">
+                            <span class="input-group-addon">条记录</span>
+                        </div>
+                    </td>
+                    <td style="padding-left:13px;">
+                        <ul class="pagination" style="margin:0px;">
+                            <li><a href="#FirstPage" onclick="NaviToPage(1);">第一页</a></li>
+                            @*<li class="active"><a href="#">1</a></li>
+                            <li class="disabled"><a href="#">2</a></li>*@
+
+                            @for (int naviPageIndex = 1; naviPageIndex <= Model.PageCount; naviPageIndex++) {
+                                string className = "";
+                                if (naviPageIndex == Model.PageIndex) {
+                                    className = "class=\"active\"";
+                                }
+                                <li @Html.Raw(className)><a href="#Page @naviPageIndex" onclick="NaviToPage(@naviPageIndex);">@naviPageIndex</a></li>
+                            }
+                            <li><a href="#LastPage" onclick="NaviToPage(@Model.PageCount);">最后一页</a></li>
+                        </ul>
+                    </td>
+                    <td>
+                    </td>
+                </tr>
+            </table>
+            <input id="htmlPageIndex" type="hidden" asp-for="PageIndex" />
+            <input id="htmlSearchProvince" type="hidden" asp-for="SearchProvince" />
+            <input id="htmlSearchProgress" type="hidden" asp-for="SearchProgress" />
+        </form>
+        <input id="htmlTip" type="hidden" asp-for="HtmlTip" />
+        <br />
     </div>
 <script>
     function NaviToPage(pageIndex) {

@@ -6,136 +6,138 @@
 }
 
 <h1>全国省市字典管理</h1>
-<form id="searchForm" method="get">
-    <table width="100%">
-        <tr>
-            <td style="width:300px;">
-                @*<div><a asp-page="Create">Create New</a></div>*@
-                <h4>Province and City</h4>
-            </td>
-            <td style="width:130px;">
-                <div class="form-group" style="width:126px">
-                    <select class="form-control" asp-for="SearchType" onchange="NaviToPage(1);">
-                        <option>全部类型</option>
-                        <option>省</option>
-                        <option>直辖市</option>
-                        <option>建设兵团</option>
-                        <option>自治区</option>
-                        <option>特别行政区</option>
-                    </select>
-                </div>
-            </td>
-            <td style="width:113px;">
-                <div class="form-group" style="width:113px;">
-                    <select class="form-control" asp-for="SearchArea" onchange="NaviToPage(1);">
-                        <option>地理位置</option>
-                        <option>华北地区</option>
-                        <option>东北地区</option>
-                        <option>西北地区</option>
-                        <option>华东地区</option>
-                        <option>华中地区</option>
-                        <option>华南地区</option>
-                        <option>西南地区</option>
-                        <option>港澳台</option>
-                    </select>
-                </div>
-            </td>
-            <td>&nbsp;</td>
-        </tr>
-    </table>
-
-    <table class="table table-hover table-condensed">
-        <thead>
+<div class="transprantBackground" style="padding:8px;">
+    <form id="searchForm" method="get">
+        <table width="100%">
             <tr>
-                <th style="width:40%;">
-                    @Html.DisplayNameFor(model => model.Province[0].Province_name)
-</th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Province[0].Province_type)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Province[0].Province_area)
-                </th>
-                <th></th>
+                <td style="width:300px;">
+                    @*<div><a asp-page="Create">Create New</a></div>*@
+                    <h4>Province and City</h4>
+                </td>
+                <td style="width:130px;">
+                    <div class="form-group" style="width:126px">
+                        <select class="form-control" asp-for="SearchType" onchange="NaviToPage(1);">
+                            <option>全部类型</option>
+                            <option>省</option>
+                            <option>直辖市</option>
+                            <option>建设兵团</option>
+                            <option>自治区</option>
+                            <option>特别行政区</option>
+                        </select>
+                    </div>
+                </td>
+                <td style="width:113px;">
+                    <div class="form-group" style="width:113px;">
+                        <select class="form-control" asp-for="SearchArea" onchange="NaviToPage(1);">
+                            <option>地理位置</option>
+                            <option>华北地区</option>
+                            <option>东北地区</option>
+                            <option>西北地区</option>
+                            <option>华东地区</option>
+                            <option>华中地区</option>
+                            <option>华南地区</option>
+                            <option>西南地区</option>
+                            <option>港澳台</option>
+                        </select>
+                    </div>
+                </td>
+                <td>&nbsp;</td>
             </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Province) {
+        </table>
+
+        <table class="table table-hover table-condensed">
+            <thead>
                 <tr>
-                    <td>
-                        <a asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Province_name)</a>
-</td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Province_type)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Province_area)
-                    </td>
-                    <td>
-                        <div class="dropdown">
-                            <button type="button" class="btn btn-success dropdown-toggle btn-xs"
-                                    data-toggle="dropdown">
-                                操作
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                <li role="presentation">
-                                    <a asp-page="./Details" asp-route-id="@item.Id">Detail</a>
-                                </li>
-                                <li role="presentation">
-                                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
-                                </li>
-                                <li role="presentation" class="divider"></li>
-                                <li role="presentation">
-                                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </td>
+                    <th style="width:40%;">
+                        @Html.DisplayNameFor(model => model.Province[0].Province_name)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Province[0].Province_type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Province[0].Province_area)
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-    <table>
-        <tr>
-            <td>
-                <div class="input-group" style="padding-bottom:7px;">
-                    <span class="input-group-addon input-group-sm">共 @Model.RecordCount 条记录，每页显示</span>
-                    <input type="text" class="form-control" asp-for="PageSize" style="width:100px;">
-                    <span class="input-group-addon">条记录</span>
-                </div>
-            </td>
-            <td style="padding-left:13px;">
-                <ul class="pagination" style="margin:0px;">
-                    <li><a href="#FirstPage" onclick="NaviToPage(1);">第一页</a></li>
-                    @*<li class="active"><a href="#">1</a></li>
-                    <li class="disabled"><a href="#">2</a></li>*@
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Province) {
+                    <tr>
+                        <td>
+                            <a asp-page="./Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.Province_name)</a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Province_type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Province_area)
+                        </td>
+                        <td>
+                            <div class="dropdown">
+                                <button type="button" class="btn btn-success dropdown-toggle btn-xs"
+                                        data-toggle="dropdown">
+                                    操作
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                                    <li role="presentation">
+                                        <a asp-page="./Details" asp-route-id="@item.Id">Detail</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
+                                    </li>
+                                    <li role="presentation" class="divider"></li>
+                                    <li role="presentation">
+                                        <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <table>
+            <tr>
+                <td>
+                    <div class="input-group" style="padding-bottom:7px;">
+                        <span class="input-group-addon input-group-sm">共 @Model.RecordCount 条记录，每页显示</span>
+                        <input type="text" class="form-control" asp-for="PageSize" style="width:100px;">
+                        <span class="input-group-addon">条记录</span>
+                    </div>
+                </td>
+                <td style="padding-left:13px;">
+                    <ul class="pagination" style="margin:0px;">
+                        <li><a href="#FirstPage" onclick="NaviToPage(1);">第一页</a></li>
+                        @*<li class="active"><a href="#">1</a></li>
+                            <li class="disabled"><a href="#">2</a></li>*@
 
-                    @for (int naviPageIndex = 1; naviPageIndex <= Model.PageCount; naviPageIndex++) {
-                        string className = "";
-                        if (naviPageIndex == Model.PageIndex) {
-                            className = "class=\"active\"";
+                        @for (int naviPageIndex = 1; naviPageIndex <= Model.PageCount; naviPageIndex++) {
+                            string className = "";
+                            if (naviPageIndex == Model.PageIndex) {
+                                className = "class=\"active\"";
+                            }
+                            <li @Html.Raw(className)><a href="#Page @naviPageIndex" onclick="NaviToPage(@naviPageIndex);">@naviPageIndex</a></li>
                         }
-                        <li @Html.Raw(className)><a href="#Page @naviPageIndex" onclick="NaviToPage(@naviPageIndex);">@naviPageIndex</a></li>
-                    }
-                    <li><a href="#LastPage" onclick="NaviToPage(@Model.PageCount);">最后一页</a></li>
-                </ul>
-            </td>
-            <td>
-            </td>
-        </tr>
-    </table>
-    <div style="margin:0px;" class="row">
-        <div class="col-1">
-        </div>
-        <div class="col-xl-2">
+                        <li><a href="#LastPage" onclick="NaviToPage(@Model.PageCount);">最后一页</a></li>
+                    </ul>
+                </td>
+                <td>
+                </td>
+            </tr>
+        </table>
+        <div style="margin:0px;" class="row">
+            <div class="col-1">
+            </div>
+            <div class="col-xl-2">
 
+            </div>
         </div>
-    </div>
-    <input id="htmlPageIndex" type="hidden" asp-for="PageIndex"/>
-</form>
-<script>
-    function NaviToPage(pageIndex) {
-        $("#htmlPageIndex").val(pageIndex);
-        $("#searchForm").submit();
-    }
-</script>
+        <input id="htmlPageIndex" type="hidden" asp-for="PageIndex" />
+    </form>
+    <script>
+        function NaviToPage(pageIndex) {
+            $("#htmlPageIndex").val(pageIndex);
+            $("#searchForm").submit();
+        }
+    </script>
+</div>

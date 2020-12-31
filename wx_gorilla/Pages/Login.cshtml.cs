@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using com.wechat.gorilla;
@@ -18,22 +19,29 @@ namespace com.wechat.gorilla.Pages {
         public LoginModel(UserContext userContext) {
             _userContext = userContext;
         }
-        public void OnGet() {
+
+        public IActionResult OnGet() {
+            ModelState.Clear();
             bool isWrongAccountOrPwd = Request.Query.ContainsKey("id");
             if (isWrongAccountOrPwd) {
                 tipDisplayed = "block";
             }
+             return Page();
         }
+        [BindProperty(SupportsGet = true), Required(ErrorMessage ="帐号不能为空"), Display(Name = "帐号")]
+        public string Account { get; set; }
+        [BindProperty(SupportsGet = true), Required(ErrorMessage ="密码不能为空"), Display(Name = "密码")]
+        public string Password { get; set; }
         public async Task<IActionResult> OnPostAsync() {
             if (!ModelState.IsValid) {
                 return Page();
             }
 
-            string account = Request.Form["uac_account"];
-            string pwd = Request.Form["uac_pwd"];
-            string pwd_encrypt = GorillaUtil.Md5(pwd);
+            //string account = Request.Form["uac_account"];
+            //string pwd = Request.Form["uac_pwd"];
+            string pwd_encrypt = GorillaUtil.Md5(Password);
 
-            User = _userContext.Users.FirstOrDefault(A => A.User_account.Equals(account) && A.User_password.Equals(pwd_encrypt));
+            User = _userContext.Users.FirstOrDefault(A => A.User_account.Equals(Account) && A.User_password.Equals(pwd_encrypt));
             if (User != null) {
                 HttpContext.Session.Set(Globals.SessionKey_CUA, User);
 
