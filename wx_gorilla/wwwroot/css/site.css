@@ -91,14 +91,14 @@ h1 {
     color: #fff;
 }
 
-.MenuClass_default, .MenuClass_hover, .MenuClass_active {
+.MenuClass_default, .MenuClass_default_hover, .MenuClass_active_hover, .MenuClass_active {
     font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
     color: #202124;
     user-select: none;
     white-space: nowrap;
     line-height: 20px;
     background: rgba(0,0,0,0.702);
-    border-radius: 0 16px 16px 0;
+    border-radius: 0 13px 13px 0;
     box-sizing: border-box;
     width: 100%;
     transition: border-radius .15s cubic-bezier(0.4,0.0,0.2,1),margin .15s cubic-bezier(0.4,0.0,0.2,1),width .15s cubic-bezier(0.4,0.0,0.2,1);
@@ -117,8 +117,11 @@ h1 {
     background-color: transparent;
 }
 
-.MenuClass_hover {
+.MenuClass_default_hover {
     background-color: rgba(255,255,255,0.30);
+}
+.MenuClass_active_hover {
+    background-color: rgba(0,0,0,0.702);
 }
 
 .menuItem_Hover {

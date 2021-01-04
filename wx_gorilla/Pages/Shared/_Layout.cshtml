@@ -37,16 +37,19 @@
             string activeMenu_id = System.Text.Encoding.UTF8.GetString(activeMenuId_Bytes);
             activeMenu_id = activeMenu_id.Replace("\"", "");
             com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_default = "MenuClass_default");
-            com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_hover = "MenuClass_hover");
-            com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_hover";
-            com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_active";
+            com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_hover = "MenuClass_default_hover");
+            com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_active_hover";
+            com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_default_hover";
         }
 
         if (cua == null) {
             showScroll = "hidden";
         } else {
             showScroll = "auto";
-        }
+        }        
+    }
+    else{
+        cua = new com.wechat.gorilla.Models.User();
     }
 }
 <head>
@@ -59,84 +62,148 @@
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    <link href="~/css/flypanel.css" rel="stylesheet"/>
 </head>
-<body style="height:100%;background-image:url('/images/9.jpg'); background-position:center;background-repeat:no-repeat;background-size:100%;">
-        <table style="height:100%;width:100%;border:1px solid;">
-            <tr>
-                @if (isLogoned) {
-                    <td id="panelMenu" style="vertical-align:top;width:273px;@showPanel" rowspan="2">
-                        <a class="navbar-brand text-white navMenuItem_Title" style="font-size:13.5pt;padding:0px;margin:0px;padding-left:26px;padding-top:18px;" asp-area="" asp-page="/Index">蓝鹰追溯CSSD在线管理系统</a>
-                        <table style="width:100%;" cellspacing="2" cellpadding="2">
-                            @{ foreach (var item in com.wechat.gorilla.Globals.NaviMenus) {
-                                    <tr>
-                                        <td id="@item.Menu_id" onclick="ClickMenu('@item.Menu_id');" class="@item.MenuClass_default" onmouseover="changeStyle('@item.Menu_id', '@item.MenuClass_hover');" onmouseout="changeStyle('@item.Menu_id', '@item.MenuClass_default');">
-                                            <a asp-area="" asp-page="@item.AspPage" style="color:#fff;text-decoration:none;"><span class="@item.Menu_icons"></span>@item.MenuText</a>
-                                        </td>
-                                    </tr>
-
-                                }
+<body id="mainWindow" style="height:100%;background-image:url('/images/9.jpg'); background-position:center;background-repeat:no-repeat;background-size:100%;">
+    @*<div class="header"></div>*@
+    <label for="openSidebarMenu" class="sidebarIconToggle">
+        @*<div class="spinner diagonal part-1"></div>
+        <div class="spinner horizontal"></div>
+        <div class="spinner diagonal part-2"></div>*@
+    </label>
+    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+    <div id="sidebarMenu">
+        <ul class="sidebarMenuInner">
+            <li>Choose themes</li>
+            @{
+                for (int imgFile = 1; imgFile <= 18; imgFile++) {
+                    string imgPath = "/images/" + imgFile + ".jpg";
+                    <li><a href="#Link"><img src="@imgPath" style="width:216px;" onclick="changeTheme('@imgPath');" /></a></li>
+                }
+            }
+        </ul>
+    </div>
+    @*<div id='center' class="main center">
+        <div class="mainInner">
+            <div>PURE CSS SIDEBAR TOGGLE MENU</div>
+        </div>
+        <div class="mainInner">
+            <div>PURE CSS SIDEBAR TOGGLE MENU</div>
+        </div>
+        <div class="mainInner">
+            <div>PURE CSS SIDEBAR TOGGLE MENU</div>
+        </div>
+    </div>*@
+    <div class="dropdown" style="position:absolute;top:13px;right:13px;">
+        @if (isLogoned) {
+            <button type="button" class="btn dropdown-toggle text-white" id="dropdownMenu1"
+                    data-toggle="dropdown">
+                @cua.User_account
+            </button>
+            <ul class="dropdown-menu pull-right" role="menu"
+                aria-labelledby="dropdownMenu1">
+                <li role="presentation" class="dropdown-header"> <i class="fa fa-wrench" aria-hidden="true"></i>设置</li>
+                <li role="presentation">
+                    <a asp-area="" asp-page="/Provinces/Index" role="menuitem" tabindex="-1">全国省市字典管理</a>
+                </li>
+                <li role="presentation">
+                    <a asp-area="" asp-page="/Privacy" role="menuitem" tabindex="-1">日志审计</a>
+                </li>
+                <li role="presentation">
+                    <a asp-area="" asp-page="/Privacy" role="menuitem" tabindex="-1">Privacy</a>
+                </li>
+                @*<li role="presentation" class="divider"></li>*@
+                <li role="presentation" class="dropdown-header"><i class="fa fa-user-edit" aria-hidden="true"></i>安全</li>
+                <li role="presentation">
+                    <a asp-area="" asp-page="/ChangePwd" role="menuitem" tabindex="-1">修改密码</a>
+                </li>
+                <li role="presentation">
+                    <a asp-area="" asp-page="/Logout" role="menuitem" tabindex="-1">注销</a>
+                </li>
+            </ul>
+        }
+    </div>
+    <table style="height: 100%; width: 100%; border: 1px solid;">
+        <tr>
+            @if (isLogoned) {
+                <td id="panelMenu" style="padding-top:13px;vertical-align:top;width:273px;@showPanel" rowspan="2">
+                    @*<a class="navbar-brand text-white navMenuItem_Title" style="font-size:13.5pt;padding:0px;margin:0px;padding-left:26px;padding-top:18px;" asp-area="" asp-page="/Index">蓝鹰追溯CSSD在线管理系统</a>*@
+                    <table style="width:100%;border-spacing:5px;border-collapse:separate;">
+                        @{ foreach (var item in com.wechat.gorilla.Globals.NaviMenus) {
+                                <tr>
+                                    <td id="@item.Menu_id" onclick="ClickMenu('@item.Menu_id');" class="@item.MenuClass_default" onmouseover="changeStyle('@item.Menu_id', '@item.MenuClass_hover');" onmouseout="changeStyle('@item.Menu_id', '@item.MenuClass_default');">
+                                        <a asp-area="" asp-page="@item.AspPage" style="color:#fff;text-decoration:none;"><span class="@item.Menu_icons"></span>@item.MenuText</a>
+                                    </td>
+                                </tr>
                             }
-                        </table>
-                    </td>
-                    <td style="width:30px;vertical-align:top;padding-top:16px;text-align:right;" align="center" rowspan="2">
-                        <span class="glyphicon glyphicon-align-justify text-shadow" style="color:#eee;" onclick="SwitchPanel();"></span>
-                        <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
-                    </td>
-                }
-                <td style="vertical-align:top;padding-left:13px;">
-                    <div style="height:100%;width:100%;overflow-x:hidden;overflow-y: @showScroll;">
-                        @RenderBody()
-                        @*<main role="main" class="pb-3">
-                </main>*@
-                    </div>
+                        }
+                    </table>
                 </td>
-            </tr>
-            <tr>
-                <td height="30px" style="padding-left: 13px;color:#fff;" class="text-shadow">
-                    &copy; 2020 - <a asp-area="" asp-page="/Index" class="text-white text-shadow">蓝鹰追溯</a> - <a asp-area="" asp-page="/Privacy" class="text-white text-shadow">Privacy</a>
-                    @*<footer class="border-top footer text-muted">
-                            <div class="container">
-                            </div>
-                        </footer>*@
+                <td style="width:30px;vertical-align:top;padding-top:19px;text-align:right;" align="center" rowspan="2">
+                    <span class="glyphicon glyphicon-align-justify text-shadow" style="color:#eee;" onclick="SwitchPanel();" title="显示/隐藏主菜单"></span>
+                    <a asp-area="" asp-page="/Index"><i class="fas fa-home text-white text-shadow" title="返回主页"></i></a>
+                    <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
                 </td>
-            </tr>
-        </table>
-        <iframe id="ChangeShowPanelIframe" name="ChangeShowPanelIframe" src="" hidden="hidden">
-        </iframe>
-        <script>
-            function ClickMenu(menu_id) {
-                $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?activeMenuId=' + menu_id);
+            }
+            <td style="vertical-align:top;padding-left:13px;">
+                <div style="height:100%;width:100%;overflow-x:hidden;overflow-y: @showScroll;">
+                    @RenderBody()
+                    @*<main role="main" class="pb-3">
+                        </main>*@
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td height="30px" style="padding-left: 13px;color:#fff;" class="text-shadow">
+                &copy; 2020 - <a asp-area="" asp-page="/Index" class="text-white text-shadow">蓝鹰追溯</a> - <a asp-area="" asp-page="/Privacy" class="text-white text-shadow">Privacy</a>
+                @*<footer class="border-top footer text-muted">
+                        <div class="container">
+                        </div>
+                    </footer>*@
+            </td>
+        </tr>
+    </table>
+    <iframe id="ChangeShowPanelIframe" name="ChangeShowPanelIframe" src="" hidden="hidden">
+    </iframe>
+    <script>
+        function changeTheme(imgUrl) {
+            $('#mainWindow').css('background-image', "url('" + imgUrl + "')");
+            $('#openSidebarMenu').click();
+        }
+        function ClickMenu(menu_id) {
+            $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?activeMenuId=' + menu_id);
+            $('#ChangeShowPanelIframe').reload();
+        }
+        function changeStyle(objid, type) {
+            $('#' + objid).attr('class', type);
+        }
+        function SwitchPanel() {
+            var showPanel = $('#hidden_ShowPanel').val();
+            if (showPanel.indexOf("none") != -1) {  // "display:none;"
+                $('#panelMenu').show();
+                $('#hidden_ShowPanel').val('block');
+                $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=block');
+                $('#ChangeShowPanelIframe').reload();
+            } else {
+                $('#panelMenu').hide();
+                $('#hidden_ShowPanel').val('none');
+                $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=none');
                 $('#ChangeShowPanelIframe').reload();
             }
-            function changeStyle(objid,type) {
-                $('#' + objid).attr('class', type);
-            }
-            function SwitchPanel() {
-                var showPanel = $('#hidden_ShowPanel').val();
-                if (showPanel.indexOf("none") != -1) {  // "display:none;"
-                    $('#panelMenu').show();
-                    $('#hidden_ShowPanel').val('block');
-                    $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=block');
-                    $('#ChangeShowPanelIframe').reload();
-                } else {
-                    $('#panelMenu').hide();
-                    $('#hidden_ShowPanel').val('none');
-                    $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=none');
-                    $('#ChangeShowPanelIframe').reload();
-                }
-            }
-            function Init() {
-                $('#ChangeShowPanelIframe').attr('src', '');
-                $('#ChangeShowPanelIframe').reload();
-            }
-            onload = Init;
-        </script>
+        }
+        function Init() {
+            $('#ChangeShowPanelIframe').attr('src', '');
+            $('#ChangeShowPanelIframe').reload();
+        }
+        onload = Init;
+    </script>
 
-        @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
-        <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
+    <script src="~/js/site.js" asp-append-version="true"></script>
 
-        @RenderSection("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
 

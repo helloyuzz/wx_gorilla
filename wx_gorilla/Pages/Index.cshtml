@@ -2,9 +2,106 @@
 @model com.wechat.gorilla.Pages.IndexModel
 @{
     ViewData["Title"] = "Home page";
+    string imagePath = "https://www.easyicon.net/api/resizeApi.php?id=1136023&size=32";
+    string imagePath_1 = "https://www.easyicon.net/api/resizeApi.php?id=1171937&size=64";
 }
-
+<style>
+    .thumbnail1 {
+        opacity:0.8;
+        border-radius:13px;
+        padding-top:26px;
+        width:165px;
+    }
+</style>
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p class="text-white">更多信息请访问 <a href="https://docs.microsoft.com/aspnet/core" class="text-white">http://www.logichealth.cn</a>.</p>
+    <br />
+    <div class="row" style="background:none;">
+        <div class="col-sm-3 col-md-2">
+            <a class="btn btn-lg btn-light text-center thumbnail1" asp-area="" asp-page="/Projects/Index">
+                <i class="fa fa-hospital fa-4x" aria-hidden="true"></i>
+                <h4>项目列表</h4>
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-2">
+            <a class="btn btn-lg btn-primary text-center thumbnail1" asp-area="" asp-page="/Employees/Index">
+                <i class="fa fa-users fa-4x"></i>
+                <div class="caption">
+                    <h4>人员权限</h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-2">
+            <a class="btn btn-lg btn-primary text-center thumbnail1" asp-area="" asp-page="/Projects/Create">
+                <i class="fa fa-comment-dots fa-4x"></i>
+                <div class="caption">
+                    <h4>推送订阅</h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-2">
+            <a class="btn btn-lg btn-primary text-center thumbnail1" asp-area="" asp-page="/Projects/Create">
+                <i class="fa fa-file-alt fa-4x"></i>
+                <div class="caption">
+                    <h4>日志审计</h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-2">
+            <a class="btn btn-lg btn-primary text-center thumbnail1" asp-area="" asp-page="/Provinces/Index">
+                <i class="fa fa-compass fa-4x"></i>
+                <div class="caption">
+                    <h4>地区字典</h4>
+                </div>
+            </a>
+        </div>
+        <div class="col-sm-6 col-md-2">
+            <a class="btn btn-lg btn-primary text-center thumbnail1" asp-area="" asp-page="/ChangePwd">
+                <i class="fa fa-cog fa-4x"></i>
+                <div class="caption">
+                    <h4>修改密码</h4>
+                </div>
+            </a>
+        </div>
+        <div class="flex-grow-1" style="background:none;margin-top:18px;">
+            <div class="col-sm-6 col-md-2">
+                <a class="btn btn-lg btn-primary text-center thumbnail1" asp-area="" asp-page="/Privacy">
+                    <i class="fa fa-cloud-download-alt fa-4x"></i>
+                    <div class="caption">
+                        <h4>Swagger</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-2">
+                <a class="btn btn-lg btn-primary text-center thumbnail1" asp-area="" asp-page="/Privacy">
+                    <i class="fa fa-info-circle fa-4x"></i>
+                    <div class="caption">
+                        <h4>Privacy</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-2">
+                <a class="btn btn-lg btn-success text-center thumbnail1" href="##" onclick="$('#openSidebarMenu').click();">
+                    <i class="fa fa-paint-brush fa-4x"></i>
+                    <div class="caption">
+                        <h4>Themes</h4>
+                    </div>
+                </a>
+            </div>
+            <div class="col-sm-6 col-md-2">
+                <a class="btn btn-lg btn-warning text-center thumbnail1" asp-area="" asp-page="/Logout">
+                    <i class="fa fa-arrow-right fa-4x"></i>
+                    <div class="caption">
+                        <h4>退出</h4>
+                    </div>
+                </a>
+            </div>
+            @*<div class="col-sm-6 col-md-2">
+            <a class="btn btn-lg btn-success" href="#">
+                <i class="fa fa-flag fa-2x pull-left"></i> Font Awesome<br>Version 4.7.0
+            </a>
+        </div>*@
+        </div>
+    </div>
 </div>

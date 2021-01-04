@@ -4,10 +4,10 @@
 }
 <h1>修改登录密码</h1>
 <h4 class="text-ddd">Security options</h4>
-<div class="transprantBackground">
+<div class="transprantBackground" style="margin-right:13px;">
     <div class="row">
         <div class="col-md-4">
-            <form method="post">
+            <form method="post" autocomplete="off">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 @*< input type="hidden" asp-for="User.Id" />
                     <div class="form-group">
@@ -62,7 +62,7 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
-                    <a asp-page="/Index" class="btn btn-default">Cancel</a>
+                    <a asp-page="/Index" class="btn btn-warning">Cancel</a>
                 </div>
             </form>
         </div>

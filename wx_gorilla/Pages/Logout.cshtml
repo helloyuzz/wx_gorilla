@@ -1,17 +1,17 @@
 ﻿@page
 @model com.wechat.gorilla.Pages.LogoutModel
 @{
-    ViewData["Title"] = "是否注销登录？";
+    ViewData["Title"] = "是否注销[" + Model.User.User_account + "]登录？";
 }
 <h1>@ViewData["Title"]</h1>
 <br />
-<p class="text-eee">登录类型：@Model.User.User_account / @Model.User.User_type</p>
+<p class="text-eee">登录类型：@Model.User.User_type</p>
 <br />
 <p class="text-eee">上次登录：@Model.User.Login_time</p>
 <form method="post">
     <div class="form-group">
         <br />
-        <input type="submit" value="退出系统" class="btn btn-primary" />
+        <input type="submit" value="退出系统" class="btn btn-primary" /><a class="btn btn-warning" style="margin-left:8px;" asp-area="" onclick="window.history.go(-1); return false;">取消</a>
     </div>
 </form>
 @*<div class="panel-group" id="accordion">

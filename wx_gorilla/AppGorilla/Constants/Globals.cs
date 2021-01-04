@@ -45,7 +45,7 @@ namespace com.wechat.gorilla {
                     _list = new List<NaviMenuItem>();
                     NaviMenuItem naviMenu_Index = new NaviMenuItem() {
                         Menu_id = "navMenu_Index",
-                        MenuText = "主页",
+                        MenuText = "Welcome",
                         AspPage = "/Index",
                         Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
                     };
@@ -61,44 +61,44 @@ namespace com.wechat.gorilla {
                         AspPage = "/Index",
                         Menu_icons = "glyphicon glyphicon glyphicon-flash menuIcon",
                     };
-                    NaviMenuItem naviMenu_System = new NaviMenuItem() {
-                        Menu_id = "naviMenu_System",
-                        MenuText = "系统管理",
-                        AspPage = "/Provinces/Index",
-                        Menu_icons = "glyphicon glyphicon glyphicon-wrench menuIcon",
-                    };
-                    NaviMenuItem naviMenu_ChangePwd = new NaviMenuItem() {
-                        Menu_id = "naviMenu_ChangePwd",
-                        MenuText = "修改密码",
-                        AspPage = "/ChangePwd",
-                        Menu_icons = "glyphicon glyphicon glyphicon-save menuIcon",
-                    };
-                    NaviMenuItem naviMenu_AuditLog = new NaviMenuItem() {
-                        Menu_id = "naviMenu_AuditLog",
-                        MenuText = "日志审计",
-                        AspPage = "/Index",
-                        Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
-                    };
-                    NaviMenuItem naviMenu_Privacy = new NaviMenuItem() {
-                        Menu_id = "naviMenu_Privacy",
-                        MenuText = "Privacy",
-                        AspPage = "/Privacy",
-                        Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
-                    };
-                    NaviMenuItem naviMenu_Logout = new NaviMenuItem() {
-                        Menu_id = "naviMenu_Logout",
-                        MenuText = "注销",
-                        AspPage = "/Logout",
-                        Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
-                    };
+                    //NaviMenuItem naviMenu_System = new NaviMenuItem() {
+                    //    Menu_id = "naviMenu_System",
+                    //    MenuText = "系统管理",
+                    //    AspPage = "/Provinces/Index",
+                    //    Menu_icons = "glyphicon glyphicon glyphicon-wrench menuIcon",
+                    //};
+                    //NaviMenuItem naviMenu_ChangePwd = new NaviMenuItem() {
+                    //    Menu_id = "naviMenu_ChangePwd",
+                    //    MenuText = "修改密码",
+                    //    AspPage = "/ChangePwd",
+                    //    Menu_icons = "glyphicon glyphicon glyphicon-save menuIcon",
+                    //};
+                    //NaviMenuItem naviMenu_AuditLog = new NaviMenuItem() {
+                    //    Menu_id = "naviMenu_AuditLog",
+                    //    MenuText = "日志审计",
+                    //    AspPage = "/Index",
+                    //    Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
+                    //};
+                    //NaviMenuItem naviMenu_Privacy = new NaviMenuItem() {
+                    //    Menu_id = "naviMenu_Privacy",
+                    //    MenuText = "Privacy",
+                    //    AspPage = "/Privacy",
+                    //    Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
+                    //};
+                    //NaviMenuItem naviMenu_Logout = new NaviMenuItem() {
+                    //    Menu_id = "naviMenu_Logout",
+                    //    MenuText = "注销",
+                    //    AspPage = "/Logout",
+                    //    Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
+                    //};
                     _list.Add(naviMenu_Index);
                     _list.Add(naviMenu_Project);
                     _list.Add(naviMenu_Subscribe);
-                    _list.Add(naviMenu_AuditLog);
-                    _list.Add(naviMenu_System);
-                    _list.Add(naviMenu_Privacy);
-                    _list.Add(naviMenu_ChangePwd);
-                    _list.Add(naviMenu_Logout);
+                    //_list.Add(naviMenu_AuditLog);
+                    //_list.Add(naviMenu_System);
+                    //_list.Add(naviMenu_Privacy);
+                    //_list.Add(naviMenu_ChangePwd);
+                    //_list.Add(naviMenu_Logout);
                 }
                 return _list;
             }

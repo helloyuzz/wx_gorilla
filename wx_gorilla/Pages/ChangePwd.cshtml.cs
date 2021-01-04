@@ -11,6 +11,7 @@ namespace com.wechat.gorilla.Pages {
         public void OnGet() {
             ViewData["aa"] = "aa";
             TempData["bb"] = "bb";
+            ModelState.Clear();
         }
         [BindProperty(SupportsGet = true), Required, Display(Name = "µ±«∞√‹¬Î")]
         public string OldPassword { get; set; }

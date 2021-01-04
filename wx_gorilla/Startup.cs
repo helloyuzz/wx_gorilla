@@ -30,6 +30,7 @@ namespace wx_razor_project {
             services.AddDbContext<CityContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
             services.AddDbContext<DepartmentContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
             services.AddDbContext<UserContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
+            services.AddDbContext<EmployeeContext>(a => a.UseMySQL(Globals.MySqlConnectionString));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
