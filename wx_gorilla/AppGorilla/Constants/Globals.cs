@@ -30,14 +30,9 @@ namespace com.wechat.gorilla {
             }
         }
 
-        public static string SessionKey_SwitchPanel = "KEY-SwitchPanel";
-        public static string SessionKey_ActiveMenuId = "KEY-ActiveMenuId";
-        public static string SessionKey_CUA = "KEY-CUA";
-
-        public static User Current_user;
-
-        public const string AuthCookieFlag = "AuthCookieFlag-Temp";
         public const string CopyRight = "蓝鹰追溯";
+
+
         private static List<NaviMenuItem> _list = null;
         public static List<NaviMenuItem> NaviMenus {
             get {
@@ -58,7 +53,7 @@ namespace com.wechat.gorilla {
                     NaviMenuItem naviMenu_Subscribe = new NaviMenuItem() {
                         Menu_id = "naviMenu_Subscribe",
                         MenuText = "推送订阅",
-                        AspPage = "/Index",
+                        AspPage = "/Subscribe",
                         Menu_icons = "glyphicon glyphicon glyphicon-flash menuIcon",
                     };
                     //NaviMenuItem naviMenu_System = new NaviMenuItem() {

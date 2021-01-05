@@ -30,6 +30,6 @@ namespace com.wechat.gorilla {
                 result = stringBuilder.ToString();
             }
             return result;
-        }
+        }        
     }
 }

@@ -2,17 +2,29 @@
 @model com.wechat.gorilla.Pages.IndexModel
 @{
     ViewData["Title"] = "Home page";
-    string imagePath = "https://www.easyicon.net/api/resizeApi.php?id=1136023&size=32";
-    string imagePath_1 = "https://www.easyicon.net/api/resizeApi.php?id=1171937&size=64";
 }
 <style>
     .thumbnail1 {
-        opacity:0.8;
-        border-radius:13px;
-        padding-top:26px;
-        width:165px;
+        opacity: 0.8;
+        border-radius: 13px;
+        padding-top: 26px;
+        width: 165px;
     }
 </style>
+<label for="openSidebarMenu" class="sidebarIconToggle">
+</label>
+<input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+<div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
+        <li class="text-dark">Choose themes<br /><a href="##" class="text-dark">恢复默认</a></li>
+        @{
+            for (int imgFile = 1; imgFile <= 18; imgFile++) {
+                string imgPath = "/images/" + imgFile + ".jpg";
+                <li><a href="#Link"><img src="@imgPath" style="width:205px;" onclick="changeTheme('@imgPath');" /></a></li>
+            }
+        }
+    </ul>
+</div>
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p class="text-white">更多信息请访问 <a href="https://docs.microsoft.com/aspnet/core" class="text-white">http://www.logichealth.cn</a>.</p>
@@ -98,10 +110,13 @@
                 </a>
             </div>
             @*<div class="col-sm-6 col-md-2">
-            <a class="btn btn-lg btn-success" href="#">
-                <i class="fa fa-flag fa-2x pull-left"></i> Font Awesome<br>Version 4.7.0
-            </a>
-        </div>*@
+                    <a class="btn btn-lg btn-success" href="#">
+                        <i class="fa fa-flag fa-2x pull-left"></i> Font Awesome<br>Version 4.7.0
+                    </a>
+                </div>*@
         </div>
     </div>
 </div>
+<script>
+    $('#sidebarMenu').css("display", "block");
+</script>

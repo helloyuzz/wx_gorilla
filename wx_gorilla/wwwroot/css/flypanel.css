@@ -1,18 +1,18 @@
-@import url('https://fonts.googleapis.com/css?family=Varela+Round');
+/*@import url('https://fonts.googleapis.com/css?family=Varela+Round');*/
 
-html, body {
+/*html, body {
     overflow-x: hidden;
     height: 100%;
 }
-
-body {
+*/
+/*body {
     background: #fff;
     padding: 0;
-    margin: 0;
-    font-family: 'Varela Round', sans-serif;
-}
+    margin: 0;*/
+    /*font-family: 'Varela Round', sans-serif;*/
+/*}*/
 
-.header {
+/*.header {
     display: block;
     margin: 0 auto;
     width: 100%;
@@ -23,16 +23,16 @@ body {
     height: 60px !important;
     overflow: hidden;
     z-index: 10;
-}
+}*/
 
-.main {
+/*.main {
     margin: 0 auto;
     display: block;
     height: 100%;
     margin-top: 60px;
 }
-
-.mainInner {
+*/
+/*.mainInner {
     display: table;
     height: 100%;
     width: 100%;
@@ -45,13 +45,13 @@ body {
         font-size: 3em;
         font-weight: bold;
         letter-spacing: 1.25px;
-    }
+    }*/
 
 #sidebarMenu {
     height: 100%;
     position: fixed;
-    /*display:none;*/
-    right: 0;
+    display:none;
+    right: 0px;
     width: 250px;
     /*margin-top: 60px;*/
     transform: translateX(250px);
@@ -69,29 +69,30 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.10);
 }
 
-    .sidebarMenuInner li {
-        list-style: none;
-        /*color: #fff;*/
-        text-transform: uppercase;
-        font-weight: bold;
-        padding: 20px;
-        cursor: pointer;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-    }
+.sidebarMenuInner li {
+    list-style: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 20px;
+    padding-bottom:0px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
 
-        .sidebarMenuInner li span {
-            display: block;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.50);
-        }
+.sidebarMenuInner li a {
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.50);
+}
 
-        .sidebarMenuInner li a {
-            /*color: #fff;*/
-            text-transform: uppercase;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-        }
+/*.sidebarMenuInner li a {
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}*/
 
 input[type="checkbox"]:checked ~ #sidebarMenu {
     transform: translateX(0);

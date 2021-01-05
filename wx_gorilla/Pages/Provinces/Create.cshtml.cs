@@ -8,19 +8,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
-namespace com.wechat.gorilla.Pages.Provinces
-{
-    public class CreateModel : PageModel
-    {
+namespace com.wechat.gorilla.Pages.Provinces {
+    public class CreateModel : PageModel {
         private readonly com.wechat.gorilla.DbContexts.ProvinceContext _context;
 
-        public CreateModel(com.wechat.gorilla.DbContexts.ProvinceContext context)
-        {
+        public CreateModel(com.wechat.gorilla.DbContexts.ProvinceContext context) {
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
+        public IActionResult OnGet() {
             return Page();
         }
 
@@ -29,10 +25,8 @@ namespace com.wechat.gorilla.Pages.Provinces
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> OnPostAsync() {
+            if (!ModelState.IsValid) {
                 return Page();
             }
 

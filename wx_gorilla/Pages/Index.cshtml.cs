@@ -16,11 +16,11 @@ namespace com.wechat.gorilla.Pages {
         }
 
         public async Task<IActionResult> OnGet() {
-            User user = HttpContext.Session.Get<User>(Globals.SessionKey_CUA);
+            User user = HttpContext.Session.Get<User>(SessionExtensions.SessionKey_CUA);
             if (user == null) {
                 return RedirectToPage("Login");
             }
-
+            SessionExtensions.Set<string>(HttpContext.Session, SessionExtensions.SessionKey_ActiveMenuId, "navMenu_Index");
             return Page();
             //if (Globals.Cua == null) {
         }

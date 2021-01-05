@@ -4,7 +4,7 @@
     ViewData["Title"] = "蓝鹰追溯";
 
     // 当前是否登录
-    bool isLogoned = Context.Session.Keys.Contains(com.wechat.gorilla.Globals.SessionKey_CUA);
+    bool isLogoned = Context.Session.Keys.Contains(com.wechat.gorilla.SessionExtensions.SessionKey_CUA);
 
     // 登录界面不显示滚动条，进入主界面才显示    
     string showScroll = "hidden";
@@ -19,11 +19,11 @@
         //var cua_Bytes = new Byte[768];
         //Context.Session.TryGetValue(com.wechat.gorilla.Globals.SessionKey_CUA, out cua_Bytes);
 
-        cua = com.wechat.gorilla.Globals.Current_user;
+        cua = com.wechat.gorilla.SessionExtensions.Get<com.wechat.gorilla.Models.User>(Context.Session, com.wechat.gorilla.SessionExtensions.SessionKey_CUA);
 
         // 从Session中获取是否显示菜单的设置
         var showPanel_Bytes = new Byte[30];
-        bool isTrySession = Context.Session.TryGetValue(com.wechat.gorilla.Globals.SessionKey_SwitchPanel, out showPanel_Bytes);
+        bool isTrySession = Context.Session.TryGetValue(com.wechat.gorilla.SessionExtensions.SessionKey_SwitchPanel, out showPanel_Bytes);
         if (isTrySession) {
             showPanel = System.Text.Encoding.UTF8.GetString(showPanel_Bytes);
             showPanel = showPanel.Replace("\"", "");
@@ -31,76 +31,55 @@
                 showPanel = "display:none;";
             }
         }
-        var activeMenuId_Bytes = new Byte[128];
-        isTrySession = Context.Session.TryGetValue(com.wechat.gorilla.Globals.SessionKey_ActiveMenuId, out activeMenuId_Bytes);
-        if (isTrySession) {
-            string activeMenu_id = System.Text.Encoding.UTF8.GetString(activeMenuId_Bytes);
-            activeMenu_id = activeMenu_id.Replace("\"", "");
-            com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_default = "MenuClass_default");
-            com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_hover = "MenuClass_default_hover");
-            com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_active_hover";
-            com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_default_hover";
+        string activeMenu_id = com.wechat.gorilla.SessionExtensions.Get<string>(Context.Session, com.wechat.gorilla.SessionExtensions.SessionKey_ActiveMenuId);
+        if (string.IsNullOrEmpty(activeMenu_id)) {
+            activeMenu_id = "navMenu_Index";
         }
+        com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_default = "MenuClass_default");
+        com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_hover = "MenuClass_default_hover");
+        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_active_hover";
+        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_default_hover";
 
         if (cua == null) {
             showScroll = "hidden";
         } else {
             showScroll = "auto";
-        }        
-    }
-    else{
+        }
+    } else {
         cua = new com.wechat.gorilla.Models.User();
+        cua.Theme_url = "/images/9.jpg";
     }
 }
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    @*<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>*@
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>*@
+
+    @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
-    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
-    <script src="https://cdn.staticfile.org/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
-    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
-    <link href="~/css/flypanel.css" rel="stylesheet"/>
+    <link href="~/css/flypanel.css" rel="stylesheet" />
+    <style>
+        #panelMenu {
+          
+        }
+    </style>
 </head>
-<body id="mainWindow" style="height:100%;background-image:url('/images/9.jpg'); background-position:center;background-repeat:no-repeat;background-size:100%;">
-    @*<div class="header"></div>*@
-    <label for="openSidebarMenu" class="sidebarIconToggle">
-        @*<div class="spinner diagonal part-1"></div>
-        <div class="spinner horizontal"></div>
-        <div class="spinner diagonal part-2"></div>*@
-    </label>
-    <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
-    <div id="sidebarMenu">
-        <ul class="sidebarMenuInner">
-            <li>Choose themes</li>
-            @{
-                for (int imgFile = 1; imgFile <= 18; imgFile++) {
-                    string imgPath = "/images/" + imgFile + ".jpg";
-                    <li><a href="#Link"><img src="@imgPath" style="width:216px;" onclick="changeTheme('@imgPath');" /></a></li>
-                }
-            }
-        </ul>
-    </div>
-    @*<div id='center' class="main center">
-        <div class="mainInner">
-            <div>PURE CSS SIDEBAR TOGGLE MENU</div>
-        </div>
-        <div class="mainInner">
-            <div>PURE CSS SIDEBAR TOGGLE MENU</div>
-        </div>
-        <div class="mainInner">
-            <div>PURE CSS SIDEBAR TOGGLE MENU</div>
-        </div>
-    </div>*@
+<body id="mainWindow" style="height:100%;background-image:url('@cua.Theme_url'); background-position:center;background-repeat:no-repeat;background-size:100%;">
+
     <div class="dropdown" style="position:absolute;top:13px;right:13px;">
         @if (isLogoned) {
-            <button type="button" class="btn dropdown-toggle text-white" id="dropdownMenu1"
+            <a class="btn dropdown-toggle text-white text-shadow" id="dropdownMenu1"
                     data-toggle="dropdown">
                 @cua.User_account
-            </button>
+            </a>
             <ul class="dropdown-menu pull-right" role="menu"
                 aria-labelledby="dropdownMenu1">
                 <li role="presentation" class="dropdown-header"> <i class="fa fa-wrench" aria-hidden="true"></i>设置</li>
@@ -132,7 +111,7 @@
                     <table style="width:100%;border-spacing:5px;border-collapse:separate;">
                         @{ foreach (var item in com.wechat.gorilla.Globals.NaviMenus) {
                                 <tr>
-                                    <td id="@item.Menu_id" onclick="ClickMenu('@item.Menu_id');" class="@item.MenuClass_default" onmouseover="changeStyle('@item.Menu_id', '@item.MenuClass_hover');" onmouseout="changeStyle('@item.Menu_id', '@item.MenuClass_default');">
+                                    <td id="@item.Menu_id" class="@item.MenuClass_default" onmouseover="changeStyle('@item.Menu_id', '@item.MenuClass_hover');" onmouseout="changeStyle('@item.Menu_id', '@item.MenuClass_default');">
                                         <a asp-area="" asp-page="@item.AspPage" style="color:#fff;text-decoration:none;"><span class="@item.Menu_icons"></span>@item.MenuText</a>
                                     </td>
                                 </tr>
@@ -141,7 +120,8 @@
                     </table>
                 </td>
                 <td style="width:30px;vertical-align:top;padding-top:19px;text-align:right;" align="center" rowspan="2">
-                    <span class="glyphicon glyphicon-align-justify text-shadow" style="color:#eee;" onclick="SwitchPanel();" title="显示/隐藏主菜单"></span>
+                    <a href="##"><span class="glyphicon glyphicon-align-justify text-shadow" style="color:#eee;margin-bottom:13px;" onclick="SwitchPanel();" title="显示/隐藏主菜单"></span></a>
+                    <br />
                     <a asp-area="" asp-page="/Index"><i class="fas fa-home text-white text-shadow" title="返回主页"></i></a>
                     <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
                 </td>
@@ -157,22 +137,17 @@
         <tr>
             <td height="30px" style="padding-left: 13px;color:#fff;" class="text-shadow">
                 &copy; 2020 - <a asp-area="" asp-page="/Index" class="text-white text-shadow">蓝鹰追溯</a> - <a asp-area="" asp-page="/Privacy" class="text-white text-shadow">Privacy</a>
-                @*<footer class="border-top footer text-muted">
-                        <div class="container">
-                        </div>
-                    </footer>*@
             </td>
         </tr>
     </table>
     <iframe id="ChangeShowPanelIframe" name="ChangeShowPanelIframe" src="" hidden="hidden">
     </iframe>
     <script>
-        function changeTheme(imgUrl) {
-            $('#mainWindow').css('background-image', "url('" + imgUrl + "')");
+        function changeTheme(themeUrl) {
+            $('#mainWindow').css('background-image', "url('" + themeUrl + "')");
             $('#openSidebarMenu').click();
-        }
-        function ClickMenu(menu_id) {
-            $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?activeMenuId=' + menu_id);
+
+            $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?themeUrl=' + themeUrl);
             $('#ChangeShowPanelIframe').reload();
         }
         function changeStyle(objid, type) {
@@ -194,7 +169,7 @@
         }
         function Init() {
             $('#ChangeShowPanelIframe').attr('src', '');
-            $('#ChangeShowPanelIframe').reload();
+            //$('#ChangeShowPanelIframe').reload();
         }
         onload = Init;
     </script>

@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 namespace com.wechat.gorilla.Pages {
     public class LogoutModel : PageModel {
         public async Task<IActionResult> OnGet() {
-            User user = HttpContext.Session.Get<User>(Globals.SessionKey_CUA);
+            User user = HttpContext.Session.Get<User>(SessionExtensions.SessionKey_CUA);
             if (user == null) {
                 return RedirectToPage("Login");
             }
@@ -23,7 +23,6 @@ namespace com.wechat.gorilla.Pages {
                 return Page();
             }
 
-            Globals.Current_user = null;
             HttpContext.Session.Clear();
 
             return RedirectToPage("Index");

@@ -9,31 +9,25 @@ using Microsoft.EntityFrameworkCore;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
-namespace com.wechat.gorilla.Pages.Accounts
-{
-    public class EditModel : PageModel
-    {
+namespace com.wechat.gorilla.Pages.Accounts {
+    public class EditModel : PageModel {
         private readonly com.wechat.gorilla.DbContexts.AccountContext _context;
 
-        public EditModel(com.wechat.gorilla.DbContexts.AccountContext context)
-        {
+        public EditModel(com.wechat.gorilla.DbContexts.AccountContext context) {
             _context = context;
         }
 
         [BindProperty]
         public Account Account { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> OnGetAsync(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
             Account = await _context.Account.FirstOrDefaultAsync(m => m.Id == id);
 
-            if (Account == null)
-            {
+            if (Account == null) {
                 return NotFound();
             }
             return Page();
@@ -41,27 +35,19 @@ namespace com.wechat.gorilla.Pages.Accounts
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-            {
+        public async Task<IActionResult> OnPostAsync() {
+            if (!ModelState.IsValid) {
                 return Page();
             }
 
             _context.Attach(Account).State = EntityState.Modified;
 
-            try
-            {
+            try {
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AccountExists(Account.Id))
-                {
+            } catch (DbUpdateConcurrencyException) {
+                if (!AccountExists(Account.Id)) {
                     return NotFound();
-                }
-                else
-                {
+                } else {
                     throw;
                 }
             }
@@ -69,8 +55,7 @@ namespace com.wechat.gorilla.Pages.Accounts
             return RedirectToPage("./Index");
         }
 
-        private bool AccountExists(int id)
-        {
+        private bool AccountExists(int id) {
             return _context.Account.Any(e => e.Id == id);
         }
     }

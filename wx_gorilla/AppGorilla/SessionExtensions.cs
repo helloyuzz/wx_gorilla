@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace com.wechat.gorilla {
     public static class SessionExtensions {
+        public static string SessionKey_SwitchPanel = "KEY-SwitchPanel";
+        public static string SessionKey_ActiveMenuId = "KEY-ActiveMenuId";
+        public static string SessionKey_CUA = "KEY-CurrentUserAccount";
         public static void Set<T>(this ISession session, string key, T value) {
             session.SetString(key, JsonSerializer.Serialize(value));
         }

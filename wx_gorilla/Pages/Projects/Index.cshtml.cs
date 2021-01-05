@@ -19,10 +19,12 @@ namespace com.wechat.gorilla.Pages.Projects {
         public IList<Project> Project { get; set; }
 
         public async Task<IActionResult> OnGet() {
-            User user = HttpContext.Session.Get<User>(Globals.SessionKey_CUA);
+            User user = HttpContext.Session.Get<User>(SessionExtensions.SessionKey_CUA);
             if (user == null) {
                 return RedirectToPage("Login");
             }
+
+            SessionExtensions.Set<string>(HttpContext.Session, SessionExtensions.SessionKey_ActiveMenuId, "naviMenu_Project");
 
             HtmlTip = "";
             IQueryable<Project> temp = _context.Project.Include(A => A.Province).Include(B => B.City);

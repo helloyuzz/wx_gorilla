@@ -24,7 +24,7 @@ namespace com.wechat.gorilla.Models {
         public int? Roleid { get; set; }
         [Display(Name = "登录密码")]
         public string User_password { get; set; }
-        public string Theme { get; set; }
+        public string Theme_url { get; set; }
         [Display(Name = "登录时间")]
         public DateTime? Login_time { get; set; }
         public Department Department { get; set; }

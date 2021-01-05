@@ -14,7 +14,7 @@ namespace com.wechat.gorilla.Pages {
         private readonly com.wechat.gorilla.DbContexts.UserContext _userContext;
         private User User { get; set; }
 
-        
+
         public string tipDisplayed = "none";
         public LoginModel(UserContext userContext) {
             _userContext = userContext;
@@ -26,11 +26,11 @@ namespace com.wechat.gorilla.Pages {
             if (isWrongAccountOrPwd) {
                 tipDisplayed = "block";
             }
-             return Page();
+            return Page();
         }
-        [BindProperty(SupportsGet = true), Required(ErrorMessage ="帐号不能为空"), Display(Name = "帐号")]
+        [BindProperty(SupportsGet = true), Required(ErrorMessage = "帐号不能为空"), Display(Name = "帐号")]
         public string Account { get; set; }
-        [BindProperty(SupportsGet = true), Required(ErrorMessage ="密码不能为空"), Display(Name = "密码")]
+        [BindProperty(SupportsGet = true), Required(ErrorMessage = "密码不能为空"), Display(Name = "密码")]
         public string Password { get; set; }
         public async Task<IActionResult> OnPostAsync() {
             if (!ModelState.IsValid) {
@@ -43,16 +43,17 @@ namespace com.wechat.gorilla.Pages {
 
             User = _userContext.Users.FirstOrDefault(A => A.User_account.Equals(Account) && A.User_password.Equals(pwd_encrypt));
             if (User != null) {
-                HttpContext.Session.Set(Globals.SessionKey_CUA, User);
+                //HttpContext.Session.Set(Globals.SessionKey_CUA, User);
+                SessionExtensions.Set<User>(HttpContext.Session, SessionExtensions.SessionKey_CUA, User);
 
                 User.Login_time = DateTime.Now;
                 _userContext.Users.Attach(User).Property(x => x.Login_time).IsModified = true;
                 _userContext.SaveChanges();
 
-                Globals.Current_user = User;
+                //Globals.Users.Add(User.Id, User);
                 return RedirectToPage("Index");
             } else {
-                return RedirectToPage("Login",new { id=DateTime.Now.ToString("yyyymmddHHmmssfff") });
+                return RedirectToPage("Login", new { id = DateTime.Now.ToString("yyyymmddHHmmssfff") });
             }
             //return Page();
         }
