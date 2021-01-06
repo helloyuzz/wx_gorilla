@@ -4,7 +4,13 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<nav aria-label="breadcrumb" style="margin-top:8px;" class="font-weight-bold text-white">
+    <ol class="breadcrumb" style="background-color:transparent">
+        <li class="breadcrumb-item"><a href="#">Home</a></li>
+        <li class="breadcrumb-item"><a href="#">项目列表</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Data</li>
+    </ol>
+</nav>
 <h1><label id="htmlTip1" style="font-weight:normal;"></label>项目列表</h1>
     <h4 style="color:#ccc;"><a asp-page="Create" class="text-eee">Create New</a></h4>
     <div class="transprantBackground" style="margin-right:8px;">

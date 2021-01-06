@@ -73,7 +73,7 @@
     </style>
 </head>
 <body id="mainWindow" style="height:100%;background-image:url('@cua.Theme_url'); background-position:center;background-repeat:no-repeat;background-size:100%;">
-
+    <!--右上角菜单-->
     <div class="dropdown" style="position:absolute;top:13px;right:13px;">
         @if (isLogoned) {
             <a class="btn dropdown-toggle text-white text-shadow" id="dropdownMenu1"
@@ -106,6 +106,7 @@
     <table style="height: 100%; width: 100%; border: 1px solid;">
         <tr>
             @if (isLogoned) {
+                <!--左侧菜单-->
                 <td id="panelMenu" style="padding-top:13px;vertical-align:top;width:273px;@showPanel" rowspan="2">
                     @*<a class="navbar-brand text-white navMenuItem_Title" style="font-size:13.5pt;padding:0px;margin:0px;padding-left:26px;padding-top:18px;" asp-area="" asp-page="/Index">蓝鹰追溯CSSD在线管理系统</a>*@
                     <table style="width:100%;border-spacing:5px;border-collapse:separate;">
@@ -126,6 +127,7 @@
                     <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
                 </td>
             }
+                            <!--内容操作区-->
             <td style="vertical-align:top;padding-left:13px;">
                 <div style="height:100%;width:100%;overflow-x:hidden;overflow-y: @showScroll;">
                     @RenderBody()
@@ -134,45 +136,16 @@
                 </div>
             </td>
         </tr>
+        <!--底部版权说明-->
         <tr>
             <td height="30px" style="padding-left: 13px;color:#fff;" class="text-shadow">
                 &copy; 2020 - <a asp-area="" asp-page="/Index" class="text-white text-shadow">蓝鹰追溯</a> - <a asp-area="" asp-page="/Privacy" class="text-white text-shadow">Privacy</a>
             </td>
         </tr>
     </table>
+    <!--隐藏刷新Session-->
     <iframe id="ChangeShowPanelIframe" name="ChangeShowPanelIframe" src="" hidden="hidden">
     </iframe>
-    <script>
-        function changeTheme(themeUrl) {
-            $('#mainWindow').css('background-image', "url('" + themeUrl + "')");
-            $('#openSidebarMenu').click();
-
-            $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?themeUrl=' + themeUrl);
-            $('#ChangeShowPanelIframe').reload();
-        }
-        function changeStyle(objid, type) {
-            $('#' + objid).attr('class', type);
-        }
-        function SwitchPanel() {
-            var showPanel = $('#hidden_ShowPanel').val();
-            if (showPanel.indexOf("none") != -1) {  // "display:none;"
-                $('#panelMenu').show();
-                $('#hidden_ShowPanel').val('block');
-                $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=block');
-                $('#ChangeShowPanelIframe').reload();
-            } else {
-                $('#panelMenu').hide();
-                $('#hidden_ShowPanel').val('none');
-                $('#ChangeShowPanelIframe').attr('src', '/HidePanelPage?showPanel=none');
-                $('#ChangeShowPanelIframe').reload();
-            }
-        }
-        function Init() {
-            $('#ChangeShowPanelIframe').attr('src', '');
-            //$('#ChangeShowPanelIframe').reload();
-        }
-        onload = Init;
-    </script>
 
     @*<script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>*@
