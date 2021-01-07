@@ -7,74 +7,71 @@
 }
 
 <h1>@Model.Project_name / &lt;新建登录帐号&gt;</h1>
-
-<table>
-    <tr>
-        <td><h4>Create User</h4></td>
-        <td style="padding-left:13px;"><a asp-page="/Projects/Details" asp-route-id="@project_id" asp-route-type="1"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a></td>
-        <td></td>
-    </tr>
-</table>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="User.User_account" class="control-label"></label>
-                <input asp-for="User.User_account" class="form-control" />
-                <span asp-validation-for="User.User_account" class="text-danger"></span>
+<div class="transprantBackground">
+    <form method="post">
+        <div class="row">
+            <div class="col-12">
+                <h4><a class="btn btn-success" asp-page="/Projects/Details" asp-route-id="@project_id" asp-route-type="1">Back to Detail</a></h4>
             </div>
-            <div class="form-group">
-                <label asp-for="User.User_password" class="control-label"></label>
-                <input asp-for="User.User_password" class="form-control" />
-                <span asp-validation-for="User.User_password" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="User.User_account" class="control-label"></label>
+                    <input asp-for="User.User_account" class="form-control" />
+                    <span asp-validation-for="User.User_account" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.User_password" class="control-label"></label>
+                    <input asp-for="User.User_password" class="form-control" />
+                    <span asp-validation-for="User.User_password" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                        <label asp-for="User.Departmentid" class="control-label"></label>
+                        <input asp-for="User.Departmentid" class="form-control" />
+                    </div>*@
+                <div class="form-group" style="display:none;">
+                    <label asp-for="User.User_type" class="control-label"></label>
+                    <input asp-for="User.User_type" class="form-control" value="科室帐号" />
+                    <span asp-validation-for="User.User_type" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label asp-for="User.Projectid" class="control-label"></label>
+                    <input asp-for="User.Projectid" class="form-control" />
+                    <span asp-validation-for="User.Projectid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
                     <label asp-for="User.Departmentid" class="control-label"></label>
-                    <input asp-for="User.Departmentid" class="form-control" />
-                </div>*@
-            <div class="form-group" style="display:none;">
-                <label asp-for="User.User_type" class="control-label"></label>
-                <input asp-for="User.User_type" class="form-control" value="科室帐号" />
-                <span asp-validation-for="User.User_type" class="text-danger"></span>
+                    <select asp-for="User.Departmentid" class="form-control" asp-items="Model.Departments"></select>
+                    <span asp-validation-for="User.Departmentid" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="User.wx_unique_id" class="control-label"></label>
+                    <input asp-for="User.wx_unique_id" class="form-control" />
+                    <span asp-validation-for="User.wx_unique_id" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label asp-for="User.Roleid" class="control-label"></label>
+                    <input asp-for="User.Roleid" class="form-control" />
+                    <span asp-validation-for="User.Roleid" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label asp-for="User.Login_time" class="control-label"></label>
+                    <input asp-for="User.Login_time" class="form-control" />
+                    <span asp-validation-for="User.Login_time" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
             </div>
-            <div class="form-group" style="display:none;">
-                <label asp-for="User.Projectid" class="control-label"></label>
-                <input asp-for="User.Projectid" class="form-control" />
-                <span asp-validation-for="User.Projectid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.Departmentid" class="control-label"></label>
-                <select asp-for="User.Departmentid" class="form-control" asp-items="Model.Departments"></select>
-                <span asp-validation-for="User.Departmentid" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="User.wx_unique_id" class="control-label"></label>
-                <input asp-for="User.wx_unique_id" class="form-control" />
-                <span asp-validation-for="User.wx_unique_id" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="display:none;">
-                <label asp-for="User.Roleid" class="control-label"></label>
-                <input asp-for="User.Roleid" class="form-control" />
-                <span asp-validation-for="User.Roleid" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="display:none;">
-                <label asp-for="User.Login_time" class="control-label"></label>
-                <input asp-for="User.Login_time" class="form-control" />
-                <span asp-validation-for="User.Login_time" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<div>
-@*    <a asp-page="/Projects/Details" asp-route-id="@Model.User.Projectid" asp-route-type="1">Back to List</a>*@
+        <div>
+            @*    <a asp-page="/Projects/Details" asp-route-id="@Model.User.Projectid" asp-route-type="1">Back to List</a>*@
+        </div>
+    </form>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

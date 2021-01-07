@@ -5,52 +5,49 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>@Model.Project_name / @Model.Department.Dept_name</h1>
+<h1>@Model.Project_name / &lt;@Model.Department.Dept_name&gt;</h1>
+<div class="transprantBackground">
+    <div class="row">
+        <div class="col-12">
+            <h4><a class="btn btn-success" asp-page="/Projects/Details" asp-route-id="@Model.Department.Projectid">Back to Detail</a></h4>
+        </div>
+    </div>
+    <form method="post" autocomplete="off">
+        <div class="row">
+            <div class="col-md-4">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Department.Id" />
+                <div class="form-group">
+                    <label asp-for="Department.Dept_name" class="control-label"></label>
+                    <input asp-for="Department.Dept_name" class="form-control" />
+                    <span asp-validation-for="Department.Dept_name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Department.Short_name" class="control-label"></label>
+                    <input asp-for="Department.Short_name" class="form-control" />
+                    <span asp-validation-for="Department.Short_name" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="display:none;">
+                    <label asp-for="Department.Projectid" class="control-label"></label>
+                    <input asp-for="Department.Projectid" class="form-control" />
+                    <span asp-validation-for="Department.Projectid" class="text-danger"></span>
+                </div>
+                @*<div class="form-group">
+                        <label asp-for="Department.Projectid" class="control-label"></label>
+                        <select asp-for="Department.Projectid" class="form-control" asp-items="ViewBag.Projectid"></select>
+                        <span asp-validation-for="Department.Projectid" class="text-danger"></span>
+                    </div>*@
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
 
-<table>
-    <tr>
-        <td><h4>Department - 编辑</h4></td>
-        <td style="padding-left:13px;"><a asp-page="/Projects/Details" asp-route-id="@Model.Department.Projectid"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a></td>
-        <td></td>
-    </tr>
-</table>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Department.Id" />
-            <div class="form-group">
-                <label asp-for="Department.Dept_name" class="control-label"></label>
-                <input asp-for="Department.Dept_name" class="form-control" />
-                <span asp-validation-for="Department.Dept_name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Department.Short_name" class="control-label"></label>
-                <input asp-for="Department.Short_name" class="form-control" />
-                <span asp-validation-for="Department.Short_name" class="text-danger"></span>
-            </div>
-            <div class="form-group" style="display:none;">
-                <label asp-for="Department.Projectid" class="control-label"></label>
-                <input asp-for="Department.Projectid" class="form-control" />
-                <span asp-validation-for="Department.Projectid" class="text-danger"></span>
-            </div>
-            @*<div class="form-group">
-            <label asp-for="Department.Projectid" class="control-label"></label>
-            <select asp-for="Department.Projectid" class="form-control" asp-items="ViewBag.Projectid"></select>
-            <span asp-validation-for="Department.Projectid" class="text-danger"></span>
-        </div>*@
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <div>
+        @*<a asp-page="./Index">Back to List</a>*@
     </div>
 </div>
-
-<div>
-    @*<a asp-page="./Index">Back to List</a>*@
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }

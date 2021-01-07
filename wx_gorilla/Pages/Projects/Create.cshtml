@@ -66,7 +66,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="Project.Provinceid"></label>
-                    <select id="itemProvince" class="form-control" asp-for="Project.Provinceid" onchange="OnProvinceChanged(this.value);">
+                    <select id="itemProvince" class="custom-select" asp-for="Project.Provinceid" onchange="OnProvinceChanged(this.value);">
                         @foreach (var item in Model.Provinces) {
                             <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.Province_name)</option>
                         }
@@ -77,7 +77,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label asp-for="Project.Cityid"></label>
-                    <select id="itemCity" class="form-control" asp-for="Project.Cityid">
+                    <select id="itemCity" class="custom-select" asp-for="Project.Cityid">
                         @*@foreach (var item in Model.Citys) {
                                 <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.City_name)</option>
                             }*@
