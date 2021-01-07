@@ -9,118 +9,119 @@
 }
 
 <h1>@Html.Raw(Model.Project.Project_name)</h1>
+<div class="transprantBackground">
+    <table>
+        <tr>
+            <td><h4>Project - 编辑</h4></td>
+            <td style="padding-left:13px;"><a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a> | <a asp-page="./Details" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a></td>
+            <td></td>
+        </tr>
+    </table>
+    <hr style="margin-top:3px;" />
+    <form method="post" autocomplete="off">
+        <input type="hidden" asp-for="Project.ID" />
+        <input type="text" asp-for="FromSource" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Project_name" class="control-label"></label>
+                    <input asp-for="Project.Project_name" class="form-control" />
+                    <span asp-validation-for="Project.Project_name" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Short_name" class="control-label"></label>
+                    <input asp-for="Project.Short_name" class="form-control" />
+                    <span asp-validation-for="Project.Short_name" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
 
-<table>
-    <tr>
-        <td><h4>Project - 编辑</h4></td>
-        <td style="padding-left:13px;"><a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a> | <a asp-page="./Details" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a></td>
-        <td></td>
-    </tr>
-</table>
-<hr style="margin-top:3px;"/>
-<form method="post" autocomplete="off">
-    <input type="hidden" asp-for="Project.ID" />
-    <input type="text" asp-for="FromSource"/>
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Project_name" class="control-label"></label>
-                <input asp-for="Project.Project_name" class="form-control" />
-                <span asp-validation-for="Project.Project_name" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Current_progress" class="control-label"></label>
+                    <select class="form-control" asp-for="Project.Current_progress">
+                        <option>待签</option>
+                        <option>实施</option>
+                        <option>售后</option>
+                    </select>
+                    <span asp-validation-for="Project.Current_progress" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Project_imple" class="control-label"></label>
+                    <input asp-for="Project.Project_imple" class="form-control" />
+                    <span asp-validation-for="Project.Project_imple" class="text-danger"></span>
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Short_name" class="control-label"></label>
-                <input asp-for="Project.Short_name" class="form-control" />
-                <span asp-validation-for="Project.Short_name" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Sign_date" class="control-label"></label>
+                    <input asp-for="Project.Sign_date" class="form-control" />
+                    <span asp-validation-for="Project.Sign_date" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Provinceid"></label>
+                    <select id="itemProvince" class="form-control" asp-for="Project.Provinceid" onchange="OnProvinceChanged(this.value);">
+                        @foreach (var item in Model.Provinces) {
+                            <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.Province_name)</option>
+                        }
+                    </select>
+                    <span asp-validation-for="Project.Provinceid" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Cityid"></label>
+                    <select id="itemCity" class="form-control" asp-for="Project.Cityid">
+                        @*@foreach (var item in Model.Citys) {
+                                <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.City_name)</option>
+                            }*@
+                    </select>
+                    <span asp-validation-for="Project.Cityid" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Address" class="control-label"></label>
+                    <input asp-for="Project.Address" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Project.Address" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="Project.Phone" class="control-label"></label>
+                    <input asp-for="Project.Phone" class="form-control" autocomplete="off" />
+                    <span asp-validation-for="Project.Phone" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </div>
+    </form>
 
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Current_progress" class="control-label"></label>
-                <select class="form-control" asp-for="Project.Current_progress">
-                    <option>待签</option>
-                    <option>实施</option>
-                    <option>售后</option>
-                </select>
-                <span asp-validation-for="Project.Current_progress" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Project_imple" class="control-label"></label>
-                <input asp-for="Project.Project_imple" class="form-control" />
-                <span asp-validation-for="Project.Project_imple" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Sign_date" class="control-label"></label>
-                <input asp-for="Project.Sign_date" class="form-control" />
-                <span asp-validation-for="Project.Sign_date" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Provinceid"></label>
-                <select id="itemProvince" class="form-control" asp-for="Project.Provinceid" onchange="OnProvinceChanged(this.value);">
-                    @foreach (var item in Model.Provinces) {
-                        <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.Province_name)</option>
-                    }
-                </select>
-                <span asp-validation-for="Project.Provinceid" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Cityid"></label>
-                <select id="itemCity" class="form-control" asp-for="Project.Cityid">
-                    @*@foreach (var item in Model.Citys) {
-                            <option value="@Html.Raw(item.Id)">@Html.DisplayFor(modelItem => item.City_name)</option>
-                        }*@
-                </select>
-                <span asp-validation-for="Project.Cityid" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Address" class="control-label"></label>
-                <input asp-for="Project.Address" class="form-control" autocomplete="off"/>
-                <span asp-validation-for="Project.Address" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Project.Phone" class="control-label"></label>
-                <input asp-for="Project.Phone" class="form-control" autocomplete="off" />
-                <span asp-validation-for="Project.Phone" class="text-danger"></span>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </div>
-    </div>
-</form>
+    <div>
 
-<div>
-    
+    </div>
 </div>
 <script>
     function AppLoad() {

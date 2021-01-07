@@ -37,8 +37,8 @@
         }
         com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_default = "MenuClass_default");
         com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_hover = "MenuClass_default_hover");
-        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_active_hover";
-        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_default_hover";
+        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_active_default";
+        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_active_hover";
 
         if (cua == null) {
             showScroll = "hidden";
@@ -74,7 +74,7 @@
 </head>
 <body id="mainWindow" style="height:100%;background-image:url('@cua.Theme_url'); background-position:center;background-repeat:no-repeat;background-size:100%;">
     <!--右上角菜单-->
-    <div class="dropdown" style="position:absolute;top:13px;right:13px;">
+    <div class="dropdown" style="position:absolute;top:13px;right:13px;z-index:138;">
         @if (isLogoned) {
             <a class="btn dropdown-toggle text-white text-shadow" id="dropdownMenu1"
                     data-toggle="dropdown">
@@ -86,8 +86,9 @@
                 <li role="presentation">
                     <a asp-area="" asp-page="/Provinces/Index" role="menuitem" tabindex="-1">全国省市字典管理</a>
                 </li>
+                <li role="presentation" class="dropdown-header"> <i class="fa fa-search" aria-hidden="true"></i>导航</li>
                 <li role="presentation">
-                    <a asp-area="" asp-page="/Privacy" role="menuitem" tabindex="-1">日志审计</a>
+                    <a asp-area="" asp-page="/Index" role="menuitem" tabindex="-1">主页</a>
                 </li>
                 <li role="presentation">
                     <a asp-area="" asp-page="/Privacy" role="menuitem" tabindex="-1">Privacy</a>
@@ -96,6 +97,9 @@
                 <li role="presentation" class="dropdown-header"><i class="fa fa-user-edit" aria-hidden="true"></i>安全</li>
                 <li role="presentation">
                     <a asp-area="" asp-page="/ChangePwd" role="menuitem" tabindex="-1">修改密码</a>
+                </li>
+                <li role="presentation">
+                    <a asp-area="" asp-page="/Privacy" role="menuitem" tabindex="-1">日志审计</a>
                 </li>
                 <li role="presentation">
                     <a asp-area="" asp-page="/Logout" role="menuitem" tabindex="-1">注销</a>

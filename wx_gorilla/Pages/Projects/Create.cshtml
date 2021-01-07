@@ -5,10 +5,14 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>新建项目</h1>
+<h1 class="text-shadow">新建项目</h1>
 
-<h4 class="text-ddd">New Project</h4>
-<div class="transprantBackground" style="padding-top:18px;">
+<div class="transprantBackground">
+    <div class="row">
+        <div class="col-12">
+            <h4><a class="btn btn-success" asp-area="" onclick="window.history.go(-1); return false;">Back To List</a></h4>
+        </div>
+    </div>
     <form id="submitForm" method="post" autocomplete="off">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
@@ -101,7 +105,7 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-primary" /><a class="btn btn-warning" style="margin-left:8px;" asp-area="" onclick="window.history.go(-1); return false;">返回</a>
+                    <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </div>
             <div class="col-md-4">
@@ -119,7 +123,7 @@
         <a asp-page="/Index">Back to Index</a>
     </div>
     <br />
-    </div>
+</div>
     <script>
         function AppLoad() {
             var province_id = $("#itemProvince").val();

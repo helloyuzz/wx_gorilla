@@ -2,9 +2,9 @@
 for details on configuring this project to bundle and minify static web assets. */
 
 a.navbar-brand {
-  white-space: normal;
-  text-align: center;
-  word-break: break-all;
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
 }
 
 /* Provide sufficient contrast against white background */
@@ -81,17 +81,20 @@ h1 {
 }
 
 .transprantBackground {
-    background: #eee;
+    /*background: #eee;*/
+    background: linear-gradient(180deg, #def 0%, #fff 100%);
     opacity: 0.75;
-    border-radius:2px;
-    padding:8px;
+    border-radius: 8px;
+    padding: 8px;
+    padding-top:0px;
+    margin-right: 8px;
 }
 
 h1 {
     color: #fff;
 }
 
-.MenuClass_default, .MenuClass_default_hover, .MenuClass_active_hover, .MenuClass_active {
+.MenuClass_default, .MenuClass_default_hover, .MenuClass_active_hover, .MenuClass_active_default {
     font-family: Roboto,RobotoDraft,Helvetica,Arial,sans-serif;
     color: #202124;
     user-select: none;
@@ -120,12 +123,12 @@ h1 {
 .MenuClass_default_hover {
     background-color: rgba(255,255,255,0.30);
 }
-.MenuClass_active_hover {
+.MenuClass_active_default {
     background-color: rgba(0,0,0,0.702);
 }
 
-.menuItem_Hover {
-    background-color: rgb(255, 0, 0);
+.MenuClass_active_hover {
+    background-color: red;
 }
 
 .navMenuItem_Title {
@@ -155,4 +158,11 @@ h1 {
 }
 .text-ccc {
     color:#ccc;
+}
+.breadcrumb {
+    /*font-size: 13pt;*/
+    /*margin-top:8px;*/
+    /*margin-right:8px;*/
+    opacity: 0.75;
+    margin-bottom: 8px;
 }
