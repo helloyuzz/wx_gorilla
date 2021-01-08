@@ -11,7 +11,7 @@
  Target Server Version : 80021
  File Encoding         : 65001
 
- Date: 28/12/2020 18:27:35
+ Date: 08/01/2021 18:12:54
 */
 
 SET NAMES utf8mb4;
@@ -564,9 +564,14 @@ DROP TABLE IF EXISTS `sm_employee`;
 CREATE TABLE `sm_employee`  (
   `id` int(0) NOT NULL AUTO_INCREMENT,
   `employee_name` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `department_id` int(0) NULL DEFAULT NULL,
+  `departmentid` int(0) NULL DEFAULT NULL,
+  `cardno` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `duty` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `sex` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `cellphone` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `email` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for sm_message_log
@@ -715,6 +720,15 @@ CREATE TABLE `sm_role_right`  (
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for sm_subscribe
+-- ----------------------------
+DROP TABLE IF EXISTS `sm_subscribe`;
+CREATE TABLE `sm_subscribe`  (
+  `id` int(0) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
 -- Table structure for sm_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sm_user`;
@@ -728,13 +742,15 @@ CREATE TABLE `sm_user`  (
   `roleid` int(0) NULL DEFAULT NULL,
   `user_password` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `login_time` datetime(0) NULL DEFAULT NULL,
+  `theme_url` varchar(80) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sm_user
 -- ----------------------------
-INSERT INTO `sm_user` VALUES (1, 'aa', '管理员', -1, -1, NULL, NULL, '4124BC0A9335C27F086F24BA207A4912', '2020-12-28 18:24:42');
-INSERT INTO `sm_user` VALUES (2, 'aa', '科室帐号', 1, 1, NULL, NULL, 'a1', NULL);
+INSERT INTO `sm_user` VALUES (1, 'aa', '管理员', -1, -1, NULL, NULL, '4124BC0A9335C27F086F24BA207A4912', '2021-01-08 18:00:26', '/images/1.jpg');
+INSERT INTO `sm_user` VALUES (2, 'aa', '科室帐号', 1, 1, NULL, NULL, 'a1', NULL, NULL);
+INSERT INTO `sm_user` VALUES (3, NULL, '科室帐号', 1, 1, NULL, NULL, NULL, NULL, NULL);
 
 SET FOREIGN_KEY_CHECKS = 1;
