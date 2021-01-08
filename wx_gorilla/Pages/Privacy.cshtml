@@ -3,12 +3,27 @@
 @{
     ViewData["Title"] = "Privacy 关于蓝鹰追溯CSSD在线管理系统";
 }
-<h1>@ViewData["Title"]</h1>
-
-<p class="text-eee">Use this page to detail your site's privacy policy.</p>
-<p class="text-eee"><b>版权所有</b>：<br />&copy;四川劳吉克信息技术有限公司</p>
-<p class="text-eee"><b>功能说明</b>：<br />本系统主要实现对用户项目和组织结构的管理，以及实现内网用户向微信公众号信息的推送</p>
-<p class="text-eee"><b>技术架构</b>：<br />Asp.net core.</p>
-<p class="text-eee"><b>数据库</b>：<br />Mysql</p>
-<p class="text-eee"><b>版本号</b>：<br />Release 0.1</p>
-<a class="btn btn-warning" asp-area="" onclick="window.history.go(-1); return false;">确定</a>
+<h1 class="text-shadow">@ViewData["Title"]</h1>
+<p>Use this page to detail your site's privacy policy.</p>
+<div class="transprantBackground">
+    <div class="row">
+        <div class="col">
+            <br />
+            <p>
+                <b>功能说明</b>：<br />本系统主要实现：
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">1.用户项目和组织结构管理</li>
+                    <li class="list-group-item">2.订阅管理</li>
+                    <li class="list-group-item">3.微信公众号推送（内网用户）</li>
+                    <li class="list-group-item">4.授权Licence/进度管理</li>
+                    <li class="list-group-item">5.本企业组织结构</li>
+                </ul>
+            </p>
+            <p><b>技术架构</b>：<br />Asp.net core.</p>
+            <p><b>数据库</b>：<br />Mysql</p>
+            <p><b>版本号</b>：<br />0.1</p>
+            <p><b>版权所有</b>：<br />&copy;四川劳吉克信息技术有限公司</p>
+            <a class="btn btn-warning" asp-area="" onclick="window.history.go(-1); return false;">确定</a>
+        </div>
+    </div>
+</div>
