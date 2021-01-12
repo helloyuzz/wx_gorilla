@@ -12,6 +12,8 @@ namespace com.wechat.gorilla.Models {
         public int Id { get; set; }
         [Display(Name = "登录帐号")]
         public string User_account { get; set; }
+        [Display(Name ="姓名")]
+        public string User_name { get; set; }
         [Display(Name = "类型")]
         public string User_type { get; set; }
         [Display(Name = "所在院区")]

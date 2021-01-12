@@ -113,6 +113,7 @@ h1 {
     font-size: 12pt;
     height: 38px;
     padding: 6px;
+    padding-top:8px;
     width: 100%;
 }
 
@@ -121,7 +122,8 @@ h1 {
 }
 
 .MenuClass_default_hover {
-    background-color: rgba(255,255,255,0.30);
+    /*background-color: rgba(255,255,255,0.30);*/
+    background-color: red;
 }
 .MenuClass_active_default {
     background-color: rgba(0,0,0,0.702);
@@ -165,4 +167,7 @@ h1 {
     /*margin-right:8px;*/
     opacity: 0.75;
     margin-bottom: 8px;
+}
+h1 {
+    text-shadow: 0 1px 2px rgba(0,0,0,.65);
 }

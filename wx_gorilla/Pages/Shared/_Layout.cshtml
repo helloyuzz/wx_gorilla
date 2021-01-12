@@ -6,7 +6,7 @@
     // 当前是否登录
     bool isLogoned = Context.Session.Keys.Contains(com.wechat.gorilla.SessionExtensions.SessionKey_CUA);
 
-    // 登录界面不显示滚动条，进入主界面才显示    
+    // 登录界面不显示滚动条，进入主界面才显示
     string showScroll = "hidden";
 
     // 是否显示左边菜单栏
@@ -68,16 +68,20 @@
     <link href="~/css/flypanel.css" rel="stylesheet" />
     <style>
         #panelMenu {
-          
         }
     </style>
 </head>
 <body id="mainWindow" style="height:100%;background-image:url('@cua.Theme_url'); background-position:center;background-repeat:no-repeat;background-size:100%;">
     <!--右上角菜单-->
-    <div class="dropdown" style="position:absolute;top:13px;right:13px;z-index:138;">
-        @if (isLogoned) {
+    @if (isLogoned) {
+    @*<div class="dropdown" style="position:absolute;top:13px;right:79px;z-index:138;">
+        <a asp-area="" asp-page="/Index" class="btn btn-light text-white text-shadow" title="返回主页">
+            <i class="fa fa-home text-dark"></i>
+        </a>
+    </div>*@
+        <div class="dropdown" style="position:absolute;top:13px;right:13px;z-index:138;">
             <a class="btn btn-success dropdown-toggle text-white text-shadow" id="dropdownMenu1"
-                    data-toggle="dropdown">
+               data-toggle="dropdown" title="菜单">
                 @cua.User_account
             </a>
             <ul class="dropdown-menu pull-right" role="menu"
@@ -105,8 +109,8 @@
                     <a asp-area="" asp-page="/Logout" role="menuitem" tabindex="-1">注销</a>
                 </li>
             </ul>
-        }
-    </div>
+        </div>
+    }
     <table style="height: 100%; width: 100%; border: 1px solid;">
         <tr>
             @if (isLogoned) {
@@ -117,21 +121,21 @@
                         @{ foreach (var item in com.wechat.gorilla.Globals.NaviMenus) {
                                 <tr>
                                     <td id="@item.Menu_id" class="@item.MenuClass_default" onmouseover="changeStyle('@item.Menu_id', '@item.MenuClass_hover');" onmouseout="changeStyle('@item.Menu_id', '@item.MenuClass_default');">
-                                        <a asp-area="" asp-page="@item.AspPage" style="color:#fff;text-decoration:none;"><span class="@item.Menu_icons"></span>@item.MenuText</a>
+                                        <a asp-area="" asp-page="@item.AspPage" style="display:block;width:100%;height:100%; color:#fff;text-decoration:none;"><span class="@item.Menu_icons"></span>@item.MenuText</a>
                                     </td>
                                 </tr>
                             }
                         }
                     </table>
                 </td>
-                <td style="width:30px;vertical-align:top;padding-top:19px;text-align:right;" align="center" rowspan="2">
-                    <a href="##"><span class="glyphicon glyphicon-align-justify text-shadow" style="color:#eee;margin-bottom:13px;" onclick="SwitchPanel();" title="显示/隐藏主菜单"></span></a>
+                <td style="width:30px;vertical-align:top;padding-top:24px;text-align:right;" align="center" rowspan="2">
+                    <a href="##"><span class="glyphicon glyphicon-align-justify text-shadow text-eee" style="margin-bottom:13px;" onclick="SwitchPanel();" title="显示/隐藏主菜单"></span></a>
                     <br />
-                    <a asp-area="" asp-page="/Index"><i class="fas fa-home text-white text-shadow" title="返回主页"></i></a>
+                    @*<a asp-area="" asp-page="/Index"><i class="fas fa-home text-white text-shadow" title="返回主页"></i></a>*@
                     <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
                 </td>
             }
-                            <!--内容操作区-->
+            <!--内容操作区-->
             <td style="vertical-align:top;padding-left:13px;">
                 <div style="height:100%;width:100%;overflow-x:hidden;overflow-y: @showScroll;">
                     @RenderBody()
@@ -161,14 +165,14 @@
 
 
 @*<header>
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                </div>
             </div>
-        </div>
-    </nav>
-</header>*@
+        </nav>
+    </header>*@

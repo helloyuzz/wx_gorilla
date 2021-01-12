@@ -25,7 +25,7 @@ namespace com.wechat.gorilla.Pages.Users {
                 return NotFound();
             }
 
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            User = await _context.Users.Include(x=>x.Department).FirstOrDefaultAsync(m => m.Id == id);
 
             if (User == null) {
                 return NotFound();

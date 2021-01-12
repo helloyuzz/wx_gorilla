@@ -8,52 +8,43 @@ using Microsoft.EntityFrameworkCore;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
-namespace com.wechat.gorilla.Pages.Users
-{
-    public class DeleteModel : PageModel
-    {
+namespace com.wechat.gorilla.Pages.Users {
+    public class DeleteModel : PageModel {
         private readonly com.wechat.gorilla.DbContexts.UserContext _context;
 
-        public DeleteModel(com.wechat.gorilla.DbContexts.UserContext context)
-        {
+        public DeleteModel(com.wechat.gorilla.DbContexts.UserContext context) {
             _context = context;
         }
 
         [BindProperty]
         public User User { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> OnGetAsync(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
-            User = await _context.Users.FirstOrDefaultAsync(m => m.Id == id);
+            User = await _context.Users.Include(x => x.Department).FirstOrDefaultAsync(m => m.Id == id);
 
-            if (User == null)
-            {
+            if (User == null) {
                 return NotFound();
             }
             return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
-        {
-            if (id == null)
-            {
+        public async Task<IActionResult> OnPostAsync(int? id) {
+            if (id == null) {
                 return NotFound();
             }
 
             User = await _context.Users.FindAsync(id);
 
-            if (User != null)
-            {
+            if (User != null) {
                 _context.Users.Remove(User);
                 await _context.SaveChangesAsync();
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("/Projects/Details", new { id = User.Projectid, type = 1 });
         }
     }
 }

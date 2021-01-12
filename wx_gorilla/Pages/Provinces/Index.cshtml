@@ -5,15 +5,15 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>全国省市字典管理</h1>
+<h1 class="text-shadow">全国省市字典管理</h1>
 <div class="transprantBackground" style="padding:8px;">
     <form id="searchForm" method="get">
         <table width="100%">
             <tr>
-                <td style="width:300px;">
+                <!--<td style="width:300px;">-->
                     @*<div><a asp-page="Create">Create New</a></div>*@
-                    <h4>Province and City</h4>
-                </td>
+                    <!--<h4>Province and City</h4>
+                </td>-->
                 <td style="width:130px;">
                     <div class="form-group" style="width:126px">
                         <select class="form-control" asp-for="SearchType" onchange="NaviToPage(1);">

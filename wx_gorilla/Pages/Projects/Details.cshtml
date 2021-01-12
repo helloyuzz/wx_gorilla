@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col">
             <a class="btn btn-primary" asp-page="./Index">Back To List</a>
-            <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+            <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.Project.ID">Edit</a>
             <p></p>
         </div>
     </div>
@@ -198,6 +198,9 @@
                             @Html.DisplayNameFor(model => model.Users[0].Departmentid)
                         </th>
                         <th class="border border-info">
+                            @Html.DisplayNameFor(model => model.Users[0].User_name)
+                        </th>
+                        <th class="border border-info">
                             @Html.DisplayNameFor(model => model.Users[0].User_account)
                         </th>
                         @*<th class="border border-info">
@@ -231,6 +234,9 @@
                             @Html.DisplayFor(modelItem => item.Department.Dept_name)
                         </td>
                         <td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.User_name)
+                        </td>
+                        <td class="border border-primary">
                             @Html.DisplayFor(modelItem => item.User_account)
                         </td>
                         @*<td class="border border-primary">
@@ -262,16 +268,16 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a asp-page="/Users/Edit" asp-route-id="@item.Id">Edit</a>
+                                        <a asp-page="./Details" asp-route-id="@item.Id">重置密码</a>
                                     </li>
                                     <li>
-                                        <a asp-page="./Edit" asp-route-id="@item.Id">Copy To...</a>
+                                        <a asp-page="/Users/Edit" asp-route-id="@item.Id" asp-route-deptid="@item.Departmentid">修改</a>
                                     </li>
-                                    <li>
-                                        <a asp-page="./Details" asp-route-id="@item.Id">Reset Password</a>
-                                    </li>
+                                    @*<li>
+            <a asp-page="./Edit" asp-route-id="@item.Id">快速复制...</a>
+        </li>*@
                                     <li class="divider"></li>
-                                    <li><a asp-page="/Users/Delete" asp-route-id="@item.Id">Delete</a></li>
+                                    <li><a asp-page="/Users/Delete" asp-route-projectid="@item.Projectid" asp-route-deptid="@item.Departmentid" asp-route-id="@item.Id">Delete</a></li>
                                 </ul>
                             </div>
                         </td>

@@ -20,6 +20,7 @@ namespace wx_razor_project {
         public void ConfigureServices(IServiceCollection services) {
             services.AddRazorPages();
             services.AddControllers();
+            services.AddSwaggerGen();
             services.AddSession(a => a.IdleTimeout = TimeSpan.FromMinutes(30));
 
             //services.AddDbContext<MovieContext>(options =>
@@ -45,6 +46,8 @@ namespace wx_razor_project {
             app.UseRouting();
             app.UseSession();
             app.UseAuthorization();
+            app.UseSwagger();
+            app.UseSwaggerUI(x => { x.SwaggerEndpoint("/swagger/v1/swagger.json", "CSSD"); });
 
             app.UseEndpoints(endpoints => {
                 endpoints.MapRazorPages();
