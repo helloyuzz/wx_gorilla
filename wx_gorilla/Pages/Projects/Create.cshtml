@@ -10,7 +10,8 @@
 <div class="transprantBackground">
     <div class="row">
         <div class="col-12">
-            <h4><a class="btn btn-success" asp-area="" onclick="window.history.go(-1); return false;">Back To List</a></h4>
+            <a class="btn btn-primary" asp-area="" onclick="window.history.go(-1); return false;">Back To List</a>
+            <p></p>
         </div>
     </div>
     <form id="submitForm" method="post" autocomplete="off">
@@ -108,20 +109,12 @@
                     <input type="submit" value="Create" class="btn btn-primary" />
                 </div>
             </div>
-            <div class="col-md-4">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-            </div>
-            <div class="col-md-4">
-            </div>
         </div>
     </form>
 
-    <div>
-        <a asp-page="/Index">Back to Index</a>
-    </div>
+    @*<div>
+            <a asp-page="/Index">Back to Index</a>
+        </div>*@
     <br />
 </div>
     <script>

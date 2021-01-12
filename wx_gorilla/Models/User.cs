@@ -10,7 +10,7 @@ namespace com.wechat.gorilla.Models {
     public class User {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Display(Name ="登录帐号")]
+        [Display(Name = "登录帐号")]
         public string User_account { get; set; }
         [Display(Name = "类型")]
         public string User_type { get; set; }
@@ -27,6 +27,8 @@ namespace com.wechat.gorilla.Models {
         public string Theme_url { get; set; }
         [Display(Name = "登录时间")]
         public DateTime? Login_time { get; set; }
+        [Display(Name ="人员条码")]
+        public string Barcode { get; set; }
         public Department Department { get; set; }
         public Project Project { get; set; }
     }

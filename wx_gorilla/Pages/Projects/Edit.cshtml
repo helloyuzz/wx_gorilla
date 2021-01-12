@@ -8,19 +8,17 @@
     string fromSource = Request.Query["source"];
 }
 
-<h1>@Html.Raw(Model.Project.Project_name)</h1>
+<h1 class="text-shadow">@Html.Raw(Model.Project.Project_name)</h1>
 <div class="transprantBackground">
-    <table>
-        <tr>
-            <td><h4>Project - 编辑</h4></td>
-            <td style="padding-left:13px;"><a asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a> | <a asp-page="./Details" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a></td>
-            <td></td>
-        </tr>
-    </table>
-    <hr style="margin-top:3px;" />
+    <div class="row">
+        <div class="col">
+            <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-share-alt"></span>Back to Detail</a>&nbsp;<a class="btn btn-success" asp-page="./Index"><span class="glyphicon glyphicon-share-alt"></span>Back to List</a>
+            <p></p>
+        </div>
+    </div>
     <form method="post" autocomplete="off">
         <input type="hidden" asp-for="Project.ID" />
-        <input type="text" asp-for="FromSource" />
+        <input type="hidden" asp-for="FromSource" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
             <div class="col-md-4">

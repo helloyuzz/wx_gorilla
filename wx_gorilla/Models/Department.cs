@@ -14,6 +14,8 @@ namespace com.wechat.gorilla.Models {
         public string Dept_name { get; set; }
         [Display(Name = "科室简称"),Required]
         public string Short_name { get; set; }
+        [Display(Name ="科室条码")]
+        public string Barcode { get; set; }
         [Display(Name ="所属项目")]
         public int Projectid { get; set; }
         //public Project Project { get; set; }

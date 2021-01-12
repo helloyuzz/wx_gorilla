@@ -11,12 +11,11 @@
 
 <h1 class="text-shadow">@Model.Project.Project_name</h1>
 <div class="transprantBackground">
-    <div class="row align-items-center">
+    <div class="row">
         <div class="col">
-            <h4><a class="btn btn-success" asp-page="./Index">Back To List</a></h4>
-        </div>
-        <div class="col-1">
-            <a asp-page="./Edit" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+            <a class="btn btn-primary" asp-page="./Index">Back To List</a>
+            <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.Project.ID"><span class="glyphicon glyphicon-pencil"></span>Edit</a>
+            <p></p>
         </div>
     </div>
     <div class="row">
@@ -141,6 +140,9 @@
                         <th class="border border-info">
                             @Html.DisplayNameFor(model => model.Departments[0].Short_name)
                         </th>
+                        <th class="border border-info">
+                            @Html.DisplayNameFor(model => model.Departments[0].Barcode)
+                        </th>
                         @*<th>
                                 @Html.DisplayNameFor(model => model.Departments[0].Projectid)
                             </th>*@
@@ -155,6 +157,10 @@
                             </td>
                             <td class="border border-primary">
                                 @Html.DisplayFor(modelItem => item.Short_name)
+                            </td>
+                            <td class="border border-primary">
+                                <a href="##"><span class="badge badge-info">查看</span></a>
+                                @Html.DisplayFor(modelItem => item.Barcode)
                             </td>
                             @*<td>
                                     @Html.DisplayFor(modelItem => item.Projectid)
@@ -189,16 +195,19 @@
                 <thead>
                     <tr>
                         <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].User_account)
+                            @Html.DisplayNameFor(model => model.Users[0].Departmentid)
                         </th>
                         <th class="border border-info">
+                            @Html.DisplayNameFor(model => model.Users[0].User_account)
+                        </th>
+                        @*<th class="border border-info">
                             @Html.DisplayNameFor(model => model.Users[0].User_type)
                         </th>
                         <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].Projectid)
-                        </th>
+            @Html.DisplayNameFor(model => model.Users[0].Projectid)
+        </th>*@
                         <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].Departmentid)
+                            @Html.DisplayNameFor(model => model.Users[0].Barcode)
                         </th>
                         <th class="border border-info">
                             @Html.DisplayNameFor(model => model.Users[0].wx_unique_id)
@@ -206,9 +215,9 @@
                         <th class="border border-info">
                             @Html.DisplayNameFor(model => model.Users[0].Roleid)
                         </th>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].User_password)
-                        </th>
+                        @*<th class="border border-info">
+            @Html.DisplayNameFor(model => model.Users[0].User_password)
+        </th>*@
                         <th class="border border-info">
                             @Html.DisplayNameFor(model => model.Users[0].Login_time)
                         </th>
@@ -217,53 +226,56 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Users) {
-                        <tr>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.User_account)
-                            </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.User_type)
-                            </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.Project.Project_name)
-                            </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.Department.Dept_name)
-                            </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.wx_unique_id)
-                            </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.Roleid)
-                            </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.User_password)
-                            </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.Login_time)
-                            </td>
-                            <td class="border border-primary">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-success dropdown-toggle btn-xs"
-                                            data-toggle="dropdown">
-                                        操作
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu">
-                                        <li>
-                                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
-                                        </li>
-                                        <li>
-                                            <a asp-page="./Edit" asp-route-id="@item.Id">复制到</a>
-                                        </li>
-                                        <li>
-                                            <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li><a asp-page="./Delete" asp-route-id="@item.Id">Delete</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.Department.Dept_name)
+                        </td>
+                        <td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.User_account)
+                        </td>
+                        @*<td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.User_type)
+                        </td>
+                        <td class="border border-primary">
+            @Html.DisplayFor(modelItem => item.Project.Project_name)
+        </td>*@
+                        <td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.Barcode)
+                        </td>
+                        <td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.wx_unique_id)
+                        </td>
+                        <td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.Roleid)
+                        </td>
+                        @*<td class="border border-primary">
+            @Html.DisplayFor(modelItem => item.User_password)
+        </td>*@
+                        <td class="border border-primary">
+                            @Html.DisplayFor(modelItem => item.Login_time)
+                        </td>
+                        <td class="border border-primary">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-success dropdown-toggle btn-xs"
+                                        data-toggle="dropdown">
+                                    操作
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a asp-page="/Users/Edit" asp-route-id="@item.Id">Edit</a>
+                                    </li>
+                                    <li>
+                                        <a asp-page="./Edit" asp-route-id="@item.Id">Copy To...</a>
+                                    </li>
+                                    <li>
+                                        <a asp-page="./Details" asp-route-id="@item.Id">Reset Password</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li><a asp-page="/Users/Delete" asp-route-id="@item.Id">Delete</a></li>
+                                </ul>
+                            </div>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
@@ -303,8 +315,8 @@
         </div>
     </div>
 </div>
-    <script>
+<script>
     $(function () {
         $('#myTab li:eq(@remoteType) a').tab('show');
     });
-    </script>
+</script>
