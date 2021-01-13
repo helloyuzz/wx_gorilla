@@ -9,7 +9,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Projects {
-    public class DeleteModel : PageModel {
+    public class DeleteModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.ProjectContext _context;
 
         public DeleteModel(com.wechat.gorilla.DbContexts.ProjectContext context) {
@@ -25,6 +25,9 @@ namespace com.wechat.gorilla.Pages.Projects {
             }
 
             Project = await _context.Project.Include(A=>A.Province).Include(A=>A.City).FirstOrDefaultAsync(m => m.ID == id);
+            _CrumbList.Add(new CrumbItem("项目列表", "/Proejcts/Index"));
+            _CrumbList.Add(new CrumbItem(Project.Project_name, false, false));
+            ViewData["CrumbList"] = _CrumbList;
 
             if (Project == null) {
                 return NotFound();

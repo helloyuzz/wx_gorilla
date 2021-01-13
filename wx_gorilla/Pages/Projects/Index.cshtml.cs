@@ -9,7 +9,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Projects {
-    public class IndexModel : PageModel {
+    public class IndexModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.ProjectContext _context;
 
         public IndexModel(com.wechat.gorilla.DbContexts.ProjectContext context) {
@@ -19,6 +19,9 @@ namespace com.wechat.gorilla.Pages.Projects {
         public IList<Project> Project { get; set; }
 
         public async Task<IActionResult> OnGet() {
+            _CrumbList.Add(new CrumbItem("项目列表",true,true));
+            ViewData["CrumbList"] = _CrumbList;
+
             User user = HttpContext.Session.Get<User>(SessionExtensions.SessionKey_CUA);
             if (user == null) {
                 return RedirectToPage("Login");
@@ -43,7 +46,7 @@ namespace com.wechat.gorilla.Pages.Projects {
             if (string.IsNullOrEmpty(HtmlTip)) {
                 HtmlTip = "所有";
             }
-            Project = await temp.Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
+            Project = await temp.OrderByDescending(a=>a.ID).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();
             RecordCount = temp.Count();
             //if (string.IsNullOrEmpty(SearchProjectName) && string.IsNullOrEmpty(SearchProvince) && string.IsNullOrEmpty(SearchProgress)) {
             //    Project = await _context.Project.Include(A => A.Province).Include(B => B.City).Skip((PageIndex - 1) * PageSize).Take(PageSize).ToListAsync();

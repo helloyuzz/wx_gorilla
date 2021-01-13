@@ -10,7 +10,7 @@ using com.wechat.gorilla.Models;
 using Microsoft.AspNetCore.Components;
 
 namespace com.wechat.gorilla.Pages.Projects {
-    public class CreateModel : PageModel {
+    public class CreateModel :PublicPage  {
         private readonly com.wechat.gorilla.DbContexts.ProjectContext _context;
 
         public CreateModel(com.wechat.gorilla.DbContexts.ProjectContext context) {
@@ -18,6 +18,10 @@ namespace com.wechat.gorilla.Pages.Projects {
         }
 
         public IActionResult OnGet() {
+            _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
+            _CrumbList.Add(new CrumbItem("新建项目", true, true));
+            ViewData["CrumbList"] = _CrumbList;
+
             Provinces = _context.Province.ToList();
             return Page();
         }

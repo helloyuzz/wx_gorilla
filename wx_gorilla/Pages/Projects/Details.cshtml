@@ -9,12 +9,12 @@
     }
 }
 
-<h1 class="text-shadow">@Model.Project.Project_name</h1>
+@*<h1 class="text-shadow">@Model.Project.Project_name</h1>*@
 <div class="transprantBackground">
     <div class="row">
         <div class="col">
-            <a class="btn btn-primary" asp-page="./Index">Back To List</a>
-            <a class="btn btn-success" asp-page="./Edit" asp-route-id="@Model.Project.ID">Edit</a>
+            <a class="btn btn-primary" asp-page="./Edit" asp-route-id="@Model.Project.ID">Edit</a>
+            <a class="btn btn-success" asp-page="./Index">Cancel</a>
             <p></p>
         </div>
     </div>
@@ -271,7 +271,7 @@
                                         <a asp-page="./Details" asp-route-id="@item.Id">重置密码</a>
                                     </li>
                                     <li>
-                                        <a asp-page="/Users/Edit" asp-route-id="@item.Id" asp-route-deptid="@item.Departmentid">修改</a>
+                                        <a asp-page="/Users/Edit" asp-route-id="@item.Id" asp-route-deptid="@item.Departmentid" asp-route-projectid="@item.Projectid">修改</a>
                                     </li>
                                     @*<li>
             <a asp-page="./Edit" asp-route-id="@item.Id">快速复制...</a>

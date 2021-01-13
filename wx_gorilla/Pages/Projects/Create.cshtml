@@ -5,15 +5,10 @@
     ViewData["Title"] = "Create";
 }
 
-<h1 class="text-shadow">新建项目</h1>
+@*<h1 class="text-shadow"></h1>*@
 
 <div class="transprantBackground">
-    <div class="row">
-        <div class="col-12">
-            <a class="btn btn-primary" asp-area="" onclick="window.history.go(-1); return false;">Back To List</a>
-            <p></p>
-        </div>
-    </div>
+    <p class="page_title">新建项目</p>
     <form id="submitForm" method="post" autocomplete="off">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row">
@@ -107,6 +102,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
+                    <a class="btn btn-success" asp-area="" onclick="window.history.go(-1); return false;">Cancel</a>
                 </div>
             </div>
         </div>

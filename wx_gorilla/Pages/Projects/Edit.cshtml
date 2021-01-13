@@ -8,15 +8,15 @@
     string fromSource = Request.Query["source"];
 }
 
-<h1 class="text-shadow">@Html.Raw(Model.Project.Project_name)</h1>
+@*<h1 class="text-shadow">@Html.Raw(Model.Project.Project_name)</h1>*@
 <div class="transprantBackground">
-    <div class="row">
+    @*<div class="row">
         <div class="col">
             <a class="btn btn-primary" asp-page="./Details" asp-route-id="@Model.Project.ID">Back to Detail</a>&nbsp;
-            <a class="btn btn-success" asp-page="./Index">Back to List</a>
+            
             <p></p>
         </div>
-    </div>
+    </div>*@
     <form method="post" autocomplete="off">
         <input type="hidden" asp-for="Project.ID" />
         <input type="hidden" asp-for="FromSource" />
@@ -113,6 +113,7 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <input type="submit" value="Save" class="btn btn-primary" />
+                    <a class="btn btn-success" asp-page="./Index">Cancel</a>
                 </div>
             </div>
         </div>

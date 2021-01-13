@@ -14,6 +14,7 @@ function changeStyle(objid, type) {
 }
 function SwitchPanel() {
     var showPanel = $('#hidden_ShowPanel').val();
+    //$('#returnToIndex').toggle();
     if (showPanel.indexOf("none") != -1) {  // "display:none;"
         $('#panelMenu').show();
         $('#hidden_ShowPanel').val('block');

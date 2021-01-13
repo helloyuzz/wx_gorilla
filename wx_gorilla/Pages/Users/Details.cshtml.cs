@@ -10,8 +10,7 @@ using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Users
 {
-    public class DetailsModel : PageModel
-    {
+    public class DetailsModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.UserContext _context;
 
         public DetailsModel(com.wechat.gorilla.DbContexts.UserContext context)

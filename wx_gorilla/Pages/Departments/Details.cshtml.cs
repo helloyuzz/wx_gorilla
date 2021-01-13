@@ -9,7 +9,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Departments {
-    public class DetailsModel : PageModel {
+    public class DetailsModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.DepartmentContext _context;
 
         public DetailsModel(com.wechat.gorilla.DbContexts.DepartmentContext context) {

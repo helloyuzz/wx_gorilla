@@ -11,6 +11,13 @@
 
     // 是否显示左边菜单栏
     string showPanel = "";
+    string isIndexPage = "false";
+    isIndexPage = Context.Request.Path;
+    if (isIndexPage.Equals("/") || isIndexPage.Equals("/index", StringComparison.OrdinalIgnoreCase)) {
+        isIndexPage = "true";
+    } else { 
+        isIndexPage = "false"; 
+    }
 
     // 当前用户名
     com.wechat.gorilla.Models.User cua = null;
@@ -74,11 +81,11 @@
 <body id="mainWindow" style="height:100%;background-image:url('@cua.Theme_url'); background-position:center;background-repeat:no-repeat;background-size:100%;">
     <!--右上角菜单-->
     @if (isLogoned) {
-    @*<div class="dropdown" style="position:absolute;top:13px;right:79px;z-index:138;">
-        <a asp-area="" asp-page="/Index" class="btn btn-light text-white text-shadow" title="返回主页">
-            <i class="fa fa-home text-dark"></i>
-        </a>
-    </div>*@
+        @*<div class="dropdown" style="position:absolute;top:13px;right:79px;z-index:138;">
+                <a asp-area="" asp-page="/Index" class="btn btn-light text-white text-shadow" title="返回主页">
+                    <i class="fa fa-home text-dark"></i>
+                </a>
+            </div>*@
         <div class="dropdown" style="position:absolute;top:13px;right:13px;z-index:138;">
             <a class="btn btn-success dropdown-toggle text-white text-shadow" id="dropdownMenu1"
                data-toggle="dropdown" title="菜单">
@@ -121,26 +128,68 @@
                         @{ foreach (var item in com.wechat.gorilla.Globals.NaviMenus) {
                                 <tr>
                                     <td id="@item.Menu_id" class="@item.MenuClass_default" onmouseover="changeStyle('@item.Menu_id', '@item.MenuClass_hover');" onmouseout="changeStyle('@item.Menu_id', '@item.MenuClass_default');">
-                                        <a asp-area="" asp-page="@item.AspPage" style="display:block;width:100%;height:100%; color:#fff;text-decoration:none;"><span class="@item.Menu_icons"></span>@item.MenuText</a>
+                                        <a asp-area="" asp-page="@item.AspPage" style="display:block;width:100%;height:100%; color:#fff;text-decoration:none;"><i class="fa @item.Menu_icons" style="margin-right:5px;"></i>@item.MenuText</a>
                                     </td>
                                 </tr>
                             }
                         }
                     </table>
                 </td>
-                <td style="width:30px;vertical-align:top;padding-top:24px;text-align:right;" align="center" rowspan="2">
-                    <a href="##"><span class="glyphicon glyphicon-align-justify text-shadow text-eee" style="margin-bottom:13px;" onclick="SwitchPanel();" title="显示/隐藏主菜单"></span></a>
-                    <br />
-                    @*<a asp-area="" asp-page="/Index"><i class="fas fa-home text-white text-shadow" title="返回主页"></i></a>*@
+                <td style="width:30px;vertical-align:top;padding-top:8px;text-align:right;padding-left:8px;" align="center" rowspan="2">
+                    <div style="padding-top:8px;">
+                        <table>
+                            <tr>
+                                <td style="line-height:300%;text-align:center;padding-left:3px;">
+                                    <a href="##" onclick="SwitchPanel();" title="显示/隐藏主菜单" style="margin-right:1px;"><i class="fa fa-th fa-2x text-white text-shadow"></i></a>
+                                </td>
+                            </tr>
+                            @*<tr id="returnToIndex">
+                                    <td style="line-height:300%;text-align:center;">
+                                        <a asp-area="" asp-page="/Index" style="@showIndex"><i class="fas fa-home text-white text-shadow fa-2x" title="返回主页" style="padding-left:3px;"></i></a>
+                                    </td>
+                                </tr>*@
+                            @*<tr>
+                                    <td style="line-height:300%;padding-left:3px;">
+                                        <a asp-area="" asp-page="/Index" style="@showIndex"><i class="fas fa-city text-white text-shadow fa-2x" title="返回主页" style="padding-left:3px;"></i></a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="line-height:300%;">
+                                        <a asp-area="" asp-page="/Index" style="@showIndex"><i class="fas fa-cloud-download-alt text-white text-shadow fa-2x" title="返回主页" style="padding-left:3px;"></i></a>
+                                    </td>
+                                </tr>*@
+                            <tr>
+                                <td style="line-height:300%;">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
                     <input id="hidden_ShowPanel" name="hidden_ShowPanel" type="hidden" value="@showPanel" />
                 </td>
             }
             <!--内容操作区-->
             <td style="vertical-align:top;padding-left:13px;">
                 <div style="height:100%;width:100%;overflow-x:hidden;overflow-y: @showScroll;">
+                    @if (isLogoned) {
+                        if (isIndexPage == "false") {
+                            <nav aria-label="breadcrumb" class="main_nav">
+                                <ol class="breadcrumb">
+                                    <li class="breadcrumb-item"><a href="/Index">Home</a></li>
+                                    @{ foreach (var item in ViewData["CrumbList"] as IList<com.wechat.gorilla.Models.CrumbItem>) {
+                                            @Html.Raw(item.HtmlContent);
+                                        @*<li class="breadcrumb-item @item.ActiveContent" aria-current="@item.AriaContent">
+                                            @if (string.IsNullOrEmpty(item.Href) == false) {
+
+                                            }
+                                    @item.Text
+                                        </li>*@
+                                        }
+                                    }
+                                </ol>
+                            </nav>
+                                            }
+                                        }
                     @RenderBody()
-                    @*<main role="main" class="pb-3">
-                        </main>*@
                 </div>
             </td>
         </tr>

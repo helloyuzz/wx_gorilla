@@ -10,7 +10,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Departments {
-    public class EditModel : PageModel {
+    public class EditModel : PublicPage {
         private readonly DepartmentContext _ctxDepartment;
         private readonly ProjectContext _ctxProject;
 
@@ -36,7 +36,11 @@ namespace com.wechat.gorilla.Pages.Departments {
                 return NotFound();
             }
             Project_name = _ctxProject.Project.FirstOrDefault(A => A.ID == Department.Projectid).Project_name;
-            
+
+            _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
+            _CrumbList.Add(new CrumbItem(Project_name, true, true));
+            ViewData["CrumbList"] = _CrumbList;
+
             //ViewData["Projectid"] = new SelectList(_context.Set<Project>(), "ID", "Project_name");
             return Page();
         }

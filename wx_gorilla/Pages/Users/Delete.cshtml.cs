@@ -9,7 +9,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Users {
-    public class DeleteModel : PageModel {
+    public class DeleteModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.UserContext _context;
 
         public DeleteModel(com.wechat.gorilla.DbContexts.UserContext context) {

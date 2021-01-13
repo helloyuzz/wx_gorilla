@@ -9,7 +9,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Projects {
-    public class DetailsModel : PageModel {
+    public class DetailsModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.ProjectContext _ctxProject;
         private readonly com.wechat.gorilla.DbContexts.DepartmentContext _ctxDepartment;
         private readonly com.wechat.gorilla.DbContexts.UserContext _ctxUser;
@@ -37,6 +37,10 @@ namespace com.wechat.gorilla.Pages.Projects {
             if (Project == null) {
                 return NotFound();
             }
+
+            _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
+            _CrumbList.Add(new CrumbItem(Project.Project_name, true, true));
+            ViewData["CrumbList"] = _CrumbList;
 
             Departments = await _ctxDepartment.Departments.Where(A => A.Projectid == Project.ID).ToListAsync();
             Users = await _ctxUser.Users.Where(A => A.Projectid == Project.ID).Include(A=>A.Project).Include(A=>A.Department).ToListAsync();

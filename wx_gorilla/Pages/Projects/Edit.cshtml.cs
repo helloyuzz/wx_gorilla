@@ -10,7 +10,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Projects {
-    public class EditModel : PageModel {
+    public class EditModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.ProjectContext _context;
 
         public EditModel(com.wechat.gorilla.DbContexts.ProjectContext context) {
@@ -36,6 +36,9 @@ namespace com.wechat.gorilla.Pages.Projects {
             if (Project == null) {
                 return NotFound();
             }
+            _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
+            _CrumbList.Add(new CrumbItem(Project.Project_name, true, true));
+            ViewData["CrumbList"] = _CrumbList;
             return Page();
         }
 
@@ -57,7 +60,7 @@ namespace com.wechat.gorilla.Pages.Projects {
                     throw;
                 }
             }
-            if (FromSource.Equals("index")) {
+            if ("index".Equals(FromSource)) {
                 return RedirectToPage("./Index");
             } else {
                 return RedirectToPage("./Details", new { id = Project.ID });

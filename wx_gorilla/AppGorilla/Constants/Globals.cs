@@ -42,19 +42,19 @@ namespace com.wechat.gorilla {
                         Menu_id = "navMenu_Index",
                         MenuText = "Welcome",
                         AspPage = "/Index",
-                        Menu_icons = "glyphicon glyphicon glyphicon-th menuIcon",
+                        Menu_icons = "fa-home",
                     };
                     NaviMenuItem naviMenu_Project = new NaviMenuItem() {
                         Menu_id = "naviMenu_Project",
                         MenuText = "项目列表",
                         AspPage = "/Projects/Index",
-                        Menu_icons = "glyphicon glyphicon glyphicon-flag menuIcon",
+                        Menu_icons = "fa-city",
                     };
                     NaviMenuItem naviMenu_Subscribe = new NaviMenuItem() {
                         Menu_id = "naviMenu_Subscribe",
                         MenuText = "推送订阅",
                         AspPage = "/Subscribe",
-                        Menu_icons = "glyphicon glyphicon glyphicon-flash menuIcon",
+                        Menu_icons = "fa-cloud-download-alt",
                     };
                     //NaviMenuItem naviMenu_System = new NaviMenuItem() {
                     //    Menu_id = "naviMenu_System",

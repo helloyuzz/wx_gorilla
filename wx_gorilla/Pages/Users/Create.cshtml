@@ -6,15 +6,10 @@
     string project_id = Request.Query["id"];
 }
 
-<h1>@Model.Project_name / &lt;新建登录帐号&gt;</h1>
+@*<h1>@Model.Project_name / &lt;新建登录帐号&gt;</h1>*@
 <div class="transprantBackground">
-    <form method="post">
-        <div class="row">
-            <div class="col-12">
-                <a class="btn btn-primary" asp-page="/Projects/Details" asp-route-id="@project_id" asp-route-type="1">Back to Detail</a>
-                <p></p>
-            </div>
-        </div>
+    <p class="page_title">新建人员帐号</p>
+    <form method="post" autocomplete="off">     
         <div class="row">
             <div class="col-md-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -64,6 +59,7 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
+                    <a class="btn btn-success" asp-page="/Projects/Details" asp-route-id="@project_id" asp-route-type="1">Cancel</a>
                 </div>
             </div>
         </div>

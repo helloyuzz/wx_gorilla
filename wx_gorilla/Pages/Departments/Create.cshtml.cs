@@ -9,7 +9,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Departments {
-    public class CreateModel : PageModel {
+    public class CreateModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.DepartmentContext _ctxDepartment;
         private readonly ProjectContext _ctxProject;
 
@@ -28,6 +28,10 @@ namespace com.wechat.gorilla.Pages.Departments {
             if (error_code > 0) {
                 Error_msg = ErrorCode.ParseCode(error_code).Msg;
             }
+
+            _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
+            _CrumbList.Add(new CrumbItem(Project_name, true, true));
+            ViewData["CrumbList"] = _CrumbList;
 
             if (Department == null) {
                 Department = new Department();
