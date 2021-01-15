@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace com.wechat.gorilla.Pages {
-    public class PrivacyModel : PageModel {
+    public class PrivacyModel : PublicPage {
         private readonly ILogger<PrivacyModel> _logger;
 
         public PrivacyModel(ILogger<PrivacyModel> logger) {
@@ -15,6 +15,7 @@ namespace com.wechat.gorilla.Pages {
         }
 
         public void OnGet() {
+            _CrumbList.Add(new Models.CrumbItem("Privacy", true, true));
             _logger.Log(LogLevel.Information, "xxx");
         }
     }

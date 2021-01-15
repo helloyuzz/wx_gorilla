@@ -1,10 +1,12 @@
 ﻿<!DOCTYPE html>
 <html lang="en" style="height:100%;">
+@using com.wechat.gorilla
+@using com.wechat.gorilla.Models
 @{
     ViewData["Title"] = "蓝鹰追溯";
 
     // 当前是否登录
-    bool isLogoned = Context.Session.Keys.Contains(com.wechat.gorilla.SessionExtensions.SessionKey_CUA);
+    bool isLogoned = Context.Session.Keys.Contains(SessionExtensions.SessionKey_CUA);
 
     // 登录界面不显示滚动条，进入主界面才显示
     string showScroll = "hidden";
@@ -15,22 +17,19 @@
     isIndexPage = Context.Request.Path;
     if (isIndexPage.Equals("/") || isIndexPage.Equals("/index", StringComparison.OrdinalIgnoreCase)) {
         isIndexPage = "true";
-    } else { 
-        isIndexPage = "false"; 
+    } else {
+        isIndexPage = "false";
     }
 
     // 当前用户名
-    com.wechat.gorilla.Models.User cua = null;
+    User cua = null;
 
     if (isLogoned == true) {
-        //var cua_Bytes = new Byte[768];
-        //Context.Session.TryGetValue(com.wechat.gorilla.Globals.SessionKey_CUA, out cua_Bytes);
-
-        cua = com.wechat.gorilla.SessionExtensions.Get<com.wechat.gorilla.Models.User>(Context.Session, com.wechat.gorilla.SessionExtensions.SessionKey_CUA);
+        cua = SessionExtensions.Get<User>(Context.Session, SessionExtensions.SessionKey_CUA);
 
         // 从Session中获取是否显示菜单的设置
         var showPanel_Bytes = new Byte[30];
-        bool isTrySession = Context.Session.TryGetValue(com.wechat.gorilla.SessionExtensions.SessionKey_SwitchPanel, out showPanel_Bytes);
+        bool isTrySession = Context.Session.TryGetValue(SessionExtensions.SessionKey_SwitchPanel, out showPanel_Bytes);
         if (isTrySession) {
             showPanel = System.Text.Encoding.UTF8.GetString(showPanel_Bytes);
             showPanel = showPanel.Replace("\"", "");
@@ -38,14 +37,14 @@
                 showPanel = "display:none;";
             }
         }
-        string activeMenu_id = com.wechat.gorilla.SessionExtensions.Get<string>(Context.Session, com.wechat.gorilla.SessionExtensions.SessionKey_ActiveMenuId);
+        string activeMenu_id = SessionExtensions.Get<string>(Context.Session, SessionExtensions.SessionKey_ActiveMenuId);
         if (string.IsNullOrEmpty(activeMenu_id)) {
             activeMenu_id = "navMenu_Index";
         }
-        com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_default = "MenuClass_default");
-        com.wechat.gorilla.Globals.NaviMenus.ForEach(a => a.MenuClass_hover = "MenuClass_default_hover");
-        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_active_default";
-        com.wechat.gorilla.Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_active_hover";
+        Globals.NaviMenus.ForEach(a => a.MenuClass_default = "MenuClass_default");
+        Globals.NaviMenus.ForEach(a => a.MenuClass_hover = "MenuClass_default_hover");
+        Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_default = "MenuClass_active_default";
+        Globals.NaviMenus.FirstOrDefault(a => a.Menu_id.Equals(activeMenu_id)).MenuClass_hover = "MenuClass_active_hover";
 
         if (cua == null) {
             showScroll = "hidden";
@@ -53,7 +52,7 @@
             showScroll = "auto";
         }
     } else {
-        cua = new com.wechat.gorilla.Models.User();
+        cua = new User();
         cua.Theme_url = "/images/9.jpg";
     }
 }
@@ -72,6 +71,8 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="~/css/site.css" />
     <link href="https://cdn.bootcdn.net/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet">
+    @*<link rel="stylesheet" href="https://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.css" />*@
+    @*<script src="https://static.runoob.com/assets/js/jquery-treeview/jquery.treeview.js" type="text/javascript"></script>*@
     <link href="~/css/flypanel.css" rel="stylesheet" />
     <style>
         #panelMenu {
@@ -175,20 +176,21 @@
                             <nav aria-label="breadcrumb" class="main_nav">
                                 <ol class="breadcrumb">
                                     <li class="breadcrumb-item"><a href="/Index">Home</a></li>
-                                    @{ foreach (var item in ViewData["CrumbList"] as IList<com.wechat.gorilla.Models.CrumbItem>) {
+                                     @*ViewData["CrumbList"] as IList<CrumbItem>*@
+                                    @{ foreach (var item in Model._CrumbList) {
                                             @Html.Raw(item.HtmlContent);
-                                        @*<li class="breadcrumb-item @item.ActiveContent" aria-current="@item.AriaContent">
-                                            @if (string.IsNullOrEmpty(item.Href) == false) {
+                                            @*<li class="breadcrumb-item @item.ActiveContent" aria-current="@item.AriaContent">
+                                                        @if (string.IsNullOrEmpty(item.Href) == false) {
 
-                                            }
-                                    @item.Text
-                                        </li>*@
+                                                        }
+                                                @item.Text
+                                                    </li>*@
                                         }
                                     }
                                 </ol>
                             </nav>
-                                            }
-                                        }
+                        }
+                    }
                     @RenderBody()
                 </div>
             </td>

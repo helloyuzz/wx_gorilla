@@ -9,7 +9,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Citys {
-    public class DeleteModel : PageModel {
+    public class DeleteModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.CityContext _context;
 
         public DeleteModel(com.wechat.gorilla.DbContexts.CityContext context) {
@@ -24,7 +24,7 @@ namespace com.wechat.gorilla.Pages.Citys {
                 return NotFound();
             }
 
-            City = await _context.City.Include(x=>x.Province).FirstOrDefaultAsync(m => m.Id == id);
+            City = await _context.City.Include(x => x.Province).FirstOrDefaultAsync(m => m.Id == id);
 
             if (City == null) {
                 return NotFound();

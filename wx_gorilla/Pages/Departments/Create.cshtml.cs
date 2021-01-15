@@ -19,10 +19,10 @@ namespace com.wechat.gorilla.Pages.Departments {
         }
 
         public IActionResult OnGet() {
-            int project_id = GorillaUtil.QueryInt(Request.Query, "id");
+            Project_id = GorillaUtil.QueryInt(Request.Query, "id");
             int error_code = GorillaUtil.QueryInt(Request.Query, "error_code");
-            if (project_id > 0) {
-                Project_name = _ctxProject.Project.FirstOrDefault(A => A.ID == project_id).Project_name;
+            if (Project_id > 0) {
+                Project_name = _ctxProject.Project.FirstOrDefault(A => A.ID == Project_id).Project_name;
             }
 
             if (error_code > 0) {
@@ -31,11 +31,11 @@ namespace com.wechat.gorilla.Pages.Departments {
 
             _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
             _CrumbList.Add(new CrumbItem(Project_name, true, true));
-            ViewData["CrumbList"] = _CrumbList;
+            
 
             if (Department == null) {
                 Department = new Department();
-                Department.Projectid = project_id;
+                Department.Projectid = Project_id;
             }
             //ViewData["Projectid"] = new SelectList(_ctxDepartment.Set<Project>(), "ID", "Project_name");
             return Page();
@@ -47,6 +47,8 @@ namespace com.wechat.gorilla.Pages.Departments {
         public string Project_name { get; set; }
         [BindProperty]
         public string Error_msg { get; set; }
+        [BindProperty(SupportsGet =true)]
+        public int Project_id { get; set; }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://aka.ms/RazorPagesCRUD.
@@ -64,7 +66,7 @@ namespace com.wechat.gorilla.Pages.Departments {
                 return Page();
             }
 
-            int count = _ctxDepartment.Departments.Count(A => A.Dept_name.Equals(Department.Dept_name));
+            int count = _ctxDepartment.Departments.Count(A=>A.Projectid == Project_id && A.Dept_name.Equals(Department.Dept_name));
             if (count > 0) {
                 return RedirectToPage("/Departments/Create", new { id = Department.Projectid,error_code= ErrorCode.Error_DepartmentAlreadyExist.Code });
             } else {

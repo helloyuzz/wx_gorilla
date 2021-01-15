@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace com.wechat.gorilla.Pages {
-    public class LoginModel : PageModel {
+    public class LoginModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.UserContext _userContext;
         private User User { get; set; }
 

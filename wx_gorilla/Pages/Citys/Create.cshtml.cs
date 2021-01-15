@@ -10,7 +10,7 @@ using com.wechat.gorilla.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace com.wechat.gorilla.Pages.Citys {
-    public class CreateModel : PageModel {
+    public class CreateModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.CityContext _context;
 
         public CreateModel(com.wechat.gorilla.DbContexts.CityContext context) {

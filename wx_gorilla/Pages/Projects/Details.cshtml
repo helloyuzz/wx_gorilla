@@ -8,7 +8,15 @@
         remoteType = "0";
     }
 }
+<style>
+    ul li {
+        list-style:outside none none;
+        list-style-type:none;     
+        padding:0px;
+        margin:0px;
+    }
 
+</style>
 @*<h1 class="text-shadow">@Model.Project.Project_name</h1>*@
 <div class="transprantBackground">
     <div class="row">
@@ -98,14 +106,11 @@
 
     <p>
     </p>
-    <ul id="myTab" class="nav nav-tabs">
-        <li class="active">
-            <a href="#department" data-toggle="tab">科室</a>
-        </li>
-        <li><a href="#user" data-toggle="tab">人员</a></li>
-        <li class="dropdown">
+    <ul>
+        <li class="dropdown active">
             <a href="#menuItem" id="myTabDrop1" class="dropdown-toggle"
                data-toggle="dropdown">
+                <i class="fa fa-wrench"></i>
                 本院管理
             </a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
@@ -113,7 +118,7 @@
                     <a asp-page="/Departments/Create" asp-route-id="@Model.Project.ID">添加科室</a>
                 </li>
                 <li>
-                    <a asp-page="/Users/Create" asp-route-id="@Model.Project.ID">添加人员</a>
+                    <a asp-page="/Users/Create" asp-route-id="@Model.Project.ID" asp-route-type="User">添加人员</a>
                 </li>
                 <li role="presentation" class="divider"></li>
                 <li>
@@ -129,59 +134,119 @@
             </ul>
         </li>
     </ul>
-    <div id="myTabContent" class="tab-content">
-        <div class="tab-pane fade in active" id="department">
+    <div class="row">
+        <div class="col-4">
+            <div class="treeview w-20 border">
+                @Html.Raw(Model.MainOrgMenu.HtmlContent)
+                @*<ul class="list-group">
+                    <li id="topMenu" class="list-group-item">
+                        <span>
+                            <i class="fas fa-angle-right rotate" style="margin-right:3px;"></i>
+                            <a id="href3" href="#aa" onclick="temp(this.id);">四川省人民中医院</a>
+                        </span>
+                        <ul id="level3" class="list-group">
+                            <li class="list-group-item border-0">
+                                <span>
+                                    <i class="fas fa-angle-right rotate" style="margin-right:3px;"></i>
+                                    <a id="href4" href="#aa" onclick="temp(this.id);">信息科</a>
+                                </span>
+                                <ul id="level4" class="list-group border-0">
+                                    <li id="level2" class="list-group-item  border-0">
+                                        <span>
+                                            <i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i>
+                                            <a href="#aa">aa</a>
+                                        </span>
+                                        <ul>
+                                        </ul>
+                                    </li>
+                                    <li id="level2" class="list-group-item border-0"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">asdfasdfasdf</a></span><ul></ul></li>
+                                    <li id="level2" class="list-group-item border-0"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">gfhjfg</a></span><ul></ul></li>
+                                    <li id="level2" class="list-group-item border-0"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">sgdfgsd</a></span><ul></ul></li>
+                                </ul>
+                            </li>
+                            <li id="level2" class="nested"><span class="folder"><i class="fas fa-angle-right rotate" style="margin-right:3px;"></i><a href="#aa">供应室</a></span><ul><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">a1a1</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">sdfgsdfg</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">gfhjfgh</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">信息科</a></span><ul></ul></li></ul></li>
+                            <li id="level2" class="nested"><span class="folder"><i class="fas fa-angle-right rotate" style="margin-right:3px;"></i><a href="#aa">手术室</a></span><ul><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">asdfas</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">dsfgsdfg</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">fghjfgh</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">总经办</a></span><ul></ul></li></ul></li>
+                        </ul>
+                    </li>
+                </ul>*@
+            </div>
+            @*<ul id="browser" class="filetree treeview-famfamfam treeview">
+            @Html.Raw(Model.MainOrgMenu.HtmlContent)
+        </ul>*@
+        </div>
+        <script>
+            function temp(id) {
+                //id = id.replace("href", "level");
+                $('#' + id).toggle();//.css("display", "none");
+            }
+        </script>
+        <div class="col">
             <table class="table table-bordered table-hover table-condensed">
                 <thead>
                     <tr>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Departments[0].Dept_name)
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].Departmentid)
                         </th>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Departments[0].Short_name)
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].User_name)
                         </th>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Departments[0].Barcode)
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].User_account)
                         </th>
-                        @*<th>
-                                @Html.DisplayNameFor(model => model.Departments[0].Projectid)
-                            </th>*@
-                        <th class="border border-info"></th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].Barcode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].wx_unique_id)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Users[0].Login_time)
+                        </th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Departments) {
+                    @foreach (var item in Model.Users) {
                         <tr>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.Dept_name)
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Department.Dept_name)
                             </td>
-                            <td class="border border-primary">
-                                @Html.DisplayFor(modelItem => item.Short_name)
+                            <td>
+                                <a asp-page="/Users/Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.User_name)</a>
                             </td>
-                            <td class="border border-primary">
-                                <a href="##"><span class="badge badge-info">查看</span></a>
+                            <td>
+                                <a asp-page="/Users/Details" asp-route-id="@item.Id">@Html.DisplayFor(modelItem => item.User_account)</a>
+                            </td>
+                            <td>
                                 @Html.DisplayFor(modelItem => item.Barcode)
                             </td>
-                            @*<td>
-                                    @Html.DisplayFor(modelItem => item.Projectid)
-                                </td>*@
-                            <td class="border border-primary">
-                                <div class="dropdown">
+                            <td>
+                                @Html.DisplayFor(modelItem => item.wx_unique_id)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Login_time)
+                            </td>
+                            <td>
+                                <div class="btn-group">
                                     <button type="button" class="btn btn-success dropdown-toggle btn-xs"
                                             data-toggle="dropdown">
                                         操作
                                     </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                                        @*<li role="presentation">
-                                                <a asp-page="./Details" asp-route-id="@item.Id">Details</a>
-                                            </li>*@
-                                        <li role="presentation">
-                                            <a asp-page="/Departments/Edit" asp-route-id="@item.Id">Edit</a>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li>
+                                            <a asp-page="/Users/Details" asp-route-id="@item.Id">订阅管理</a>
                                         </li>
-                                        <li role="presentation" class="divider"></li>
-                                        <li role="presentation">
-                                            <a asp-page="/Departments/Delete" asp-route-id="@item.Id">Delete</a>
+                                        <li>
+                                            <a asp-page="/Users/Details" asp-route-id="@item.Id">重置密码</a>
                                         </li>
+                                        <li>
+                                            <a asp-page="/Users/Edit" asp-route-id="@item.Id" asp-route-deptid="@item.Departmentid" asp-route-projectid="@item.Projectid">修改</a>
+                                        </li>
+                                        @*<li>
+                                            <a asp-page="./Edit" asp-route-id="@item.Id">快速复制...</a>
+                                        </li>*@
+                                        <li class="divider"></li>
+                                        <li><a asp-page="/Users/Delete" asp-route-projectid="@item.Projectid" asp-route-deptid="@item.Departmentid" asp-route-id="@item.Id">Delete</a></li>
                                     </ul>
                                 </div>
                             </td>
@@ -189,110 +254,6 @@
                     }
                 </tbody>
             </table>
-        </div>
-        <div class="tab-pane fade" id="user">
-            <table class="table table-bordered table-hover table-condensed">
-                <thead>
-                    <tr>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].Departmentid)
-                        </th>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].User_name)
-                        </th>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].User_account)
-                        </th>
-                        @*<th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].User_type)
-                        </th>
-                        <th class="border border-info">
-            @Html.DisplayNameFor(model => model.Users[0].Projectid)
-        </th>*@
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].Barcode)
-                        </th>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].wx_unique_id)
-                        </th>
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].Roleid)
-                        </th>
-                        @*<th class="border border-info">
-            @Html.DisplayNameFor(model => model.Users[0].User_password)
-        </th>*@
-                        <th class="border border-info">
-                            @Html.DisplayNameFor(model => model.Users[0].Login_time)
-                        </th>
-                        <th class="border border-info"></th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Users) {
-                    <tr>
-                        <td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.Department.Dept_name)
-                        </td>
-                        <td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.User_name)
-                        </td>
-                        <td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.User_account)
-                        </td>
-                        @*<td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.User_type)
-                        </td>
-                        <td class="border border-primary">
-            @Html.DisplayFor(modelItem => item.Project.Project_name)
-        </td>*@
-                        <td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.Barcode)
-                        </td>
-                        <td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.wx_unique_id)
-                        </td>
-                        <td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.Roleid)
-                        </td>
-                        @*<td class="border border-primary">
-            @Html.DisplayFor(modelItem => item.User_password)
-        </td>*@
-                        <td class="border border-primary">
-                            @Html.DisplayFor(modelItem => item.Login_time)
-                        </td>
-                        <td class="border border-primary">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-success dropdown-toggle btn-xs"
-                                        data-toggle="dropdown">
-                                    操作
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a asp-page="./Details" asp-route-id="@item.Id">重置密码</a>
-                                    </li>
-                                    <li>
-                                        <a asp-page="/Users/Edit" asp-route-id="@item.Id" asp-route-deptid="@item.Departmentid" asp-route-projectid="@item.Projectid">修改</a>
-                                    </li>
-                                    @*<li>
-            <a asp-page="./Edit" asp-route-id="@item.Id">快速复制...</a>
-        </li>*@
-                                    <li class="divider"></li>
-                                    <li><a asp-page="/Users/Delete" asp-route-projectid="@item.Projectid" asp-route-deptid="@item.Departmentid" asp-route-id="@item.Id">Delete</a></li>
-                                </ul>
-                            </div>
-                        </td>
-                    </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="tab-pane fade" id="jmeter">
-            <p>jMeter 是一款开源的测试软件。它是 100% 纯 Java 应用程序，用于负载和性能测试。</p>
-        </div>
-        <div class="tab-pane fade" id="ejb">
-            <p>
-                Enterprise Java Beans（EJB）是一个创建高度可扩展性和强大企业级应用程序的开发架构，部署在兼容应用程序服务器（比如 JBOSS、Web Logic 等）的 J2EE 上。
-            </p>
         </div>
     </div>
     <nav aria-label="breadcrumb">
@@ -321,6 +282,25 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#browser").treeview({
+            toggle: function () {
+                console.log("%s was toggled.", $(this).find(">span").text());
+            }
+        });
+
+        $("#add").click(function () {
+            var branches = $("<li><span class='folder'>New Sublist</span><ul>" +
+                "<li><span class='file'>Item1</span></li>" +
+                "<li><span class='file'>Item2</span></li></ul></li>").appendTo("#browser");
+            $("#browser").treeview({
+                add: branches
+            });
+        });
+    });
+</script>
 <script>
     $(function () {
         $('#myTab li:eq(@remoteType) a').tab('show');

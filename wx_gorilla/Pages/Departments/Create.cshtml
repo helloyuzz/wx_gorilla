@@ -3,12 +3,13 @@
 
 @{
     ViewData["Title"] = "Create";
-    string project_id = Request.Query["id"];
+    //string project_id = Request.Query["id"];
 }
 
 <div class="transprantBackground">
     <p class="page_title">新建科室</p>
     <form method="post" autocomplete="off">
+        <input type="hidden" asp-for="Project_id" />
         <div class="row">
             <div class="col-4">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -22,6 +23,11 @@
                     <input asp-for="Department.Short_name" class="form-control" />
                     <span asp-validation-for="Department.Short_name" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Department.Area_id" class="control-label"></label>
+                    <input asp-for="Department.Area_id" class="form-control" />
+                    <span asp-validation-for="Department.Area_id" class="text-danger"></span>
+                </div>
                 <div class="form-group" style="display:none;">
                     <label asp-for="Department.Projectid" class="control-label"></label>
                     <input asp-for="Department.Projectid" class="form-control" />
@@ -29,7 +35,7 @@
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Create" class="btn btn-primary" />
-                    <a class="btn btn-success" asp-page="/Projects/Details" asp-route-id="@project_id">Cancel</a>
+                    <a class="btn btn-success" asp-page="/Projects/Details" asp-route-id="@Model.Project_id">Cancel</a>
                     <input style="width:100%;border:none;color:red;background:#fff;" disabled asp-for="Error_msg" />
                 </div>
             </div>

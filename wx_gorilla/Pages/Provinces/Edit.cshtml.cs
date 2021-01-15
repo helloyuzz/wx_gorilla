@@ -10,7 +10,7 @@ using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
 
 namespace com.wechat.gorilla.Pages.Provinces {
-    public class EditModel : PageModel {
+    public class EditModel : PublicPage {
         private readonly com.wechat.gorilla.DbContexts.ProvinceContext _context;
 
         public EditModel(com.wechat.gorilla.DbContexts.ProvinceContext context) {

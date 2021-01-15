@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace com.wechat.gorilla {
     public class GorillaUtil {
+        public static string UUID {
+            get {
+                return Guid.NewGuid().ToString().Replace("-", "");
+            }
+        }
+
         internal static int QueryInt(IQueryCollection query, string key) {
             return ParseInt(query[key]);
         }

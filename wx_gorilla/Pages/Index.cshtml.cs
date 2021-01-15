@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace com.wechat.gorilla.Pages {
-    public class IndexModel : PageModel {
+    public class IndexModel : PublicPage {
         private readonly ILogger<IndexModel> _logger;
 
         public IndexModel(ILogger<IndexModel> logger) {

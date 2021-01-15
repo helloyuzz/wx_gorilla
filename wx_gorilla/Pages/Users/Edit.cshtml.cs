@@ -17,15 +17,13 @@ namespace com.wechat.gorilla.Pages.Users {
             _ctx = context;
         }
 
-        [BindProperty]
-        public User User { get; set; }
         public SelectList Departments { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id,int? deptid,int? projectid) {
             if (id == null) {
                 return NotFound();
             }
-
+            FromPage= Request.Headers["Referer"].ToString();
             User = await _ctx.Users.Include(x=>x.Department).FirstOrDefaultAsync(m => m.Id == id);
 
             if (User == null) {
@@ -39,7 +37,6 @@ namespace com.wechat.gorilla.Pages.Users {
             _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
             _CrumbList.Add(new CrumbItem(project_name, true, true));
             _CrumbList.Add(new CrumbItem(User.Department.Dept_name, true, true));
-            ViewData["CrumbList"] = _CrumbList;
 
             List<Department> dbSet = _ctx.Set<Department>().Where(a => a.Projectid == projectid.Value).ToList();
             Departments = new SelectList(dbSet, "Id", "Dept_name");
@@ -65,7 +62,8 @@ namespace com.wechat.gorilla.Pages.Users {
                 }
             }
 
-            return RedirectToPage("/Projects/Details",new { id=User.Projectid,type=1});
+            return Redirect(FromPage);
+            //return RedirectToPage("/Projects/Details",new { id=User.Projectid,type=1});
         }
 
         private bool UserExists(int id) {

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace com.wechat.gorilla.Pages {
-    public class ChangePwdModel : PageModel {
+    public class ChangePwdModel : PublicPage {
         public void OnGet() {
             ViewData["aa"] = "aa";
             TempData["bb"] = "bb";

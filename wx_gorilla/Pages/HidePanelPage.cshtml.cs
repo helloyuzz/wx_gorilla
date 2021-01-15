@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace com.wechat.gorilla.Pages {
-    public class HidePanelPageModel : PageModel {
+    public class HidePanelPageModel : PublicPage {
         public string ThemeUrl = "";
         public string SwitchPanel = "";
         public string ActiveMenuId = "";

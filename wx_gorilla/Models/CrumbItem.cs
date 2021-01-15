@@ -9,7 +9,7 @@ namespace com.wechat.gorilla.Models {
             Text = text;
             Href = href;
         }
-        public CrumbItem(string text, bool isActive, bool isAria_current) {
+        public CrumbItem(string text, bool isActive=true, bool isAria_current=true) {
             Text = text;
             IsActive = isActive;
             IsAriaCurrent = isAria_current;
