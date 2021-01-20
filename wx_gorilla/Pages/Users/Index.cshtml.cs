@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using com.wechat.gorilla.DbContexts;
 using com.wechat.gorilla.Models;
-using com.wechat.gorilla.Menus;
 
 namespace com.wechat.gorilla.Pages.Users {
     public class IndexModel : PublicPage {
@@ -18,8 +17,6 @@ namespace com.wechat.gorilla.Pages.Users {
         }
 
         public IList<User> User { get; set; }
-        [BindProperty]
-        public OrgMenu OrgMenuItem { get; set; }
 
         public async Task OnGetAsync() {
             _CrumbList.Add(new CrumbItem("用户管理"));

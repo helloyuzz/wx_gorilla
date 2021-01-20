@@ -9,13 +9,41 @@
     }
 }
 <style>
-    ul li {
-        list-style:outside none none;
-        list-style-type:none;     
-        padding:0px;
-        margin:0px;
+    /* Remove default bullets */
+    ul, #myUL {
+        list-style-type: none;
     }
 
+    /* Remove margins and padding from the parent ul */
+
+    /* Style the caret/arrow */
+    .caret {
+        cursor: pointer;
+        user-select: none; /* Prevent text selection */
+    }
+
+    /* Create the caret/arrow with a unicode, and style it */
+    .caret::before {
+        content: "\25B6";
+        color: black;
+        display: inline-block;
+        /*margin-right: 6px;*/
+    }
+
+    /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
+    .caret-down::before {
+        transform: rotate(90deg);
+    }
+
+    /* Hide the nested list */
+    .nested {
+        display: none;
+    }
+
+    /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
+    .active {
+        display: block;
+    }
 </style>
 @*<h1 class="text-shadow">@Model.Project.Project_name</h1>*@
 <div class="transprantBackground">
@@ -103,81 +131,50 @@
             </span>
         </div>
     </div>
-
-    <p>
-    </p>
-    <ul>
-        <li class="dropdown active">
-            <a href="#menuItem" id="myTabDrop1" class="dropdown-toggle"
-               data-toggle="dropdown">
-                <i class="fa fa-wrench"></i>
-                本院管理
-            </a>
-            <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                <li>
-                    <a asp-page="/Departments/Create" asp-route-id="@Model.Project.ID">添加科室</a>
-                </li>
-                <li>
-                    <a asp-page="/Users/Create" asp-route-id="@Model.Project.ID" asp-route-type="User">添加人员</a>
-                </li>
-                <li role="presentation" class="divider"></li>
-                <li>
-                    <a href="#subscribe" tabindex="-1" data-toggle="tab">订阅管理</a>
-                </li>
-                <li>
-                    <a href="#qrcode" tabindex="-1" data-toggle="modal" data-target="#exampleModal">二维码</a>
-                </li>
-                <li role="presentation" class="divider"></li>
-                <li>
-                    <a asp-page="/Projects/Delete" asp-route-id="@Model.Project.ID">删除</a>
+    <p/>
+    <div class="row">
+        <div class="col">
+            <ul style="padding:0px;">
+                <li class="dropdown active">
+                    <a href="#menuItem" id="myTabDrop1" class="dropdown-toggle"
+                       data-toggle="dropdown" style="margin-left:8px;">
+                        <i class="fa fa-user-check"></i>
+                        本院管理
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
+                        <li>
+                            <a asp-page="/Departments/Create" asp-route-id="@Model.Project.ID">添加科室</a>
+                        </li>
+                        <li>
+                            <a asp-page="/Users/Create" asp-route-id="@Model.Project.ID" asp-route-type="User">添加人员</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a href="#subscribe" tabindex="-1" data-toggle="tab">订阅管理</a>
+                        </li>
+                        <li>
+                            <a href="#qrcode" tabindex="-1" data-toggle="modal" data-target="#exampleModal">二维码</a>
+                        </li>
+                        <li role="presentation" class="divider"></li>
+                        <li>
+                            <a asp-page="/Projects/Delete" asp-route-id="@Model.Project.ID">删除</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
-        </li>
-    </ul>
+        </div>
+    </div>
     <div class="row">
         <div class="col-4">
-            <div class="treeview w-20 border">
-                @Html.Raw(Model.MainOrgMenu.HtmlContent)
-                @*<ul class="list-group">
-                    <li id="topMenu" class="list-group-item">
-                        <span>
-                            <i class="fas fa-angle-right rotate" style="margin-right:3px;"></i>
-                            <a id="href3" href="#aa" onclick="temp(this.id);">四川省人民中医院</a>
-                        </span>
-                        <ul id="level3" class="list-group">
-                            <li class="list-group-item border-0">
-                                <span>
-                                    <i class="fas fa-angle-right rotate" style="margin-right:3px;"></i>
-                                    <a id="href4" href="#aa" onclick="temp(this.id);">信息科</a>
-                                </span>
-                                <ul id="level4" class="list-group border-0">
-                                    <li id="level2" class="list-group-item  border-0">
-                                        <span>
-                                            <i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i>
-                                            <a href="#aa">aa</a>
-                                        </span>
-                                        <ul>
-                                        </ul>
-                                    </li>
-                                    <li id="level2" class="list-group-item border-0"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">asdfasdfasdf</a></span><ul></ul></li>
-                                    <li id="level2" class="list-group-item border-0"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">gfhjfg</a></span><ul></ul></li>
-                                    <li id="level2" class="list-group-item border-0"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">sgdfgsd</a></span><ul></ul></li>
-                                </ul>
-                            </li>
-                            <li id="level2" class="nested"><span class="folder"><i class="fas fa-angle-right rotate" style="margin-right:3px;"></i><a href="#aa">供应室</a></span><ul><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">a1a1</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">sdfgsdfg</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">gfhjfgh</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">信息科</a></span><ul></ul></li></ul></li>
-                            <li id="level2" class="nested"><span class="folder"><i class="fas fa-angle-right rotate" style="margin-right:3px;"></i><a href="#aa">手术室</a></span><ul><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">asdfas</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">dsfgsdfg</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">fghjfgh</a></span><ul></ul></li><li id="level2" class="nested"><span class="file"><i class="far fa-envelope-open ic-w mx-1" style="margin-right:3px;"></i><a href="#aa">总经办</a></span><ul></ul></li></ul></li>
-                        </ul>
-                    </li>
-                </ul>*@
+            <div class="treeview w-20 border" style="overflow-y:scroll;height:389px;">
+                @Html.Raw(Model.ulTreeView.ToHtmlContent)
             </div>
-            @*<ul id="browser" class="filetree treeview-famfamfam treeview">
-            @Html.Raw(Model.MainOrgMenu.HtmlContent)
-        </ul>*@
         </div>
         <script>
+            var displayValue = true;
             function temp(id) {
                 //id = id.replace("href", "level");
-                $('#' + id).toggle();//.css("display", "none");
+                $('#' + id).toggle();
             }
         </script>
         <div class="col">
@@ -243,8 +240,8 @@
                                             <a asp-page="/Users/Edit" asp-route-id="@item.Id" asp-route-deptid="@item.Departmentid" asp-route-projectid="@item.Projectid">修改</a>
                                         </li>
                                         @*<li>
-                                            <a asp-page="./Edit" asp-route-id="@item.Id">快速复制...</a>
-                                        </li>*@
+                                                <a asp-page="./Edit" asp-route-id="@item.Id">快速复制...</a>
+                                            </li>*@
                                         <li class="divider"></li>
                                         <li><a asp-page="/Users/Delete" asp-route-projectid="@item.Projectid" asp-route-deptid="@item.Departmentid" asp-route-id="@item.Id">Delete</a></li>
                                     </ul>
@@ -282,27 +279,21 @@
         </div>
     </div>
 </div>
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#browser").treeview({
-            toggle: function () {
-                console.log("%s was toggled.", $(this).find(">span").text());
-            }
-        });
-
-        $("#add").click(function () {
-            var branches = $("<li><span class='folder'>New Sublist</span><ul>" +
-                "<li><span class='file'>Item1</span></li>" +
-                "<li><span class='file'>Item2</span></li></ul></li>").appendTo("#browser");
-            $("#browser").treeview({
-                add: branches
-            });
-        });
-    });
-</script>
-<script>
+@*<script>
     $(function () {
         $('#myTab li:eq(@remoteType) a').tab('show');
     });
+</script>*@
+<script>
+    $(document).ready(function () {
+    });
+    var toggler = document.getElementsByClassName("caret");
+    var i;
+
+    for (i = 0; i < toggler.length; i++) {
+        toggler[i].addEventListener("click", function () {
+            this.parentElement.querySelector(".nested").classList.toggle("active");
+            this.classList.toggle("caret-down");
+        });
+    }
 </script>
