@@ -13,31 +13,65 @@
     ul, #myUL {
         list-style-type: none;
     }
-
+    .ul_TreeView {
+        padding-left:3px;
+    }
+    .li_TreeItem {
+        margin-top: 3px;
+        margin-bottom: 8px;
+    }
+    .nested {
+        padding-left:3px;
+    }
+    .nodeLevel0 {
+        padding-left: 3px;
+    }
+    .nodeLevel1 {
+        padding-left: 23px;
+    }
+    .nodeLevel2 {
+        padding-left: 29px;
+    }
+    .nodeLevel3 {
+        padding-left: 34px;
+    }
     /* Remove margins and padding from the parent ul */
-
     /* Style the caret/arrow */
-    .caret {
+    .caretMenu {
         cursor: pointer;
         user-select: none; /* Prevent text selection */
+        width: auto;
+        border: none;
     }
-
     /* Create the caret/arrow with a unicode, and style it */
-    .caret::before {
-        content: "\25B6";
-        color: black;
-        display: inline-block;
-        /*margin-right: 6px;*/
-    }
+        .caretMenu::before {
+            content: "\25B6";
+            color: black;
+            display: inline-block;
+            /*margin-right: 6px;*/
+        }
 
     /* Rotate the caret/arrow icon when clicked on (using JavaScript) */
-    .caret-down::before {
+    .caretMenu-down::before {
         transform: rotate(90deg);
     }
+    .caretMenuItem {
+        cursor: pointer;
+        user-select: none; /* Prevent text selection */
+        width: auto;
+        border: none;
+    }
+    /* Create the caret/arrow with a unicode, and style it */
+        .caretMenuItem::before {
+            content: "\00BB";
+            color: black;
+            display: inline-block;
+        }
 
     /* Hide the nested list */
     .nested {
         display: none;
+        padding-top:3eclpx;
     }
 
     /* Show the nested list when the user clicks on the caret/arrow (with JavaScript) */
@@ -167,7 +201,7 @@
     <div class="row">
         <div class="col-4">
             <div class="treeview w-20 border" style="overflow-y:scroll;height:389px;">
-                @Html.Raw(Model.ulTreeView.ToHtmlContent)
+                @Html.Raw(Model.htmlTree.ToHtmlContent)
             </div>
         </div>
         <script>
@@ -287,13 +321,13 @@
 <script>
     $(document).ready(function () {
     });
-    var toggler = document.getElementsByClassName("caret");
+    var toggler = document.getElementsByClassName("caretMenu");
     var i;
 
     for (i = 0; i < toggler.length; i++) {
         toggler[i].addEventListener("click", function () {
             this.parentElement.querySelector(".nested").classList.toggle("active");
-            this.classList.toggle("caret-down");
+            this.classList.toggle("caretMenu-down");
         });
     }
 </script>

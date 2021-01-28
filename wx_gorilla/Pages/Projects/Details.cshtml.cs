@@ -28,7 +28,7 @@ namespace com.wechat.gorilla.Pages.Projects {
         public IList<Department> Departments { get; set; }
         public IList<User> Users { get; set; }
         [BindProperty]
-        public TreeView.ULTreeView ulTreeView { get; set; }
+        public TreeView.HtmlTree htmlTree { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id) {
             if (id == null) {
@@ -41,7 +41,6 @@ namespace com.wechat.gorilla.Pages.Projects {
                 return NotFound();
             }
 
-
             _CrumbList.Add(new CrumbItem("项目列表", "/Projects/Index"));
             _CrumbList.Add(new CrumbItem(Project.Project_name, true, true));
             ViewData["CrumbList"] = _CrumbList;
@@ -50,14 +49,12 @@ namespace com.wechat.gorilla.Pages.Projects {
             Departments = await _ctxDepartment.Departments.Where(A => A.Projectid == Project.ID).ToListAsync();
             Users = await _ctxUser.Users.Where(A => A.Projectid == Project.ID).Include(A => A.Project).Include(A => A.Department).ToListAsync();
 
-            if (ulTreeView == null) {
-                ulTreeView = new TreeView.ULTreeView("aa");
+            htmlTree = new TreeView.HtmlTree(Project.Project_name);
+
+            if (Departments.Count > 0) {
+                GorillaUtil.HtmlTree<Department>(Departments, htmlTree);
             }
-            GorillaUtil.TransToULTreeView<Department>(Departments, ulTreeView);
 
-
-            //MainOrgMenu = new OrgMenu(Project.Project_name, Project.ID.ToString());
-            //AddSubMenus(ulTreeView, - 1);
             return Page();
         }
     }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace com.wechat.gorilla.Models {
     [Table("sm_department")]
-    [ULTreeView("Id", "Parent_id", "Dept_name")]
+    [HtmlTree("Id", "Parent_id", "Dept_name")]
     public class Department {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

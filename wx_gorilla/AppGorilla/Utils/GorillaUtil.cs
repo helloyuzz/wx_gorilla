@@ -40,55 +40,55 @@ namespace com.wechat.gorilla {
             return result;
         }
 
-        internal static void TransToULTreeView<T>(IList<T> itemList, ULTreeView ulTreeView) {
-            if (itemList == null || itemList.Count <= 0) {
-                throw new Exception("TransToULTreeView<T>转换的数据对象为空。");
+        internal static void HtmlTree<T>(IList<T> treeItems, HtmlTree htmlTree) {
+            if (treeItems == null || treeItems.Count <= 0) {
+                throw new Exception("HtmlTree<T>()转换的数据对象DbModel为空。");
             }
-            Type itemType = typeof(T);
+            Type dbModelType = typeof(T);
 
-            PropertyInfo p1 = null;        // Id Field
-            PropertyInfo p2 = null;        // Pid Field
-            PropertyInfo p3 = null;        // Text Field
+            PropertyInfo field_id = null;           // Id Field
+            PropertyInfo field_pid = null;          // Pid Field
+            PropertyInfo field_text = null;         // Text Field
 
-            Attribute[] objectTypes = Attribute.GetCustomAttributes(itemList[0].GetType());
-            foreach (Attribute item in objectTypes) {
-                if (item is ULTreeViewAttribute) {
-                    ULTreeViewAttribute temp = (ULTreeViewAttribute)item;
-                    p1 = itemType.GetProperty(temp.ID);
-                    p2 = itemType.GetProperty(temp.PID);
-                    p3 = itemType.GetProperty(temp.TextField);
+            Attribute[] dbModelAttribytes = Attribute.GetCustomAttributes(dbModelType);
+            foreach (Attribute attribute in dbModelAttribytes) {
+                if (attribute is HtmlTreeAttribute) {
+                    HtmlTreeAttribute treeAttribute = (HtmlTreeAttribute)attribute;
+                    field_id = dbModelType.GetProperty(treeAttribute.ID);
+                    field_pid = dbModelType.GetProperty(treeAttribute.PID);
+                    field_text = dbModelType.GetProperty(treeAttribute.TextField);
                     break;
                 }
             }
-            if (p1 == null && p2 == null && p3 == null) {
-                throw new Exception("未指定" + itemType.ToString() + "的ULTreeView(\"Id\",\"Pid\",\"Text Field\")属性。");
+            if (field_id == null && field_pid == null && field_text == null) {
+                throw new Exception("HtmlTree<T>()未指定对象" + dbModelType.ToString() + "的自定义属性[HtmlTree(\"Id\",\"Pid\",\"Text Field\")]属性。");
             }
 
-            int level = 1;
-            BuildULFlag(itemList, ulTreeView, -1, ref level, p1, p2, p3);   
+            int treeLevel = 1;
+            BuildHtmlTree(treeItems, htmlTree, -1, ref treeLevel, field_id, field_pid, field_text);   
         }
 
-        private static void BuildULFlag<T>(IList<T> itemList, ULTreeView ulTreeView, object argu_pid, ref int level, params PropertyInfo[] props) {
-            IEnumerable<T> tempList = itemList.Where(x => props[1].GetValue(x).Equals(argu_pid));
-            foreach (var item in tempList) {
-                object id = props[0].GetValue(item);
-                object pid = props[1].GetValue(item);
-                object text = props[2].GetValue(item);
+        private static void BuildHtmlTree<T>(IList<T> treeNodes, HtmlTree htmlTree, object pid, ref int nodeLevel, params PropertyInfo[] dbModelAttributes) {
+            IEnumerable<T> subNodes = treeNodes.Where(x => dbModelAttributes[1].GetValue(x).Equals(pid));
+            foreach (var subNode in subNodes) {
+                object value_id = dbModelAttributes[0].GetValue(subNode);
+                object value_pid = dbModelAttributes[1].GetValue(subNode);
+                object value_text = dbModelAttributes[2].GetValue(subNode);
 
-                AFlag a = new AFlag();
-                a.HtmlText = text.ToString();
+                AFlag html_a = new AFlag();
+                html_a.Text = value_text.ToString();
 
-                SpanFlag span = new SpanFlag();
-                span.ClassName = "caret";
-                span.MenuLevel = level;
-                span.A = a;
+                SpanFlag html_span = new SpanFlag();
+                html_span.ClassName = "caret";
+                html_span.MenuLevel = nodeLevel;
 
-                LiFlag li = new LiFlag();
-                li.Span = span;
+                LiFlag html_li = new LiFlag();
+                html_li.Span = html_span;
+                html_li.A = html_a;
+                BuildHtmlTree(treeNodes, html_li.UL, value_id, ref nodeLevel, dbModelAttributes);
 
-                BuildULFlag(itemList, li.UL, id, ref level, props);
-                level++;
-                ulTreeView.LiNodes.Add(li);
+                nodeLevel++;
+                htmlTree.LiNodes.Add(html_li);
             }
         }
     }
