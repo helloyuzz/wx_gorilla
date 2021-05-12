@@ -1,0 +1,114 @@
+﻿<html lang="zh-cn">
+<head>
+    <title>产品协作管理平台</title>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>
+</head>
+<body style="padding:3px;">
+    <div>
+        <div class="alert alert-primary" style="text-align:center;" role="alert">
+            <h4>产品协作管理平台</h4>
+        </div>
+        <!--<ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">产品研发</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">需求登记</a>
+            </li>
+            <li class="nav-item" role="presentation">
+                <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">关于</a>
+            </li>
+        </ul>-->
+        <div class="position-relative w-100 h-100" style="position:relative;">
+            <button type="button" class="btn btn-primary">产品原型</button>
+            <a href="http://192.168.3.65:8080/projects/gorilla/issues/new" target="_blank"><button type="button" class="btn btn-success">需求登记</button></a>
+            <button type="button" class="btn btn-info">关于</button>
+            <div class="position-absolute" style="height:400px;width:100%;position:absolute;margin:auto;margin-top:13px;">
+                <div>
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">版本号</th>
+                                    <th scope="col">版本开始</th>
+                                    <th scope="col">完成开发</th>
+                                    <th scope="col">状态</th>
+                                    <th scope="col">需求来源</th>
+                                    <th scope="col">功能需求清单</th>
+                                    <th scope="col">产品原型</th>
+                                    <th scope="col" style="width:26%;">参与评审人员</th>
+                                    <th scope="col">发布日期</th>
+                                    <th scope="col">Release地址</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th scope="row">2.3</th>
+                                    <td>2019-12-13</td>
+                                    <td>2019-12-16</td>
+                                    <td><span style="color:red;">研发中</span></td>
+                                    <td><a href="#View">产品设计</a></td>
+                                    <td><a href="http://192.168.3.65:8080/projects/gorilla/issues?query_id=3" target="_blank">查看</a></td>
+                                    <td><a href="http://192.168.3.65/prototype/#id=f8x6t4&p=%E4%B8%BB%E9%A1%B5&g=1" target="_blank">查看</a></td>
+                                    <td>王东平，黄龙，陈坤，陈平，UI，毛阳，胡朝洋</td>
+                                    <td><a href="#Release">研发中</a></td>
+                                    <td><a href="#Release">研发中</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2.3</th>
+                                    <td>2019-12-13</td>
+                                    <td>2019-12-16</td>
+                                    <td>已发布</td>
+                                    <td><a href="#view">四川省中医<br />重医附一</a><br />江苏省中医</td>
+                                    <td><a href="http://192.168.3.65:8080/projects/gorilla/issues?query_id=3" target="_blank">查看</a></td>
+                                    <td><a href="http://192.168.3.65/prototype/#id=cses9h&p=%E6%B8%85%E6%B4%97&g=1" target="_blank">查看</a></td>
+                                    <td>王东平，黄龙，陈坤，陈平，UI，毛阳，胡朝洋</td>
+                                    <td>2019-12-16</td>
+                                    <td><a href="#Release">提取安装包</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2.3</th>
+                                    <td>2019-12-13</td>
+                                    <td>2019-12-16</td>
+                                    <td>已发布</td>
+                                    <td><a href="#view">四川省中医</a></td>
+                                    <td><a href="http://192.168.3.65:8080/projects/gorilla/issues?query_id=3" target="_blank">查看</a></td>
+                                    <td><a href="http://192.168.3.65/prototype/#id=cses9h&p=%E6%B8%85%E6%B4%97&g=1" target="_blank">查看</a></td>
+                                    <td>王东平，黄龙，陈坤，陈平，UI，毛阳，胡朝洋</td>
+                                    <td>2019-12-16</td>
+                                    <td><a href="#Release">提取安装包</a></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row">2.3</th>
+                                    <td>2019-12-13</td>
+                                    <td>2019-12-16</td>
+                                    <td>已实施</td>
+                                    <td><a href="#view">重医附一</a></td>
+                                    <td><a href="http://192.168.3.65:8080/projects/gorilla/issues?query_id=3" target="_blank">查看</a></td>
+                                    <td><a href="http://192.168.3.65/prototype/#id=cses9h&p=%E6%B8%85%E6%B4%97&g=1" target="_blank">查看</a></td>
+                                    <td>王东平，黄龙，陈坤，陈平，UI，毛阳，胡朝洋</td>
+                                    <td>2019-12-16</td>
+                                    <td><a href="#Release">提取安装包</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                sadfsadfasd
+            </div>
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                sadfasdf
+            </div>
+        </div>
+    </div>
+       
+</body>
+</html>
